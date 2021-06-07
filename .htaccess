@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+<Files ".env">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+# AuthUserFile /.htpasswd
+# AuthName "L'accès à ce répertoire est sécurisé."
+# AuthType Basic
+# Require valid-user

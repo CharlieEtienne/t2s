@@ -1,0 +1,151 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+ob_start();
+
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+use Google\Cloud\TextToSpeech\V1\AudioConfig;
+use Google\Cloud\TextToSpeech\V1\AudioEncoding;
+use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
+use Google\Cloud\TextToSpeech\V1\SynthesisInput;
+use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
+use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
+
+function synthesize_text( $text ) {
+    // create client object
+    $client = new TextToSpeechClient();
+
+    $voice_gender      = $_POST[ 'voice-gender' ] ?? '1';
+    $voice_name        = $_POST[ 'voice-name' ] ?? 'fr-FR-Wavenet-D';
+    $language          = $voice_name[ 0 ] == 'e' ? 'en-EN' : 'fr-FR';
+    $root              = __DIR__ . '/audio/';
+    $directory         = $_COOKIE[ 't2s' ] ?? uniqid();
+    $user_dir          = $root . $directory;
+    $filename          = !empty($_POST[ 'filename' ]) ? $_POST[ 'filename' ] : uniqid();
+    $filepath          = $user_dir . '/' . $filename . '.mp3';
+    $relative_user_dir = '/audio/' . $directory;
+    $relative_filepath = $relative_user_dir . '/' . $filename . '.mp3';
+    $is_multiple       = false;
+    $overwrite         = $_POST[ 'overwrite' ] ?? 'on';
+
+    // note: the voice can also be specified by name
+    // names of voices can be retrieved with $client->listVoices()
+    $voice = ( new VoiceSelectionParams() )
+        ->setLanguageCode($language)
+        ->setName($voice_name)
+        ->setSsmlGender($voice_gender);
+
+    /**
+     * We choose "LINEAR16" for encoding since it sounds
+     * much better compared to MP3 as set in Google code examples.
+     * It is the setting used in Cloud Text To Speech demo
+     */
+    $audioConfig = ( new AudioConfig() )
+        ->setAudioEncoding(AudioEncoding::LINEAR16);
+
+    // Create necessary folders
+    if( !is_dir($root) ) {
+        mkdir($root, 0777, true);
+    }
+    if( !is_dir($user_dir) ) {
+        mkdir($user_dir, 0777, true);
+    }
+
+    $actual_name   = pathinfo($filepath, PATHINFO_FILENAME);
+    $original_name = $actual_name;
+    $extension     = pathinfo($filepath, PATHINFO_EXTENSION);
+
+    /* If we choose to not overwrite, we create files with number after name. Ex: audio(1).mp3 */
+    if( $overwrite != 'on' ) {
+        $i = 1;
+        while( file_exists($user_dir . '/' . $actual_name . "." . $extension) ) {
+            $actual_name       = (string)$original_name . '(' . $i . ')';
+            $name              = $actual_name . "." . $extension;
+            $filepath          = $user_dir . '/' . $name;
+            $relative_filepath = $relative_user_dir . '/' . $name;
+            $i++;
+        }
+    }
+
+    /* Check if multiple : we detect line breaks and split string into array */
+    if( isset($_POST[ 'multiple' ], $_POST[ 'download' ]) && $_POST[ 'multiple' ] == 'on' && $_POST[ 'download' ] == 1 ) {
+        $array = preg_split('/\r\n|[\r\n]/', $text);
+        if( is_array($array) && count($array) > 1 ) {
+            $is_multiple = true;
+        }
+    }
+
+    /* If we choose to make multiple files, we iterate and return a zip file */
+    if( $is_multiple ) {
+        $i                   = 1;
+        $zip                 = new ZipArchive();
+        $zipfilename         = $original_name . ".zip";
+        $zipfilepath         = $user_dir . '/' . $zipfilename;
+        $relative_filepath   = $relative_user_dir . '/' . $zipfilename;
+        $tempdir             = uniqid();
+        $tempdirabsolutepath = $user_dir . '/' . $tempdir;
+        $tempdirrelativepath = $tempdir;
+
+        // Make a temp folder
+        mkdir($tempdirabsolutepath, 0777, true);
+
+        // Create a zip archive
+        $zip->open($zipfilepath, ZipArchive::CREATE);
+
+        foreach( $array as $key => $value ) {
+            $number       = (string)$i;
+            $name         = $original_name . '.' . $i . ".mp3";
+            $filepath     = $tempdirabsolutepath . '/' . $name;
+            $input_text   = ( new SynthesisInput() )->setText($value);
+            $response     = $client->synthesizeSpeech($input_text, $voice, $audioConfig);
+            $audioContent = $response->getAudioContent();
+
+            // Write audio to file
+            file_put_contents($filepath, $audioContent, LOCK_EX);
+
+            // Add file to zip
+            $zip->addFile($filepath, $name);
+
+            $i++;
+        }
+        $zip->close();
+
+        // Delete temporary files and temporary folder
+        array_map('unlink', glob("$tempdirabsolutepath/*.*"));
+        rmdir($tempdirabsolutepath);
+    }
+    else { // We don't want to make multiple audio file, so let's just create one.
+        $input_text   = ( new SynthesisInput() )->setText($text);
+        $response     = $client->synthesizeSpeech($input_text, $voice, $audioConfig);
+        $audioContent = $response->getAudioContent();
+
+        // Write audio to file
+        file_put_contents($filepath, $audioContent, LOCK_EX);
+    }
+
+    $client->close();
+
+    return compact('relative_user_dir', 'relative_filepath');
+}
+
+if( isset($_POST[ 'text' ]) ) {
+    $result = synthesize_text($_POST[ 'text' ]);
+    echo json_encode([
+                         'status'   => 'success',
+                         'message'  => 'Fichier généré avec succès',
+                         'user_dir' => $result[ 'relative_user_dir' ],
+                         'filepath' => $result[ 'relative_filepath' ],
+                     ]);
+}
+else {
+    echo json_encode([
+                         'status'  => 'error',
+                         'message' => 'Le texte est absent'
+                     ]);
+}
