@@ -92,7 +92,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-row mt-2">
+                <div class="form-row mt-md-2">
                     <div class="custom-control custom-switch col-md-12" style="padding-left: calc(2.5rem + 5px);">
                         <input type="checkbox" class="custom-control-input" name="new_tab" id="new_tab" checked="checked">
                         <label class="custom-control-label" for="new_tab">
