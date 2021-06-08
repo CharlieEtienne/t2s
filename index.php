@@ -139,7 +139,7 @@
                 <div class="form-group col-md-5">
                     <label for="filename">Nom du fichier</label>
                     <div class="input-group">
-                        <input id="filename" class="form-control" type="text" value="" name="filename" placeholder="<?php echo uniqid(); ?>">
+                        <input id="filename" class="form-control" type="text" value="" name="filename" placeholder="<?php echo uniqid(); ?>" tabindex="1">
                         <div class="input-group-append">
                             <div class="input-group-text">.mp3</div>
                         </div>
@@ -192,15 +192,15 @@
             
             <div class="form-group">
                 <label for="text">Texte</label>
-                <textarea  class="form-control" rows="10" type="text" name="text" id="text"></textarea>
+                <textarea  class="form-control" rows="10" type="text" name="text" id="text" tabindex="2"></textarea>
             </div>
             
             <div class="form-group text-center">
-                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter 
+                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + P" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
                     <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
                     <span id="equalizer"></span>
                 </button>
-                <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank"><i class="far fa-arrow-alt-circle-down"></i> Télécharger 
+                <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title="Ctrl + D" tabindex="4"><i class="far fa-arrow-alt-circle-down"></i> Télécharger
                     <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
                 </a>
                 <a class="btn btn-link" data-toggle="collapse" href="#myfiles" role="button" aria-expanded="false" aria-controls="myfiles">
@@ -305,6 +305,7 @@
             }
             listfiles();
             $('#text').trigger('change');
+            $('#filename').focus();
         });
 
         function setCookie(cname, cvalue, exdays) {
@@ -328,6 +329,17 @@
             }
             return "";
         }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.code === "KeyP") {
+                event.preventDefault();
+                $('#play').click();
+            }
+            if (event.ctrlKey && event.code === "KeyD") {
+                event.preventDefault();
+                $('#download').click();
+            }
+        });
         
         /* Listen button */
         $('#t2s').on('submit', function(e){
