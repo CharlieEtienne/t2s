@@ -307,7 +307,12 @@
             listfiles();
             $('#text').trigger('change');
             $('#filename').focus().select();
-            $('#text').on('focus', function() { $(this).select(); });
+            $(window).keyup(function (e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 9 && $('#text:focus').length) {
+                    $('#text').select();
+                }
+            });
         });
 
         function setCookie(cname, cvalue, exdays) {
