@@ -189,6 +189,15 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-row mt-2">
+                    <div class="custom-control custom-switch col-md-12" style="padding-left: calc(2.5rem + 5px);">
+                        <input type="checkbox" class="custom-control-input" name="new_tab" id="new_tab" checked="checked">
+                        <label class="custom-control-label" for="new_tab">
+                            Ouvrir dans un nouvel onglet ?
+                            <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, le bouton Téléchargez ouvrira le fichier dans un nouvel onglet."></i>
+                        </label>
+                    </div>
+                </div>
             </div>
             
             <div class="form-group">
@@ -304,6 +313,9 @@
             if(getCookie('last_overwrite') === 'is_false'){
                 $('#overwrite').prop('checked', false);
             }
+            if(getCookie('last_new_tab') === 'is_false'){
+                $('#new_tab').prop('checked', false);
+            }
             listfiles();
             $('#text').trigger('change');
             $('#filename').focus().select();
@@ -356,6 +368,7 @@
             setCookie('last_voice', $('#voice-name').val(), 360);
             setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
             setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
+            setCookie('last_new_tab', 'is_' + $('#new_tab').prop('checked'), 360);
             play_btn.find('.spinner').removeClass('d-none');
             $.ajax({ 
                 method: "POST",
@@ -399,8 +412,9 @@
             setCookie('last_filename', $('#filename').val(), 360);
             setCookie('last_content', encodeURIComponent($('#text').val()), 360);
             setCookie('last_voice', $('#voice-name').val(), 360);
-            setCookie('last_multiple', $('#multiple').val(), 360);
-            setCookie('last_overwrite', $('#overwrite').val(), 360);
+            setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
+            setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
+            setCookie('last_new_tab', 'is_' + $('#new_tab').prop('checked'), 360);
             download_btn.find('.spinner').removeClass('d-none');
             $.ajax({ 
                 method: "POST",
@@ -413,13 +427,17 @@
                         toastr[response.status](response.message);
                     }
                     audio.pause();
-                    var link = document.createElement("a");
-                    link.setAttribute('download', '');
-                    link.href = response.filepath;
-                    document.body.appendChild(link);
-                    link.click();
-                    link.remove();
-                    // window.open(response.filepath, '_blank');
+                    if($('#new_tab').prop('checked')){
+                        window.open(response.filepath, '_blank');
+                    }
+                    else {
+                        var link = document.createElement("a");
+                        link.setAttribute('download', '');
+                        link.href = response.filepath;
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                    }
                     download_btn.find('.spinner').addClass('d-none');
                     listfiles();
                 },
