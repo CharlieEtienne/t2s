@@ -1,6 +1,6 @@
 <?php
     if(!isset($_COOKIE['t2s'])){
-        setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true); 
+        setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true);
     }
 ?>
 
@@ -27,115 +27,18 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/fbb35493dc.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-align: center;
-            align-items: center;
-            padding-top: 10px;
-            background-color: #f8f7fc;
-            font-family: 'Nunito', sans-serif;
-        }
-        #t2s {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px;
-            margin: auto;
-        }
-        #equalizer {
-            position: relative;
-            background-image: url(ani_equalizer_white.gif);
-            background-size: cover;
-            background-position: center;
-            width: 26px;
-            height: 16px;
-            display: none;
-        }
-        button.disabled {
-            cursor:default;
-        }
-        .custom-control-input:checked~.custom-control-label::before{
-            background-color:#3e28a9;
-            border-color:#3e28a9;
-        }
-        .btn-info {
-            background-color: #3e28a9;
-            border-color: #3e28a9;
-        }
-        .btn-link {
-            color: #3e28a9;
-        }
-        .btn-link:hover {
-            color: #2e1e80;
-        }
-        .btn-info:hover {
-            background-color: #2e1e80;
-            border-color: #2e1e80;
-        }
-        .btn-info.disabled, .btn-info:disabled {
-            background-color: #3e28a9;
-            border-color: #3e28a9;
-        }
-        .btn-info.focus, .btn-info:focus {
-            background-color: #3e28a9;
-            border-color: #3e28a9;
-            box-shadow: 0 0 0 0.2rem rgba(62, 40, 169, 0.5);
-        }
-        .btn.focus, .btn:focus {    
-            box-shadow: 0 0 0 0.2rem rgba(62, 40, 169, .25);
-        }
-        .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle {
-            background-color: #2e1e80;
-            border-color: #2e1e80;
-        }
-        .text-info {
-            color: #3e28a9!important;
-        }
-        a {
-            color: #6049d4;
-        }
-        a:hover {
-            color: #8473de;
-            text-decoration: underline;
-        }
-        .form-control:focus {
-            border-color: rgba(62, 40, 169, 0.1);
-            box-shadow: 0 0 0 0.2rem rgba(62, 40, 169, 0.25);
-        }
-        .custom-control-input:focus~.custom-control-label::before {
-            box-shadow: 0 0 0 0.2rem rgba(62, 40, 169, 0.25);
-        }
-        @media(max-width:500px) {
-            h1.h3 {
-                font-size: 1.5rem;
-            }
-        }
-        .table td, .table th {
-            vertical-align: middle;
-        }
-        .actions>button {
-            padding: 0 3px;
-        }
-        .actions {
-            min-width: 96px;
-        }
-        .actions .btn-link.disabled, .actions .btn-link:disabled {
-            color: #3e28a9;
-            opacity: .45;
-        }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body class="pt-md-5 pt-3">
     <div class="container">
-        
+
         <form id="t2s" method="POST" action="process.php">
-            
+
             <h1 class="h3 mb-5 mt-lg-5 font-weight-bold text-center" style="color: rgba(0, 0, 0, 0.75);">
-                <img src="icon-192.png" class="mb-1 mr-3" style="width: 2rem;">
+                <img src="icon-192.png" class="mb-1 mr-3" style="width: 2rem;" alt="icon">
                 Google TextToSpeech 2 mp3
             </h1>
-    
+
             <div class="form-row">
                 <div class="form-group col-md-5">
                     <label for="filename">Nom du fichier</label>
@@ -146,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="form-group col-md-6 col-11">
                     <label for="voice-name">Type de voix</label>
                     <select class="form-control custom-select" name="voice-name" id="voice-name">
@@ -180,7 +83,7 @@
                             <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, un fichier audio sera créé à chaque fois qu'un saut de ligne sera détecté. Les fichiers seront numérotés par ordre croissant et téléchargés dans une archive au format .zip"></i>
                         </label>
                     </div>
-        
+
                     <div class="custom-control custom-switch col-md-7" style="padding-left: calc(2.5rem + 5px);">
                         <input type="checkbox" class="custom-control-input" name="overwrite" id="overwrite" checked="checked">
                         <label class="custom-control-label" for="overwrite">
@@ -199,14 +102,20 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label for="text">Texte</label>
                 <textarea  class="form-control" rows="10" type="text" name="text" id="text" tabindex="2"></textarea>
             </div>
-            
+
+            <div class="form-group">
+                <audio controls class="w-100" id="audio_player" tabindex="5">
+                    Votre navigateur ne supporte pas la balise audio.
+                </audio>
+            </div>
+
             <div class="form-group text-center">
-                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + P" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
+                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + E" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
                     <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
                     <span id="equalizer"></span>
                 </button>
@@ -230,7 +139,7 @@
 
 
         <p class="mt-3 mb-3 text-muted text-center">Made with <i class="far fa-heart text-danger"></i> by <a href="https://github.com/CharlieEtienne" target="_blank">Charlie Etienne</a></p>
-        
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -241,8 +150,6 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
-
-
 
         toastr.options = {
             "closeButton": true,
@@ -262,16 +169,17 @@
             "hideMethod": "fadeOut"
         }
 
-        var audio           = new Audio();
-        var equalizer       = $('#equalizer');
-        var form            = $('#t2s');
-        var url             = form.attr('action');
-        var play_btn        = $('#play');
-        var play_icon       = $('#play>#play-pause');
-        var download_btn    = $('#download');
-        var textarea        = $('#text');
+        const audio         = new Audio();
+        const equalizer     = $('#equalizer');
+        const form          = $('#t2s');
+        const url           = form.attr('action');
+        const play_btn      = $('#play');
+        const play_icon     = $('#play>#play-pause');
+        const download_btn  = $('#download');
+        const textarea      = $('#text');
+        const filename      = $('#filename');
 
-        textarea.on('change input paste keyup', function(e){
+        textarea.on('change input paste keyup', function(){
             // textarea is not empty
             if ($.trim(textarea.val())) {
                 play_btn.removeClass('disabled').removeAttr('disabled');
@@ -284,25 +192,25 @@
         });
 
         audio.onplaying = function() { equalizer.css('display','inline-block'); };
-        audio.onended = function() { 
-            this.currentTime = 0; 
+        audio.onended = function() {
+            this.currentTime = 0;
             equalizer.css('display','none');
             play_btn.removeClass('playing');
-            play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle'); 
+            play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
         };
-        audio.onpause = function() { 
-            this.currentTime = 0; 
+        audio.onpause = function() {
+            this.currentTime = 0;
             equalizer.css('display','none');
             play_btn.removeClass('playing');
             play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
         };
 
-        $(document).ready(function(e){
+        $(document).ready(function(){
             if(getCookie('last_filename')){
                 $('#filename').val(getCookie('last_filename'));
             }
             if(getCookie('last_content')){
-                $('#text').val(decodeURIComponent(getCookie('last_content')));
+                textarea.val(decodeURIComponent(getCookie('last_content')));
             }
             if(getCookie('last_voice')){
                 $('#voice-name').val(getCookie('last_voice'));
@@ -316,33 +224,36 @@
             if(getCookie('last_new_tab') === 'is_false'){
                 $('#new_tab').prop('checked', false);
             }
+            if(getCookie('last_audio_file')){
+                $('#audio_player').attr("src", decodeURIComponent(getCookie('last_audio_file')) );
+            }
             listfiles();
-            $('#text').trigger('change');
-            $('#filename').focus().select();
+            textarea.trigger('change');
+            filename.focus().select();
             $(window).keyup(function (e) {
-                var code = (e.keyCode ? e.keyCode : e.which);
-                if (code == 9 && $('#text:focus').length) {
-                    $('#text').select();
+                let code = (e.keyCode ? e.keyCode : e.which);
+                if (code === 9 && $('#text:focus').length) {
+                    textarea.select();
                 }
             });
         });
 
         function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
+            let d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
+            let expires = "expires="+d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
         function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
                 c = c.substring(1);
                 }
-                if (c.indexOf(name) == 0) {
+                if (c.indexOf(name) === 0) {
                 return c.substring(name.length, c.length);
                 }
             }
@@ -350,7 +261,7 @@
         }
 
         document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey && event.code === "KeyP") {
+            if (event.ctrlKey && event.code === "KeyE") {
                 event.preventDefault();
                 $('#play').click();
             }
@@ -359,46 +270,55 @@
                 $('#download').click();
             }
         });
-        
-        /* Listen button */
-        $('#t2s').on('submit', function(e){
-            e.preventDefault();
-            setCookie('last_filename', $('#filename').val(), 360);
-            setCookie('last_content', encodeURIComponent($('#text').val()), 360);
+
+        function setCookies() {
+            setCookie('last_filename', filename.val(), 360);
+            setCookie('last_content', encodeURIComponent(textarea.val()), 360);
             setCookie('last_voice', $('#voice-name').val(), 360);
             setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
             setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
             setCookie('last_new_tab', 'is_' + $('#new_tab').prop('checked'), 360);
+        }
+
+        /* Listen button */
+        form.on('submit', function(e){
+            e.preventDefault();
+            setCookies();
             play_btn.find('.spinner').removeClass('d-none');
-            $.ajax({ 
+            $.ajax({
                 method: "POST",
-                url: url, 
+                url: url,
                 data: form.serialize(),
                 dataType: 'json',
                 success: function(response){
                     // console.log(response);
-                    if (response.status && response.status == 'error') {
+                    if (response.status && response.status === 'error') {
                         toastr[response.status](response.message);
                     }
-                    if(play_btn.hasClass('playing')){
-                        audio.pause();
-                        audio.currentTime = 0; 
-                        equalizer.css('display','none');
-                        play_btn.removeClass('playing');
-                        play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
-                    }
-                    else {
-                        var url = response.filepath;
-                        audio.src = url + '?' + Date.now();
-                        audio.load();
-                        audio.play();
-                        play_btn.addClass('playing');
-                        play_icon.removeClass('fa-play-circle').addClass('fa-pause-circle');
-                    }
+                    let player = document.getElementById('audio_player');
+                    $('#audio_player').attr("src", response.filepath + '?' + Date.now() );
+                    player.play();
+                    player.focus();
+                    // if(play_btn.hasClass('playing')){
+                    //     audio.pause();
+                    //     audio.currentTime = 0;
+                    //     equalizer.css('display','none');
+                    //     play_btn.removeClass('playing');
+                    //     play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
+                    // }
+                    // else {
+                    //     var url = response.filepath;
+                    //     audio.src = url + '?' + Date.now();
+                    //     audio.load();
+                    //     audio.play();
+                    //     play_btn.addClass('playing');
+                    //     play_icon.removeClass('fa-play-circle').addClass('fa-pause-circle');
+                    // }
                     play_btn.find('.spinner').addClass('d-none');
                     listfiles();
+                    setCookie('last_audio_file', encodeURIComponent(response.filepath), 360);
                 },
-                error: function(response){
+                error: function(){
                     // console.log(response);
                     play_btn.find('.spinner').addClass('d-none');
                     toastr['error']('Erreur lors de la requête Ajax');
@@ -409,21 +329,16 @@
         /* Download button */
         $(document).on('click', '#download', function (e) {
             e.preventDefault();
-            setCookie('last_filename', $('#filename').val(), 360);
-            setCookie('last_content', encodeURIComponent($('#text').val()), 360);
-            setCookie('last_voice', $('#voice-name').val(), 360);
-            setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
-            setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
-            setCookie('last_new_tab', 'is_' + $('#new_tab').prop('checked'), 360);
+            setCookies();
             download_btn.find('.spinner').removeClass('d-none');
-            $.ajax({ 
+            $.ajax({
                 method: "POST",
-                url: url, 
+                url: url,
                 data: form.serialize() + "&download=1",
                 dataType: 'json',
                 success: function(response){
                     // console.log(response);
-                    if (response.status && response.status == 'error') {
+                    if (response.status && response.status === 'error') {
                         toastr[response.status](response.message);
                     }
                     audio.pause();
@@ -431,17 +346,18 @@
                         window.open(response.filepath, '_blank');
                     }
                     else {
-                        var link = document.createElement("a");
+                        let link = document.createElement("a");
                         link.setAttribute('download', '');
                         link.href = response.filepath;
                         document.body.appendChild(link);
                         link.click();
                         link.remove();
                     }
+                    setCookie('last_audio_file', encodeURIComponent(response.filepath), 360);
                     download_btn.find('.spinner').addClass('d-none');
                     listfiles();
                 },
-                error: function(response){
+                error: function(){
                     // console.log(response);
                     download_btn.find('.spinner').addClass('d-none');
                     toastr['error']('Erreur lors de la requête Ajax');
@@ -452,7 +368,7 @@
         /* Get user's old files list */
         function listfiles() {
             myfilestable = $('#myfiles>table>tbody');
-            $.ajax({ 
+            $.ajax({
                 method: "GET",
                 url: '/getfiles.php',
                 dataType: 'json',
@@ -502,18 +418,18 @@
             $( document ).off( "click", ".action-btn" );
             $(document).on('click', '.action-btn', function (event) {
                 event.stopPropagation();
-                var button  = $(event.currentTarget);
-                var action  = button.data('action');
-                var file    = button.data('file');
-                
-                if (action && file && action == 'listen') {
+                let button  = $(event.currentTarget);
+                let action  = button.data('action');
+                let file    = button.data('file');
+
+                if (action && file && action === 'listen') {
                     audio.src = file;
                     audio.load();
                     audio.play();
                     button.addClass('playing');
                 }
-                if (action && file && action == 'download') {
-                    var link = document.createElement("a");
+                if (action && file && action === 'download') {
+                    let link = document.createElement("a");
                     link.setAttribute('download', '');
                     link.href = file;
                     document.body.appendChild(link);
@@ -521,16 +437,16 @@
                     link.remove();
                     // window.open(file, '_blank');
                 }
-                if (action && file && action == 'remove') {
+                if (action && file && action === 'remove') {
                     deleteFile(file);
                 }
             });
         }
 
         $(document).on('click', '#delete-all', function (event) {
-            $.ajax({ 
+            $.ajax({
                 method: "POST",
-                url: 'deletefile.php', 
+                url: 'deletefile.php',
                 data: {'all' : 1},
                 dataType: 'json',
                 success: function(response){
@@ -546,9 +462,9 @@
         });
 
         function deleteFile(file) {
-            $.ajax({ 
+            $.ajax({
                 method: "POST",
-                url: 'deletefile.php', 
+                url: 'deletefile.php',
                 data: {'file' : file},
                 dataType: 'json',
                 success: function(response){
