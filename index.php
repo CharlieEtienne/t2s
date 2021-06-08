@@ -305,7 +305,8 @@
             }
             listfiles();
             $('#text').trigger('change');
-            $('#filename').focus();
+            $('#filename').focus().select();
+            $('#text').on('focus', function() { $(this).select(); });
         });
 
         function setCookie(cname, cvalue, exdays) {
