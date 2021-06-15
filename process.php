@@ -75,10 +75,17 @@ function synthesize_text( $text ) {
 
     /* Check if multiple : we detect line breaks and split string into array */
     if( isset($_POST[ 'multiple' ], $_POST[ 'download' ]) && $_POST[ 'multiple' ] == 'on' && $_POST[ 'download' ] == 1 ) {
+        $text = str_replace('"', '', $text);
+        $text = rtrim($text, '&#13;&#10;');
+        $text = rtrim($text, '"');
+        $text = ltrim($text, '"');
+        $text = stripslashes (str_replace('&#13;&#10;', "\r\n", $text));
+        $text = rtrim($text, "\r\n");
         $array = preg_split('/\r\n|[\r\n]/', $text);
         if( is_array($array) && count($array) > 1 ) {
             $is_multiple = true;
         }
+        //"<prosody rate="fast" pitch="+50%">Là je suis très content !</prosody>. <prosody rate="slow" pitch="-50%">Et là je suis plutôt triste.</prosody>. "
     }
 
     /* If we choose to make multiple files, we iterate and return a zip file */
@@ -102,7 +109,7 @@ function synthesize_text( $text ) {
             $number       = (string)$i;
             $name         = $original_name . '.' . $i . ".mp3";
             $filepath     = $tempdirabsolutepath . '/' . $name;
-            $input_text   = ( new SynthesisInput() )->setText($value);
+            $input_text   = ( new SynthesisInput() )->setSsml('<speak>' . $value . '</speak>');
             $response     = $client->synthesizeSpeech($input_text, $voice, $audioConfig);
             $audioContent = $response->getAudioContent();
 
@@ -121,7 +128,11 @@ function synthesize_text( $text ) {
         rmdir($tempdirabsolutepath);
     }
     else { // We don't want to make multiple audio file, so let's just create one.
-        $input_text   = ( new SynthesisInput() )->setText($text);
+        $text = rtrim($text, '&#13;&#10;');
+        $text = rtrim($text, '"');
+        $text = ltrim($text, '"');
+        $text = stripslashes ( str_replace('&#13;&#10;', "", $text));
+        $input_text   = ( new SynthesisInput() )->setSsml('<speak>' . $text . '</speak>');
         $response     = $client->synthesizeSpeech($input_text, $voice, $audioConfig);
         $audioContent = $response->getAudioContent();
 
@@ -131,7 +142,7 @@ function synthesize_text( $text ) {
 
     $client->close();
 
-    return compact('relative_user_dir', 'relative_filepath');
+    return compact('relative_user_dir', 'relative_filepath', 'text');
 }
 
 if( isset($_POST[ 'text' ]) ) {
@@ -141,6 +152,8 @@ if( isset($_POST[ 'text' ]) ) {
                          'message'  => 'Fichier généré avec succès',
                          'user_dir' => $result[ 'relative_user_dir' ],
                          'filepath' => $result[ 'relative_filepath' ],
+                         'original_text' => $_POST[ 'text' ],
+                         'output_text' => $result[ 'text' ],
                      ]);
 }
 else {
