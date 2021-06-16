@@ -2,6 +2,54 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+
+function style_to_code(text) {
+    let code='';
+    let current='normal';
+    let interpret=''
+    let dico=false;
+    let n=text.length;
+    for (let i = 0; i < n; i++) {
+        let T=quill.getText(i,1);
+        if (T=='⌛') {
+            code+='<break strength="strong"/>';
+        }
+        else if (T=='✒') {
+            if (dico==true) {
+                code+='</say-as>';
+                dico=false;
+            }
+            else {
+                code+='<say-as interpret-as="spell-out">';
+                dico=true;
+            }
+        }
+        else {
+  
+        if ((quill.getFormat(i,1).color == "#0000ff") && current=='normal'){
+            code=code + '<emphasis level="strong">'+T;
+            current='emphasis';
+        }
+        else if ((quill.getFormat(i,1).color == "#0000ff") && current!='normal'){
+            code+=T;
+        }
+  
+  
+        if ((quill.getFormat(i,1).color != "#0000ff") && current=='emphasis'){
+            code+='</emphasis>'+T;
+            current='normal';
+        }
+        else if ((quill.getFormat(i,1).color != "#0000ff") && current!='emphasis'){
+            code+=T;
+        }
+  
+  
+      }}
+
+      return(code);
+  }
+
+
 const audio         = new Audio();
 const equalizer     = $('#equalizer');
 const form          = $('#t2s');
@@ -15,14 +63,20 @@ const filename      = $('#filename');
 
 textarea.on('change input paste keyup', function(){
     // textarea is not empty
+    quill.once('text-change', function(delta, oldDelta, source) {
+        play_btn.removeClass('disabled').removeAttr('disabled');
+        download_btn.removeClass('disabled').removeAttr('disabled');
+      });
+      /*
     if ($.trim(textarea.val())) {
+        console.log("coucou");
         play_btn.removeClass('disabled').removeAttr('disabled');
         download_btn.removeClass('disabled').removeAttr('disabled');
     }
     else {
         play_btn.addClass('disabled').attr("disabled", true);
         download_btn.addClass('disabled').attr("disabled", true);
-    }
+    }*/
 });
 
 audio.onplaying = function() { equalizer.css('display','inline-block'); };
@@ -95,7 +149,7 @@ function setCookies() {
 /* Listen button */
 form.on('submit', function(e){
     e.preventDefault();
-    hidden_text_input.value = JSON.stringify(quill.getText(0).replaceAll('\n', '&#13;&#10;'));
+    hidden_text_input.value = JSON.stringify(style_to_code(quill.getText(0)).replaceAll('\n', '&#13;&#10;'));
     setCookies();
     play_btn.find('.spinner').removeClass('d-none');
     $.ajax({
