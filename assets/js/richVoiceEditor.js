@@ -70,6 +70,7 @@ var RichVoiceEditor =
 
 "use strict";
 
+const Parchment = Quill.import('parchment');
 
 var _quill = __webpack_require__(1);
 
@@ -82,7 +83,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // get module form quill to extend
-
 
 var Module = _quill2.default.import('core/module');
 
@@ -148,9 +148,12 @@ var RichVoiceEditor = function (_Module) {
                 // get the current position idndex
                 var cursorPosition = this.quill.getSelection().index;
                 // insert the single tag
+                this.quill.insertText(cursorPosition, '⌛')
+/*                
                 this.quill.insertText(cursorPosition, '<break strength="' + value + '"/>');
                 // set cursor position to the end of new tag
                 this.quill.setSelection(cursorPosition + value.length + 20);
+*/
             }
         }
         // add tag handler to quill toolbar
@@ -167,16 +170,21 @@ var RichVoiceEditor = function (_Module) {
             if (range) {
                 // only if it is a range and not a position
                 if (range.length > 0) {
-                    // add tag at the end of the selected range
-                    this.quill.insertText(range.index + range.length, '</emphasis>');
-                    // add tag at the beginning of the selected range
-                    this.quill.insertText(range.index, '<emphasis level="strong">');
-                    this.quill.formatText(0, 5, {
-                        'bold': true,
-                        'color': 'rgb(0, 0, 255)'
-                    });
-                    // set cursor position to the end of new tag
-                    this.quill.setSelection(range.index + range.length + 36);
+
+/*              
+                  // add tag at the end of the selected range
+                  this.quill.insertText(range.index + range.length, '</emphasis>');
+                  // add tag at the beginning of the selected range
+                  this.quill.insertText(range.index, '<emphasis level="strong">');
+*/
+                  this.quill.formatText(range.index, (range.length), {
+                    'bold': true,
+                    'color': 'rgb(0, 0, 255)'
+                });
+                  // set cursor position to the end of new tag
+/*
+                  this.quill.setSelection(range.index + range.length + 36);
+*/                  
                 }
             }
         }
@@ -279,12 +287,17 @@ var RichVoiceEditor = function (_Module) {
             if (range) {
                 // only if it is a range and not a position
                 if (range.length > 0) {
+                  this.quill.insertText(range.index + range.length, '✒');
+                  this.quill.insertText(range.index, '✒');
+                  this.quill.setSelection(range.index + range.length + value.length + 1);
+/*                  
                     // add tag at the end of the selected range
                     this.quill.insertText(range.index + range.length, '</say-as>');
                     // add tag at the beginning of the selected range
                     this.quill.insertText(range.index, '<say-as interpret-as="' + value + '">');
                     // set cursor position to the end of new tag
                     this.quill.setSelection(range.index + range.length + value.length + 33);
+*/
                 }
             }
         }
@@ -310,12 +323,15 @@ var RichVoiceEditor = function (_Module) {
             if (range) {
                 // only if it is a range and not a position
                 if (range.length > 0) {
+
+
                     // add tag at the end of the selected range
                     this.quill.insertText(range.index + range.length, '</say-as>');
                     // add tag at the beginning of the selected range
                     this.quill.insertText(range.index, '<say-as interpret-as="date" format="' + value + '">');
                     // set cursor position to the end of new tag
                     this.quill.setSelection(range.index + range.length + value.length + 47);
+
                 }
             }
         }
