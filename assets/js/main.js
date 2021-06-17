@@ -220,8 +220,8 @@ $(document).ready(function(){
         $('#filename').val(getCookie('last_filename'));
     }
     if(getCookie('last_content')){
-        textarea.innerHtml=decodeURIComponent(getCookie('last_content'));
-        quill.setText(decodeURIComponent(getCookie('last_content')));
+        quill.root.innerHTML=decodeURIComponent(getCookie('last_content'));
+        
     }
     
     if(getCookie('last_voice')){
@@ -263,7 +263,7 @@ document.addEventListener("keydown", function(event) {
 //setCookie('last_content', encodeURIComponent(textarea.innerHtml), 360);
 function setCookies() {
     setCookie('last_filename', filename.val(), 360);
-    setCookie('last_content', encodeURIComponent(quill.getText(0)), 360);
+    setCookie('last_content', encodeURIComponent(document.querySelector('.ql-editor').innerHTML), 360);
     setCookie('last_voice', $('#voice-name').val(), 360);
     setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
     setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
