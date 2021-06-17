@@ -155,8 +155,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" crossorigin="anonymous"></script>
     <script src="/assets/js/quill.js"></script>
-    <script src="/assets/js/richVoiceEditor.js"></script>
     <script src="/assets/js/richVoiceEditor_options.js"></script>
+    <script src="/assets/js/richVoiceEditor.js"></script>
     <script src="/assets/js/toastr_options.js"></script>
     <script src="/assets/js/cookies.js"></script>
     <script src="/assets/js/main.js"></script>

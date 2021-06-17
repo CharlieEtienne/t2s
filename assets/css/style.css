@@ -103,3 +103,43 @@ audio:focus, audio:focus-visible {
     color: #3e28a9;
     opacity: .45;
 }
+
+.ql-color-rate_x-slow,
+.ql-color-rate_slow,
+/*.ql-color-rate_medium,*/
+.ql-color-rate_fast,
+.ql-color-rate_x-fast {
+    background-color: hsl(33, 100%, 93%);
+    text-decoration: underline dotted hsl(36, 100%, 50%);
+    text-decoration-thickness: 3px;
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+.ql-color-pitch_x-low,
+.ql-color-pitch_low,
+/*.ql-color-pitch_medium,*/
+.ql-color-pitch_high,
+.ql-color-pitch_x-high {
+    background-color: hsl(272, 100%, 93%);
+    text-decoration: underline wavy hsl(272, 100%, 50%);
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+.ql-color-emphasis {
+    background-color: hsl(189, 100%, 93%);
+    text-decoration: underline hsl(189, 100%, 50%);
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.ql-color-spellout {
+    background-color: hsl(156, 100%, 93%);
+    text-decoration: underline dashed hsl(156, 100%, 50%);
+    text-decoration-thickness: 5px;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}

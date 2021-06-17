@@ -2,8 +2,63 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
-
 function style_to_code(text) {
+    let code='';
+    let current='normal';
+    let spell=false;
+    let dico=false;
+    let n=text.length;
+    let done=false;
+    let rate_colors = [
+        'rate_x-slow',
+        'rate_slow',
+        'rate_medium',
+        'rate_fast',
+        'rate_x-fast'
+    ];
+    let pitch_colors = [
+        'pitch_x-low',
+        'pitch_low',
+        'pitch_medium',
+        'pitch_high',
+        'pitch_x-high'
+    ];
+    for (let i = 0; i < n; i++) {
+        let T=quill.getText(i,1);
+        done=false
+        if (T=='⌛') {
+            code+='<break strength="strong"/>';
+        }
+        else {
+            if ((quill.getFormat(i,1).color == 'emphasis') && current=='normal'){
+                code+='<emphasis level="strong">'+T;
+                current='emphasis';
+                done=true;
+            }
+            if ((quill.getFormat(i,1).color != 'emphasis') && current=='emphasis'){
+                code+='</emphasis>'+T;
+                current='normal';
+                done=true;
+            }
+            if ((quill.getFormat(i,1).color == 'spellout') && (spell==false)){
+                code+='<say-as interpret-as="spell-out">'+T;
+                spell=true;
+                done=true;
+            }
+            if ((quill.getFormat(i,1).color != 'spellout') && spell){
+                code+='</say-as>'+T;
+                spell=false;
+                done=true;
+            }
+            if (done==false){
+                code+=T
+            }
+        }}
+    console.log(code);
+    return(code);
+}
+
+function style_to_code_old(text) {
     let code='';
     let current='normal';
     let interpret=''
@@ -25,26 +80,80 @@ function style_to_code(text) {
             }
         }
         else {
+
+            console.log(quill.getFormat(i,1).color);
+            if ((quill.getFormat(i,1).color === 'emphasis') && current === 'normal'){
+                code=code + '<emphasis level="strong">'+T;
+                current='emphasis';
+            }
+            else if ((quill.getFormat(i,1).color === 'emphasis') && current !== 'normal'){
+                code+=T;
+            }
+
+
+            if ((quill.getFormat(i,1).color !== 'emphasis') && current === 'emphasis'){
+                code+='</emphasis>'+T;
+                current='normal';
+            }
+            else if ((quill.getFormat(i,1).color !== 'emphasis') && current !== 'emphasis'){
+                code+=T;
+            }
+
+            // TODO : ne marche pas, pb de boucle...
+            let rate_colors = [
+                'rate_x-slow',
+                'rate_slow',
+                'rate_medium',
+                'rate_fast',
+                'rate_x-fast'
+            ];
+
+            rate_colors.forEach(function (item) {
+                let attribute = item.split('rate_')[1];
+                if ((quill.getFormat(i, 1).color === item) && current === 'normal') {
+                    code    = code + '<prosody rate="' + attribute + '">' + T;
+                    current = 'rate';
+                } else if ((quill.getFormat(i, 1).color === item) && current !== 'normal') {
+                    code += T;
+                }
+
+                if ((quill.getFormat(i, 1).color !== item) && current === 'rate') {
+                    code += '</prosody>' + T;
+                    current = 'normal';
+                } else if ((quill.getFormat(i, 1).color !== item) && current !== 'rate') {
+                    code += T;
+                }
+            });
+
+            let pitch_colors = [
+                'pitch_x-low',
+                'pitch_low',
+                'pitch_medium',
+                'pitch_high',
+                'pitch_x-high'
+            ];
+
+            pitch_colors.forEach(function (item) {
+                let attribute = item.split('pitch_')[1];
+                if ((quill.getFormat(i, 1).color === item) && current === 'normal') {
+                    code    = code + '<prosody pitch="' + attribute + '">' + T;
+                    current = 'pitch';
+                } else if ((quill.getFormat(i, 1).color === item) && current !== 'normal') {
+                    code += T;
+                }
+
+                if ((quill.getFormat(i, 1).color !== item) && current === 'pitch') {
+                    code += '</prosody>' + T;
+                    current = 'normal';
+                } else if ((quill.getFormat(i, 1).color !== item) && current !== 'pitch') {
+                    code += T;
+                }
+            });
+
+
   
-        if ((quill.getFormat(i,1).color == "#0000ff") && current=='normal'){
-            code=code + '<emphasis level="strong">'+T;
-            current='emphasis';
         }
-        else if ((quill.getFormat(i,1).color == "#0000ff") && current!='normal'){
-            code+=T;
-        }
-  
-  
-        if ((quill.getFormat(i,1).color != "#0000ff") && current=='emphasis'){
-            code+='</emphasis>'+T;
-            current='normal';
-        }
-        else if ((quill.getFormat(i,1).color != "#0000ff") && current!='emphasis'){
-            code+=T;
-        }
-  
-  
-      }}
+    }
 
       return(code);
   }
