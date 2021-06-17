@@ -9,27 +9,17 @@ function style_to_code(text) {
     let dico=false;
     let n=text.length;
     let done=false;
-    let rate_colors = [
-        'rate_x-slow',
-        'rate_slow',
-        'rate_medium',
-        'rate_fast',
-        'rate_x-fast'
-    ];
-    let pitch_colors = [
-        'pitch_x-low',
-        'pitch_low',
-        'pitch_medium',
-        'pitch_high',
-        'pitch_x-high'
-    ];
+    let pitch='normal';
+    let rate='normal';
     for (let i = 0; i < n; i++) {
         let T=quill.getText(i,1);
         done=false
+        console.log(quill.getFormat(i,1).color);
         if (T=='⌛') {
             code+='<break strength="strong"/>';
         }
         else {
+            //emphasis
             if ((quill.getFormat(i,1).color == 'emphasis') && current=='normal'){
                 code+='<emphasis level="strong">'+T;
                 current='emphasis';
@@ -40,6 +30,8 @@ function style_to_code(text) {
                 current='normal';
                 done=true;
             }
+
+            //spellout
             if ((quill.getFormat(i,1).color == 'spellout') && (spell==false)){
                 code+='<say-as interpret-as="spell-out">'+T;
                 spell=true;
@@ -50,6 +42,129 @@ function style_to_code(text) {
                 spell=false;
                 done=true;
             }
+
+
+            //pitch
+
+            if ((quill.getFormat(i,1).color == 'pitch_x-low') && (pitch!='x-low')){
+                if (pitch=='normal') {
+                    code+='<prosody pitch="x-low">'+T;
+                    pitch='x-low';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody pitch="x-low">'+T;
+                    pitch='x-low';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color == 'pitch_low') && (pitch!='low')){
+                if (pitch=='normal') {
+                    code+='<prosody pitch="low">'+T;
+                    pitch='low';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody pitch="low">'+T;
+                    pitch='low';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color ==undefined) && (pitch!='normal')){
+                    code+='</prosody>'+T;
+                    pitch='normal';
+                    done=true;
+            }
+
+            if ((quill.getFormat(i,1).color == 'pitch_high') && (pitch!='high')){
+                if (pitch=='normal') {
+                    code+='<prosody pitch="high">'+T;
+                    pitch='high';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody pitch="high">'+T;
+                    pitch='high';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color == 'pitch_x-high') && (pitch!='x-high')){
+                if (pitch=='normal') {
+                    code+='<prosody pitch="x-high">'+T;
+                    pitch='x-high';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody pitch="x-high">'+T;
+                    pitch='x-high';
+                    done=true;
+                }
+            }
+
+
+            //Rate
+
+            if ((quill.getFormat(i,1).color == 'rate_x-slow') && (rate!='x-slow')){
+                if (rate=='normal') {
+                    code+='<prosody rate="x-slow">'+T;
+                    rate='x-slow';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody rate="x-slow">'+T;
+                    rate='x-slow';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color == 'rate_slow') && (rate!='slow')){
+                if (rate=='normal') {
+                    code+='<prosody rate="slow">'+T;
+                    rate='slow';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody rate="slow">'+T;
+                    rate='slow';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color == undefined) && (rate!='normal')){
+                    code+='</prosody>'+T;
+                    rate='normal';
+                    done=true;
+            }
+
+            if ((quill.getFormat(i,1).color == 'rate_fast') && (rate!='fast')){
+                if (rate=='normal') {
+                    code+='<prosody rate="fast">'+T;
+                    rate='fast';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody rate="fast">'+T;
+                    rate='fast';
+                    done=true;
+                }
+            }
+
+            if ((quill.getFormat(i,1).color == 'rate_x-fast') && (rate!='x-fast')){
+                if (rate=='normal') {
+                    code+='<prosody rate="x-fast">'+T;
+                    rate='x-fast';
+                    done=true;
+                }
+                else {
+                    code+='</prosody>'+'<prosody rate="x-fast">'+T;
+                    rate='x-fast';
+                    done=true;
+                }
+            }
+
             if (done==false){
                 code+=T
             }
