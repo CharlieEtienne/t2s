@@ -158,18 +158,18 @@ audio:focus, audio:focus-visible {
     margin-right: 3px;
 }
 
-.ql-color-pitch_x-low,
-.ql-color-pitch_low,
-/*.ql-color-pitch_medium,*/
-.ql-color-pitch_high,
-.ql-color-pitch_x-high {
+.ql-bg-pitch_x-low,
+.ql-bg-pitch_low,
+/*.ql-bg-pitch_medium,*/
+.ql-bg-pitch_high,
+.ql-bg-pitch_x-high {
     background-color: hsl(272, 100%, 93%);
     text-decoration: underline wavy hsl(272, 100%, 50%);
     padding: 0 3px;
     border-radius: 3px;
 }
 
-.ql-color-pitch_x-low:before {
+.ql-bg-pitch_x-low:before {
     content: url(/assets/icons/pitch-x-low.svg);
     height: 19px;
     width: 11px;
@@ -179,7 +179,7 @@ audio:focus, audio:focus-visible {
     vertical-align: middle;
     margin-right: 3px;
 }
-.ql-color-pitch_low:before {
+.ql-bg-pitch_low:before {
     content: url(/assets/icons/pitch-low.svg);
     height: 16px;
     width: 11px;
@@ -190,7 +190,7 @@ audio:focus, audio:focus-visible {
     margin-right: 3px;
 }
 
-.ql-color-pitch_high:before {
+.ql-bg-pitch_high:before {
     content: url(/assets/icons/pitch-high.svg);
     height: 16px;
     width: 11px;
@@ -200,7 +200,7 @@ audio:focus, audio:focus-visible {
     vertical-align: middle;
     margin-right: 3px;
 }
-.ql-color-pitch_x-high:before {
+.ql-bg-pitch_x-high:before {
     content: url(/assets/icons/pitch-x-high.svg);
     height: 19px;
     width: 11px;
