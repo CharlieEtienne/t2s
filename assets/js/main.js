@@ -189,16 +189,6 @@ textarea.on('change input paste keyup', function(){
         play_btn.removeClass('disabled').removeAttr('disabled');
         download_btn.removeClass('disabled').removeAttr('disabled');
       });
-      /*
-    if ($.trim(textarea.val())) {
-        console.log("coucou");
-        play_btn.removeClass('disabled').removeAttr('disabled');
-        download_btn.removeClass('disabled').removeAttr('disabled');
-    }
-    else {
-        play_btn.addClass('disabled').attr("disabled", true);
-        download_btn.addClass('disabled').attr("disabled", true);
-    }*/
 });
 
 audio.onplaying = function() { equalizer.css('display','inline-block'); };
@@ -288,21 +278,6 @@ form.on('submit', function(e){
             $('#audio_player').attr("src", response.filepath + '?' + Date.now() );
             player.play();
             player.focus();
-            // if(play_btn.hasClass('playing')){
-            //     audio.pause();
-            //     audio.currentTime = 0;
-            //     equalizer.css('display','none');
-            //     play_btn.removeClass('playing');
-            //     play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
-            // }
-            // else {
-            //     var url = response.filepath;
-            //     audio.src = url + '?' + Date.now();
-            //     audio.load();
-            //     audio.play();
-            //     play_btn.addClass('playing');
-            //     play_icon.removeClass('fa-play-circle').addClass('fa-pause-circle');
-            // }
             play_btn.find('.spinner').addClass('d-none');
             listfiles();
             setCookie('last_audio_file', encodeURIComponent(response.filepath), 360);
