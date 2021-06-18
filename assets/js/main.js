@@ -318,7 +318,7 @@ form.on('submit', function(e){
 /* Download button */
 $(document).on('click', '#download', function (e) {
     e.preventDefault();
-    hidden_text_input.value = JSON.stringify(quill.getText(0).replaceAll('\n', '&#13;&#10;'));
+    hidden_text_input.value = JSON.stringify(style_to_code(quill.getText(0)).replaceAll('\n', '&#13;&#10;'));
     setCookies();
     download_btn.find('.spinner').removeClass('d-none');
     $.ajax({
