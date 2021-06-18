@@ -1,6 +1,6 @@
 const ssmlToolbarOptions = {
     container: [
-        [{ 'ssml_break': ['weak', 'strong', 'x-strong'] }],
+        [{ 'ssml_break': ['x-weak', 'weak', 'strong', 'x-strong'] }],
         ['ssml_emphasis'],
         [{'ssml_rate':['x-slow', 'slow', 'medium', 'fast', 'x-fast']}],
         [{'ssml_pitch':['x-low', 'low', 'medium', 'high', 'x-high']}],
