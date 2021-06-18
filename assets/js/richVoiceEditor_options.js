@@ -5,6 +5,7 @@ const ssmlToolbarOptions = {
         [{'ssml_rate':['x-slow', 'slow', 'medium', 'fast', 'x-fast']}],
         [{'ssml_pitch':['x-low', 'low', 'medium', 'high', 'x-high']}],
         ['ssml_spellout'],
+        ['erase_format']
         // [{ 'ssml_date': ['mdy', 'dmy', 'ymd', 'md', 'dm', 'ym', 'my', 'd', 'm', 'y'] }],
     ],
     handlers: {
@@ -13,6 +14,7 @@ const ssmlToolbarOptions = {
         'ssml_rate': function () { },
         'ssml_pitch': function () { },
         'ssml_spellout': function () { },
+        'erase_format' : function () { }
         // 'ssml_date': function () { },
     }
 }
