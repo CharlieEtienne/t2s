@@ -27,7 +27,22 @@ function ssml_break_handler(value) {
         // get the current position idndex
         var cursorPosition = quill.getSelection().index;
         // insert the single tag
-        quill.insertText(cursorPosition, '⌛')
+        switch (value){
+            case 'x-weak':
+                quill.insertText(cursorPosition, '⌛');
+                break;
+            case 'weak':
+                quill.insertText(cursorPosition, '⌛⌛');
+                break;
+            case 'strong':
+                quill.insertText(cursorPosition, '⌛⌛⌛');
+                break;
+            case 'x-strong':
+                quill.insertText(cursorPosition, '⌛⌛⌛⌛');
+                break;
+            default :
+                break;
+        }
     }
 }
 // add tag handler to quill toolbar
@@ -58,7 +73,7 @@ toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
 // --------------
 set_dropdown('ssml_pitch', 'Pitch', 'fas fa-wave-square')
 function ssml_pitch_handler(value) {
-    quill_range_button_handler('pitch_' + value);
+    quill_range_button_handler('pitch_' + value, 'background');
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
