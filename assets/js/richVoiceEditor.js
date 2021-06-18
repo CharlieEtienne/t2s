@@ -109,7 +109,7 @@ toolbar.addHandler('ssml_spellout', ssml_spellout_handler.bind(quill));
 // add tag handler to quill toolbar
 // toolbar.addHandler('ssml_date', ssml_date_handler.bind(quill));
 
-
+document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser" title="Eraser"></i>';
 function erase_format() {
     // get current selected text as range
     let range   = quill.getSelection();
