@@ -3,172 +3,56 @@ $(function () {
 });
 
 // Replace format with appropriate SSML tags
-function style_to_code(text) {
+function style_to_code() {
     let code='';
-    let current='normal';
-    let spell=false;
-    let dico=false;
-    let n=text.length;
-    let done=false;
-    let pitch='normal';
-    let rate='normal';
-    for (let i = 0; i < n; i++) {
-        let T=quill.getText(i,1);
-        done=false
-        if (T=='⌛') {
-            code+='<break strength="strong"/>';
+    let contents = quill.getContents();
+    let rate = [
+        'rate_x-slow',
+        'rate_slow',
+        'rate_fast',
+        'rate_x-fast',
+    ];
+    let pitch = [
+        'rate_x-low',
+        'rate_low',
+        'rate_high',
+        'rate_x-high',
+    ];
+
+    contents.forEach(function (item){
+        // Text have some formats
+        if (item.attributes){
+            // Text have emphasis
+            if (item.attributes.color === 'emphasis'){
+                code += '<emphasis level="strong">' + item.insert + '</emphasis>';
+            }
+            // Text have spellout
+            if (item.attributes.color === 'spellout'){
+                code += '<say-as interpret-as="spell-out">' + item.insert + '</say-as>';
+            }
+            // Text have rate
+            rate.forEach(function (rate_item){
+                if (item.attributes.color === rate_item){
+                    code += '<prosody rate="' + rate_item + '">' + item.insert + '</prosody>';
+                }
+            });
+            // Text have pitch
+            pitch.forEach(function (pitch_item){
+                if (item.attributes.background === pitch_item){
+                    code += '<prosody pitch="' + pitch_item + '">' + item.insert + '</prosody>';
+                }
+            });
         }
         else {
-            //emphasis
-            if ((quill.getFormat(i,1).color == 'emphasis') && current=='normal'){
-                code+='<emphasis level="strong">'+T;
-                current='emphasis';
-                done=true;
-            }
-            if ((quill.getFormat(i,1).color != 'emphasis') && current=='emphasis'){
-                code+='</emphasis>'+T;
-                current='normal';
-                done=true;
-            }
+            code += item.insert;
+        }
+    });
 
-            //spellout
-            if ((quill.getFormat(i,1).color == 'spellout') && (spell==false)){
-                code+='<say-as interpret-as="spell-out">'+T;
-                spell=true;
-                done=true;
-            }
-            if ((quill.getFormat(i,1).color != 'spellout') && spell){
-                code+='</say-as>'+T;
-                spell=false;
-                done=true;
-            }
+    code = code.replaceAll('⌛', '<break strength="x-weak"/>');
+    code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
+    code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
+    code = code.replaceAll('⌛⌛⌛⌛', '<break strength="x-strong"/>');
 
-
-            //pitch
-
-            if ((quill.getFormat(i,1).color == 'pitch_x-low') && (pitch!='x-low')){
-                if (pitch=='normal') {
-                    code+='<prosody pitch="x-low">'+T;
-                    pitch='x-low';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody pitch="x-low">'+T;
-                    pitch='x-low';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color == 'pitch_low') && (pitch!='low')){
-                if (pitch=='normal') {
-                    code+='<prosody pitch="low">'+T;
-                    pitch='low';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody pitch="low">'+T;
-                    pitch='low';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color ==undefined) && (pitch!='normal')){
-                    code+='</prosody>'+T;
-                    pitch='normal';
-                    done=true;
-            }
-
-            if ((quill.getFormat(i,1).color == 'pitch_high') && (pitch!='high')){
-                if (pitch=='normal') {
-                    code+='<prosody pitch="high">'+T;
-                    pitch='high';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody pitch="high">'+T;
-                    pitch='high';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color == 'pitch_x-high') && (pitch!='x-high')){
-                if (pitch=='normal') {
-                    code+='<prosody pitch="x-high">'+T;
-                    pitch='x-high';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody pitch="x-high">'+T;
-                    pitch='x-high';
-                    done=true;
-                }
-            }
-
-
-            //Rate
-
-            if ((quill.getFormat(i,1).color == 'rate_x-slow') && (rate!='x-slow')){
-                if (rate=='normal') {
-                    code+='<prosody rate="x-slow">'+T;
-                    rate='x-slow';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody rate="x-slow">'+T;
-                    rate='x-slow';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color == 'rate_slow') && (rate!='slow')){
-                if (rate=='normal') {
-                    code+='<prosody rate="slow">'+T;
-                    rate='slow';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody rate="slow">'+T;
-                    rate='slow';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color == undefined) && (rate!='normal')){
-                    code+='</prosody>'+T;
-                    rate='normal';
-                    done=true;
-            }
-
-            if ((quill.getFormat(i,1).color == 'rate_fast') && (rate!='fast')){
-                if (rate=='normal') {
-                    code+='<prosody rate="fast">'+T;
-                    rate='fast';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody rate="fast">'+T;
-                    rate='fast';
-                    done=true;
-                }
-            }
-
-            if ((quill.getFormat(i,1).color == 'rate_x-fast') && (rate!='x-fast')){
-                if (rate=='normal') {
-                    code+='<prosody rate="x-fast">'+T;
-                    rate='x-fast';
-                    done=true;
-                }
-                else {
-                    code+='</prosody>'+'<prosody rate="x-fast">'+T;
-                    rate='x-fast';
-                    done=true;
-                }
-            }
-
-            if (done==false){
-                code+=T
-            }
-        }}
     return(code);
 }
 
@@ -262,7 +146,7 @@ function setCookies() {
 /* Listen button */
 form.on('submit', function(e){
     e.preventDefault();
-    hidden_text_input.value = JSON.stringify(style_to_code(quill.getText(0)).replaceAll('\n', '&#13;&#10;'));
+    hidden_text_input.value = JSON.stringify(style_to_code().replaceAll('\n', '&#13;&#10;'));
     setCookies();
     play_btn.find('.spinner').removeClass('d-none');
     $.ajax({
@@ -294,7 +178,7 @@ form.on('submit', function(e){
 /* Download button */
 $(document).on('click', '#download', function (e) {
     e.preventDefault();
-    hidden_text_input.value = JSON.stringify(style_to_code(quill.getText(0)).replaceAll('\n', '&#13;&#10;'));
+    hidden_text_input.value = JSON.stringify(style_to_code().replaceAll('\n', '&#13;&#10;'));
     setCookies();
     download_btn.find('.spinner').removeClass('d-none');
     $.ajax({
