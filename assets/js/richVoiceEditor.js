@@ -110,6 +110,27 @@ toolbar.addHandler('ssml_spellout', ssml_spellout_handler.bind(quill));
 // toolbar.addHandler('ssml_date', ssml_date_handler.bind(quill));
 
 
+function erase_format() {
+    // get current selected text as range
+    let range   = quill.getSelection();
+    // only if range is currently selected
+    if (range) {
+        // only if it is a range and not a position
+        // removing all styles applied to the selection
+        if (range.length > 0) {
+                quill.formatText(range.index, (range.length), {'color' : false,
+                'bold':false,
+                'italic':false,
+                'strike':false,
+                'underline':false,
+                'font':false,
+                'size':false,
+                'color':false,
+                'background':false});
+            }
+        }
+}
+toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
 function quill_range_button_handler(color) {
@@ -137,7 +158,6 @@ function quill_range_button_handler(color) {
             }else {
                 quill.format('color', color);
             }
-
         }
     }
 }
