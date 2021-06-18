@@ -2,6 +2,7 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+// Replace format with appropriate SSML tags
 function style_to_code(text) {
     let code='';
     let current='normal';
