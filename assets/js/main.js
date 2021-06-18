@@ -220,10 +220,8 @@ $(document).ready(function(){
         $('#filename').val(getCookie('last_filename'));
     }
     if(getCookie('last_content')){
-        quill.root.innerHTML=decodeURIComponent(getCookie('last_content'));
-        
+        quill.root.innerHTML = decodeURIComponent(getCookie('last_content'));
     }
-    
     if(getCookie('last_voice')){
         $('#voice-name').val(getCookie('last_voice'));
     }
