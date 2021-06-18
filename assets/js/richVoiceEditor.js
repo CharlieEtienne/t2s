@@ -133,7 +133,7 @@ function erase_format() {
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
-function quill_range_button_handler(color) {
+function quill_range_button_handler(color, type='color') {
     // get current selected text as range
     let range   = quill.getSelection();
     let format  = quill.getFormat(range);
@@ -142,21 +142,21 @@ function quill_range_button_handler(color) {
     if (range) {
         // only if it is a range and not a position
         if (range.length > 0) {
-            if(format.color === color){
+            if(format[type] === color){
                 quill.formatText(range.index, (range.length), {
-                    'color': false
+                    [type]: false
                 });
             }else {
                 quill.formatText(range.index, (range.length), {
-                    'color': color
+                    [type]: color
                 });
             }
         }
         else {
-            if(format.color === color){
-                quill.format('color', false);
+            if(format[type] === color){
+                quill.format(type, false);
             }else {
-                quill.format('color', color);
+                quill.format(type, color);
             }
         }
     }
