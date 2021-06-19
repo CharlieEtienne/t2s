@@ -102,7 +102,7 @@ say-as[interpret-as="spell-out"] {
     text-decoration-thickness: 4px;
     padding: 0 3px;
     border-radius: 3px;
-    font-weight: bold;
+    letter-spacing: 3px;
 }
 
 say-as[interpret-as="spell-out"]:before {
