@@ -25,7 +25,7 @@ function ssml_break_handler(value) {
     // only if a position is currently selected
     if (value) {
         // get the current position idndex
-        var cursorPosition = quill.getSelection().index;
+        let cursorPosition = quill.getSelection().index;
         // insert the single tag
         switch (value){
             case 'x-weak':
