@@ -131,13 +131,10 @@ function erase_format() {
             );
         }
         else {
-            quill.format({
-                    'emphasis': false,
-                    'spellout': false,
-                    'rate':     false,
-                    'pitch':    false,
-                }
-            );
+            quill.format('emphasis', false);
+            quill.format('spellout', false);
+            quill.format('rate', false);
+            quill.format('pitch', false);
         }
     }
 }
