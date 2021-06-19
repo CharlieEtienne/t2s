@@ -85,7 +85,6 @@ function synthesize_text( $text ) {
         if( is_array($array) && count($array) > 1 ) {
             $is_multiple = true;
         }
-        //"<prosody rate="fast" pitch="+50%">Là je suis très content !</prosody>. <prosody rate="slow" pitch="-50%">Et là je suis plutôt triste.</prosody>. "
     }
 
     /* If we choose to make multiple files, we iterate and return a zip file */
