@@ -112,7 +112,6 @@
             <div class="form-group">
                 <label for="text">Texte</label>
                 <input name="text" type="hidden">
-<!--                <textarea  class="form-control" rows="10" type="text" name="text" id="text" tabindex="2"></textarea>-->
                 <div id="text" class="center form-control" tabindex="2"></div>
             </div>
 
