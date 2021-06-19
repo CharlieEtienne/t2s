@@ -1,0 +1,147 @@
+
+.ql-color-rate_x-slow,
+.ql-color-rate_slow,
+    /*.ql-color-rate_medium,*/
+.ql-color-rate_fast,
+.ql-color-rate_x-fast {
+    background-color: hsl(33, 100%, 93%);
+    text-decoration: underline dotted hsl(36, 100%, 50%);
+    text-decoration-thickness: 3px;
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+.ql-color-rate_slow:before {
+    content: url(/assets/icons/turtle.svg);
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.ql-color-rate_x-slow:before {
+    content: url(/assets/icons/double-turtle.svg);
+    height: 16px;
+    width: 30px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.ql-color-rate_fast:before {
+    content: url(/assets/icons/rabbit.svg);
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.ql-color-rate_x-fast:before {
+    content: url(/assets/icons/double-rabbit.svg);
+    height: 16px;
+    width: 30px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.ql-bg-pitch_x-low,
+.ql-bg-pitch_low,
+    /*.ql-bg-pitch_medium,*/
+.ql-bg-pitch_high,
+.ql-bg-pitch_x-high {
+    background-color: hsl(272, 100%, 93%);
+    text-decoration: underline wavy hsl(272, 100%, 50%);
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+.ql-bg-pitch_x-low:before {
+    content: url(/assets/icons/pitch-x-low.svg);
+    height: 19px;
+    width: 11px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.ql-bg-pitch_low:before {
+    content: url(/assets/icons/pitch-low.svg);
+    height: 16px;
+    width: 11px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.ql-bg-pitch_high:before {
+    content: url(/assets/icons/pitch-high.svg);
+    height: 16px;
+    width: 11px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.ql-bg-pitch_x-high:before {
+    content: url(/assets/icons/pitch-x-high.svg);
+    height: 19px;
+    width: 11px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.ql-color-emphasis {
+    background-color: hsl(189, 100%, 93%);
+    text-decoration: underline hsl(189, 100%, 50%);
+    text-decoration-thickness: 3px;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.ql-color-emphasis:before {
+    content: url(/assets/icons/emphasis.svg);
+    height: 18px;
+    width: 14px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.ql-color-spellout {
+    background-color: hsl(156, 100%, 93%);
+    text-decoration: underline dashed hsl(156, 100%, 50%);
+    text-decoration-thickness: 4px;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.ql-color-spellout:before {
+    content: url(/assets/icons/spellout.svg);
+    height: 18px;
+    width: 14px;
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
