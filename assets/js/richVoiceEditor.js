@@ -33,12 +33,14 @@ function ssml_break_handler(value) {
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 
+
+
 // SSML emphasis tag
 // -----------------
 // style toolbar button with icon
 document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="fas fa-volume-up" title="Emphasis"></i>';
 function ssml_emphasis_handler() {
-    quill_range_button_handler('emphasis');
+    quill_range_button_handler('emphasis', 'strong');
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_emphasis', ssml_emphasis_handler.bind(quill));
@@ -49,16 +51,18 @@ toolbar.addHandler('ssml_emphasis', ssml_emphasis_handler.bind(quill));
 // --------------
 set_dropdown('ssml_rate', 'Rate', 'fas fa-tachometer-alt')
 function ssml_rate_handler(value) {
-    quill_range_button_handler('rate_' + value);
+    quill_range_button_handler('rate', value);
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
+
+
 
 // SSML prosody pitch tag
 // --------------
 set_dropdown('ssml_pitch', 'Pitch', 'fas fa-wave-square')
 function ssml_pitch_handler(value) {
-    quill_range_button_handler('pitch_' + value, 'background');
+    quill_range_button_handler('pitch', value);
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
@@ -70,7 +74,7 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 // style toolbar button with icon and keep dropdown values
 document.querySelector('.ql-ssml_spellout').innerHTML = '<i class="fas fa-spell-check" title="Spell Out"></i>';
 function ssml_spellout_handler() {
-    quill_range_button_handler('spellout');
+    quill_range_button_handler('spellout', 'spell-out');
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_spellout', ssml_spellout_handler.bind(quill));
@@ -109,7 +113,7 @@ toolbar.addHandler('ssml_spellout', ssml_spellout_handler.bind(quill));
 // add tag handler to quill toolbar
 // toolbar.addHandler('ssml_date', ssml_date_handler.bind(quill));
 
-document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser" title="Eraser"></i>';
+document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser" title="Effacer les formats"></i>';
 function erase_format() {
     // get current selected text as range
     let range   = quill.getSelection();
@@ -119,14 +123,19 @@ function erase_format() {
         // removing all styles applied to the selection
         if (range.length > 0) {
             quill.formatText(range.index, (range.length), {
-                    'color':      false,
-                    'bold':       false,
-                    'italic':     false,
-                    'strike':     false,
-                    'underline':  false,
-                    'font':       false,
-                    'size':       false,
-                    'background': false
+                    'emphasis': false,
+                    'spellout': false,
+                    'rate':     false,
+                    'pitch':    false,
+                }
+            );
+        }
+        else {
+            quill.format({
+                    'emphasis': false,
+                    'spellout': false,
+                    'rate':     false,
+                    'pitch':    false,
                 }
             );
         }
@@ -135,30 +144,32 @@ function erase_format() {
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
-function quill_range_button_handler(color, type='color') {
+function quill_range_button_handler(type='color', value = false ) {
     // get current selected text as range
     let range   = quill.getSelection();
     let format  = quill.getFormat(range);
+
+    // console.log(format);
 
     // only if range is currently selected
     if (range) {
         // only if it is a range and not a position
         if (range.length > 0) {
-            if(format[type] === color){
+            if(format[type] === value){
                 quill.formatText(range.index, (range.length), {
                     [type]: false
                 });
             }else {
                 quill.formatText(range.index, (range.length), {
-                    [type]: color
+                    [type]: value
                 });
             }
         }
         else {
-            if(format[type] === color){
+            if(format[type] === value){
                 quill.format(type, false);
             }else {
-                quill.format(type, color);
+                quill.format(type, value);
             }
         }
     }
@@ -177,3 +188,81 @@ function set_dropdown(method, title, icon) {
     document.querySelector('.ql-' + method).style.width   = '45px';
     document.querySelector('.ql-' + method).style.padding = '4px 0 0 0';
 }
+
+let Inline = Quill.import('blots/inline');
+
+/**
+ * Class for <emphasis level="strong"></emphasis>
+ */
+class EmphasisBlot extends Inline {
+    static create() {
+        let node = super.create();
+        node.setAttribute('level', 'strong');
+        return node;
+    }
+
+    static formats(node) {
+        return node.getAttribute('level');
+    }
+}
+EmphasisBlot.blotName = 'emphasis';
+EmphasisBlot.tagName = 'emphasis';
+
+Quill.register(EmphasisBlot);
+
+/**
+ * Class for <prosody rate=""></prosody>
+ */
+class RateBlot extends Inline {
+    static create(value) {
+        let node = super.create();
+        node.setAttribute('rate', value);
+        return node;
+    }
+
+    static formats(node) {
+        return node.getAttribute('rate');
+    }
+}
+RateBlot.blotName = 'rate';
+RateBlot.tagName = 'prosody';
+
+Quill.register(RateBlot);
+
+/**
+ * Class for <prosody pitch=""></prosody>
+ */
+class PitchBlot extends Inline {
+    static create(value) {
+        let node = super.create();
+        node.setAttribute('pitch', value);
+        return node;
+    }
+
+    static formats(node) {
+        return node.getAttribute('pitch');
+    }
+}
+PitchBlot.blotName = 'pitch';
+PitchBlot.tagName = 'prosody';
+
+Quill.register(PitchBlot);
+
+/**
+ * Class for <say-as interpret-as="spell-out"></say-as>
+ */
+class SpelloutBlot extends Inline {
+    static create() {
+        let node = super.create();
+        node.setAttribute('interpret-as', 'spell-out');
+        return node;
+    }
+
+    static formats(node) {
+        return node.getAttribute('interpret-as');
+    }
+}
+SpelloutBlot.blotName = 'spellout';
+SpelloutBlot.tagName = 'say-as';
+
+Quill.register(SpelloutBlot);

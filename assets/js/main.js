@@ -4,54 +4,16 @@ $(function () {
 
 // Replace format with appropriate SSML tags
 function style_to_code() {
-    let code='';
-    let contents = quill.getContents();
-    let rate = [
-        'rate_x-slow',
-        'rate_slow',
-        'rate_fast',
-        'rate_x-fast',
-    ];
-    let pitch = [
-        'rate_x-low',
-        'rate_low',
-        'rate_high',
-        'rate_x-high',
-    ];
 
-    contents.forEach(function (item){
-        // Text has some formats
-        if (item.attributes){
-            // Text has emphasis
-            if (item.attributes.color === 'emphasis'){
-                code += '<emphasis level="strong">' + item.insert + '</emphasis>';
-            }
-            // Text has spellout
-            if (item.attributes.color === 'spellout'){
-                code += '<say-as interpret-as="spell-out">' + item.insert + '</say-as>';
-            }
-            // Text has rate
-            rate.forEach(function (rate_item){
-                if (item.attributes.color === rate_item){
-                    code += '<prosody rate="' + rate_item + '">' + item.insert + '</prosody>';
-                }
-            });
-            // Text has pitch
-            pitch.forEach(function (pitch_item){
-                if (item.attributes.background === pitch_item){
-                    code += '<prosody pitch="' + pitch_item + '">' + item.insert + '</prosody>';
-                }
-            });
-        }
-        else {
-            code += item.insert;
-        }
-    });
+    let code = quill.root.innerHTML;
 
-    code = code.replaceAll('⌛', '<break strength="x-weak"/>');
-    code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
-    code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
+    code = code.replace('<p>', '');
+    code = code.replace('</p>', '');
+
     code = code.replaceAll('⌛⌛⌛⌛', '<break strength="x-strong"/>');
+    code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
+    code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
+    code = code.replaceAll('⌛', '<break strength="x-weak"/>');
 
     return(code);
 }

@@ -1,9 +1,25 @@
+prosody[rate="slow"]:before,
+prosody[rate="x-slow"]:before,
+prosody[rate="fast"]:before,
+prosody[rate="x-fast"]:before,
+prosody[pitch="x-low"]:before,
+prosody[pitch="low"]:before,
+prosody[pitch="high"]:before,
+prosody[pitch="x-high"]:before,
+emphasis:before,
+say-as[interpret-as="spell-out"]:before {
+    line-height: 16px;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
 
-.ql-color-rate_x-slow,
-.ql-color-rate_slow,
-    /*.ql-color-rate_medium,*/
-.ql-color-rate_fast,
-.ql-color-rate_x-fast {
+
+prosody[rate="x-slow"],
+prosody[rate="slow"],
+prosody[rate="fast"],
+prosody[rate="x-fast"] {
     background-color: hsl(33, 100%, 93%);
     text-decoration: underline dotted hsl(36, 100%, 50%);
     text-decoration-thickness: 3px;
@@ -11,102 +27,61 @@
     border-radius: 3px;
 }
 
-.ql-color-rate_slow:before {
+prosody[rate="slow"]:before {
     content: url(/assets/icons/turtle.svg);
     height: 16px;
     width: 16px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
-.ql-color-rate_x-slow:before {
+prosody[rate="x-slow"]:before {
     content: url(/assets/icons/double-turtle.svg);
     height: 16px;
     width: 30px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
 
-.ql-color-rate_fast:before {
+prosody[rate="fast"]:before {
     content: url(/assets/icons/rabbit.svg);
     height: 16px;
     width: 16px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
-.ql-color-rate_x-fast:before {
+prosody[rate="x-fast"]:before {
     content: url(/assets/icons/double-rabbit.svg);
     height: 16px;
     width: 30px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
 
-.ql-bg-pitch_x-low,
-.ql-bg-pitch_low,
-    /*.ql-bg-pitch_medium,*/
-.ql-bg-pitch_high,
-.ql-bg-pitch_x-high {
+prosody[pitch="x-low"],
+prosody[pitch="low"],
+prosody[pitch="high"],
+prosody[pitch="x-high"] {
     background-color: hsl(272, 100%, 93%);
     text-decoration: underline wavy hsl(272, 100%, 50%);
     padding: 0 3px;
     border-radius: 3px;
 }
 
-.ql-bg-pitch_x-low:before {
+prosody[pitch="x-low"]:before {
     content: url(/assets/icons/pitch-x-low.svg);
     height: 19px;
     width: 11px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
-.ql-bg-pitch_low:before {
+prosody[pitch="low"]:before {
     content: url(/assets/icons/pitch-low.svg);
     height: 16px;
     width: 11px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
 
-.ql-bg-pitch_high:before {
+prosody[pitch="high"]:before {
     content: url(/assets/icons/pitch-high.svg);
     height: 16px;
     width: 11px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
-.ql-bg-pitch_x-high:before {
+prosody[pitch="x-high"]:before {
     content: url(/assets/icons/pitch-x-high.svg);
     height: 19px;
     width: 11px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
 
-.ql-color-emphasis {
+emphasis {
     background-color: hsl(189, 100%, 93%);
     text-decoration: underline hsl(189, 100%, 50%);
     text-decoration-thickness: 3px;
@@ -115,18 +90,13 @@
     font-weight: bold;
 }
 
-.ql-color-emphasis:before {
+emphasis:before {
     content: url(/assets/icons/emphasis.svg);
     height: 18px;
     width: 14px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
 
-.ql-color-spellout {
+say-as[interpret-as="spell-out"] {
     background-color: hsl(156, 100%, 93%);
     text-decoration: underline dashed hsl(156, 100%, 50%);
     text-decoration-thickness: 4px;
@@ -135,13 +105,8 @@
     font-weight: bold;
 }
 
-.ql-color-spellout:before {
+say-as[interpret-as="spell-out"]:before {
     content: url(/assets/icons/spellout.svg);
     height: 18px;
     width: 14px;
-    line-height: 16px;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
 }
