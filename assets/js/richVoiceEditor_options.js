@@ -29,9 +29,9 @@ const quill = new Quill('#text', {
 
 window.quill = quill;
 
-var BackgroundClass = Quill.import('attributors/class/background');
-var ColorClass      = Quill.import('attributors/class/color');
-var SizeStyle       = Quill.import('attributors/style/size');
+let BackgroundClass = Quill.import('attributors/class/background');
+let ColorClass      = Quill.import('attributors/class/color');
+let SizeStyle       = Quill.import('attributors/style/size');
 Quill.register(BackgroundClass, true);
 Quill.register(ColorClass, true);
 Quill.register(SizeStyle, true);
