@@ -5,15 +5,7 @@ let toolbar = quill.getModule('toolbar');
 // SSML break tag
 // --------------
 // load texts for dropdown items
-let breakPickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-ssml_break .ql-picker-item'));
-breakPickerItems.forEach(function (item) {
-    return item.textContent = item.dataset.value;
-});
-// style toolbar button with icon and keep dropdown values
-document.querySelector('.ql-ssml_break .ql-picker-label').innerHTML = '<i class="pause icon" title="Break"></i>' + document.querySelector('.ql-ssml_break .ql-picker-label').innerHTML;
-// fix withd and padding problem in quill toolbar for dropdowns
-document.querySelector('.ql-ssml_break').style.width = '45px';
-document.querySelector('.ql-ssml_break').style.padding = '4px 0 0 0';
+set_dropdown('ssml_break', 'Break', 'fas fa-pause');
 function ssml_break_handler(value) {
     // only if a position is currently selected
     if (value) {
