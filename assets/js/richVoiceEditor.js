@@ -133,17 +133,19 @@ function erase_format() {
         // only if it is a range and not a position
         // removing all styles applied to the selection
         if (range.length > 0) {
-                quill.formatText(range.index, (range.length), {'color' : false,
-                'bold':false,
-                'italic':false,
-                'strike':false,
-                'underline':false,
-                'font':false,
-                'size':false,
-                'color':false,
-                'background':false});
-            }
+            quill.formatText(range.index, (range.length), {
+                    'color':      false,
+                    'bold':       false,
+                    'italic':     false,
+                    'strike':     false,
+                    'underline':  false,
+                    'font':       false,
+                    'size':       false,
+                    'background': false
+                }
+            );
         }
+    }
 }
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
