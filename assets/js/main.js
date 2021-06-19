@@ -20,23 +20,23 @@ function style_to_code() {
     ];
 
     contents.forEach(function (item){
-        // Text have some formats
+        // Text has some formats
         if (item.attributes){
-            // Text have emphasis
+            // Text has emphasis
             if (item.attributes.color === 'emphasis'){
                 code += '<emphasis level="strong">' + item.insert + '</emphasis>';
             }
-            // Text have spellout
+            // Text has spellout
             if (item.attributes.color === 'spellout'){
                 code += '<say-as interpret-as="spell-out">' + item.insert + '</say-as>';
             }
-            // Text have rate
+            // Text has rate
             rate.forEach(function (rate_item){
                 if (item.attributes.color === rate_item){
                     code += '<prosody rate="' + rate_item + '">' + item.insert + '</prosody>';
                 }
             });
-            // Text have pitch
+            // Text has pitch
             pitch.forEach(function (pitch_item){
                 if (item.attributes.background === pitch_item){
                     code += '<prosody pitch="' + pitch_item + '">' + item.insert + '</prosody>';
