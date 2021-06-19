@@ -1,8 +1,8 @@
 // fetch the toolbar to add handlers
-var toolbar = quill.getModule('toolbar');
+let toolbar = quill.getModule('toolbar');
 
 // add semantic ui icons to html for own buttons
-var fileref = document.createElement("link");
+let fileref = document.createElement("link");
 fileref.setAttribute("rel", "stylesheet");
 fileref.setAttribute("type", "text/css");
 fileref.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css");
@@ -12,7 +12,7 @@ document.getElementsByTagName("head")[0].appendChild(fileref);
 // SSML break tag
 // --------------
 // load texts for dropdown items
-var breakPickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-ssml_break .ql-picker-item'));
+let breakPickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-ssml_break .ql-picker-item'));
 breakPickerItems.forEach(function (item) {
     return item.textContent = item.dataset.value;
 });
