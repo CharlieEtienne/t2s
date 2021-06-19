@@ -1,13 +1,6 @@
 // fetch the toolbar to add handlers
 let toolbar = quill.getModule('toolbar');
 
-// add semantic ui icons to html for own buttons
-let fileref = document.createElement("link");
-fileref.setAttribute("rel", "stylesheet");
-fileref.setAttribute("type", "text/css");
-fileref.setAttribute("href", "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css");
-document.getElementsByTagName("head")[0].appendChild(fileref);
-
 
 // SSML break tag
 // --------------
@@ -51,7 +44,7 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // SSML emphasis tag
 // -----------------
 // style toolbar button with icon
-document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="volume up icon" title="Emphasis"></i>';
+document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="fas fa-volume-up" title="Emphasis"></i>';
 function ssml_emphasis_handler() {
     quill_range_button_handler('emphasis');
 }
