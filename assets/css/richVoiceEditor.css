@@ -54,7 +54,7 @@ prosody[pitch="low"],
 prosody[pitch="high"],
 prosody[pitch="x-high"] {
     background-color: hsl(272, 100%, 93%);
-    text-decoration: underline wavy hsl(272, 100%, 50%);
+    text-decoration: underline wavy hsl(272, 100%, 60%);
     padding: 0 3px;
     border-radius: 3px;
 }

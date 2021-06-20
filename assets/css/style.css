@@ -15,7 +15,7 @@ body {
 }
 #equalizer {
     position: relative;
-    background-image: url(ani_equalizer_white.gif);
+    background-image: url(/ani_equalizer_white.gif);
     background-size: cover;
     background-position: center;
     width: 26px;
@@ -102,4 +102,132 @@ audio:focus, audio:focus-visible {
 .actions .btn-link.disabled, .actions .btn-link:disabled {
     color: #3e28a9;
     opacity: .45;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: hsl(229, 45%, 98%);
+        color: hsl(229, 18%, 16%);
+    }
+    .main-title{
+        color: hsl(229, 18%, 31%);
+    }
+    .form-control{
+        background: #fff;
+        color: hsl(229, 18%, 31%);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: hsl(229, 21%, 16%);
+        color: hsl(229, 18%, 72%);
+    }
+    .main-title{
+        color: hsl(229, 18%, 65%);
+    }
+    .form-control{
+        background: hsl(229, 21%, 19%);
+        color: hsl(229, 18%, 65%);
+        border-color: hsl(229, 21%, 32%);
+    }
+    .form-control:focus {
+        background: hsl(229, 21%, 23%);
+        color: hsl(229, 18%, 92%);
+    }
+    .custom-control-label::before{
+        background: hsl(229, 21%, 26%);
+        border-color: hsl(229, 21%, 32%);
+    }
+    .input-group-text {
+        color: hsl(229, 18%, 50%);
+        background-color: hsl(229, 21%, 23%);
+        border-color: hsl(229, 21%, 32%);
+    }
+    .text-muted {
+        color: hsl(229, 18%, 46%)!important;
+    }
+    .ql-toolbar.ql-snow {
+        background: hsl(229, 21%, 23%);
+    }
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+        color: hsl(229, 18%, 79%);
+    }
+    .ql-toolbar.ql-snow,
+    .ql-container.ql-snow {
+        border-color: hsl(229, 21%, 32%);
+    }
+    .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button,
+    .ql-snow .ql-picker {
+        color: hsl(229, 18%, 65%);
+    }
+    .ql-snow .ql-stroke {
+        stroke: hsl(229, 18%, 65%);
+    }
+    .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+        color: hsl(229, 18%, 50%);
+    }
+    .ql-snow .ql-picker-options {
+        background: hsl(229, 18%, 29%);
+    }
+    .text-info {
+        color: hsl(250, 62%, 61%) !important;
+    }
+    a {
+        color: hsl(250, 62%, 76%);
+    }
+    a:hover {
+        color: hsl(250, 62%, 86%);
+    }
+    .btn-link {
+        color: hsl(250, 62%, 61%);
+    }
+    .btn-link:hover {
+        color: hsl(250, 62%, 71%);
+    }
+    .custom-control-input:not(:disabled):active~.custom-control-label::before {
+        background-color: hsl(229, 21%, 32%);
+        border-color: hsl(229, 21%, 32%);
+    }
+    .custom-control-label::before {
+        border-color: hsl(229, 21%, 32%);
+    }
+    say-as[interpret-as="spell-out"] {
+        background-color: hsla(156, 100%, 50%, 0.2);
+    }
+    emphasis {
+        background-color: hsla(189, 100%, 50%, 0.2);
+    }
+    prosody[rate="x-slow"],
+    prosody[rate="slow"],
+    prosody[rate="fast"],
+    prosody[rate="x-fast"] {
+        background-color: hsla(33, 100%, 50%, 0.2);
+    }
+    prosody[pitch="x-low"],
+    prosody[pitch="low"],
+    prosody[pitch="high"],
+    prosody[pitch="x-high"] {
+        background-color: hsla(272, 100%, 60%, 0.2);
+    }
+
+    /* audio target color = hsl(229, 21%, 23%); */
+    /* soluce 1 */
+    /*audio::-webkit-media-controls-panel {
+        background: hsl(410, 21%, 76%);
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }*/
+
+    /* soluce 2 */
+    audio::-webkit-media-controls-panel {
+        background: #fff;
+        filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
+        -webkit-filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
+    }
+
+    /* EXO Pablo :
+    peut-on adapter ce code https://codepen.io/jsm91/pen/ZEEawyZ
+    pour pouvoir partir d'une autre couleur que le noir ?
+    */
 }
