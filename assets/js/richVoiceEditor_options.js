@@ -5,7 +5,8 @@ const ssmlToolbarOptions = {
         [{'ssml_rate':['x-slow', 'slow', 'medium', 'fast', 'x-fast']}],
         [{'ssml_pitch':['x-low', 'low', 'medium', 'high', 'x-high']}],
         ['ssml_spellout'],
-        ['erase_format']
+        ['erase_format'],
+        ['showHtml']
         // [{ 'ssml_date': ['mdy', 'dmy', 'ymd', 'md', 'dm', 'ym', 'my', 'd', 'm', 'y'] }],
     ],
     handlers: {
@@ -22,6 +23,7 @@ const ssmlToolbarOptions = {
 const quill = new Quill('#text', {
     theme: 'snow',
     modules: {
+        syntax: true,
         toolbar: ssmlToolbarOptions,
     },
     placeholder: ''

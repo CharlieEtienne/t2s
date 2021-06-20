@@ -110,3 +110,19 @@ say-as[interpret-as="spell-out"]:before {
     height: 18px;
     width: 14px;
 }
+
+.ssml-code {
+    width: 100%;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+    padding: 12px 15px;
+    line-height: 24px;
+    font-family: Consolas, Menlo, Monaco, "Courier New", monospace;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border: none;
+    border-radius: 0 0 6px 6px;
+}
