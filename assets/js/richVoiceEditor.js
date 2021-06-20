@@ -263,3 +263,38 @@ SpelloutBlot.blotName = 'spellout';
 SpelloutBlot.tagName = 'say-as';
 
 Quill.register(SpelloutBlot);
+
+/**
+ * Code/text switch
+ */
+let customButton   = document.querySelector('.ql-showHtml');
+let txtArea        = document.createElement('div');
+let htmlEditor     = quill.addContainer('ql-custom');
+let quillEditor    = document.querySelector('#text');
+
+customButton.innerHTML = '<i class="fas fa-code" title="Basculer entre les vues texte et code"></i>';
+txtArea.setAttribute('contenteditable', 'true');
+txtArea.style.cssText = "display:none";
+txtArea.classList.add("ssml-code");
+txtArea.classList.add("language-html");
+
+htmlEditor.appendChild(txtArea);
+
+quill.on('text-change', (delta, oldDelta, source) => {
+    txtArea.innerText = quillEditor.children[0].innerHTML;
+    hljs.configure({
+        languages:['html']
+    });
+    hljs.highlightElement( txtArea );
+})
+
+
+customButton.addEventListener('click', () => {
+    if (txtArea.style.display === '') {
+        let html = txtArea.innerText;
+        self.quill.pasteHTML(html);
+    }
+    txtArea.style.display = txtArea.style.display === 'none' ? '' : 'none';
+    customButton.classList.toggle("active");
+});
+
