@@ -29,10 +29,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="/assets/css/quill.snow.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/richVoiceEditor.css">
     <link rel="stylesheet" href="assets/css/material-palenight.css">
     <link rel="stylesheet" href="assets/css/one-light.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="pt-md-5 pt-3">
@@ -40,7 +40,7 @@
 
         <form id="t2s" method="POST" action="process.php">
 
-            <h1 class="h3 mb-5 mt-lg-5 font-weight-bold text-center" style="color: rgba(0, 0, 0, 0.75);">
+            <h1 class="h3 mb-5 mt-lg-5 font-weight-bold text-center main-title">
                 <img src="icon-192.png" class="mb-1 mr-3" style="width: 2rem;" alt="icon">
                 Google TextToSpeech 2 mp3
             </h1>
