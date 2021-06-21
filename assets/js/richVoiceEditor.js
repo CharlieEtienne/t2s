@@ -51,7 +51,7 @@ toolbar.addHandler('ssml_emphasis', ssml_emphasis_handler.bind(quill));
 // --------------
 set_dropdown('ssml_rate', 'Rate', 'fas fa-tachometer-alt')
 function ssml_rate_handler(value) {
-    quill_range_button_handler('rate', value);
+    quill_range_button_handler('prosody',{'rate':value})
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
@@ -62,7 +62,7 @@ toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
 // --------------
 set_dropdown('ssml_pitch', 'Pitch', 'fas fa-wave-square')
 function ssml_pitch_handler(value) {
-    quill_range_button_handler('pitch', value);
+    quill_range_button_handler('prosody',{'pitch':value});
 }
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
@@ -117,6 +117,8 @@ document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser"
 function erase_format() {
     // get current selected text as range
     let range   = quill.getSelection();
+    let format = quill.getFormat(range);
+    let type='color';
     // only if range is currently selected
     if (range) {
         // only if it is a range and not a position
@@ -127,21 +129,22 @@ function erase_format() {
                     'spellout': false,
                     'rate':     false,
                     'pitch':    false,
-                }
-            );
-        }
+                    'prosody': false
+                })    
+            }
         else {
             quill.format('emphasis', false);
             quill.format('spellout', false);
             quill.format('rate', false);
             quill.format('pitch', false);
+            quill.format('prosody', false)
         }
     }
 }
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
-function quill_range_button_handler(type='color', value = false ) {
+function quill_range_button_handler(type='color', value = false) {
     // get current selected text as range
     let range   = quill.getSelection();
     let format  = quill.getFormat(range);
@@ -152,21 +155,55 @@ function quill_range_button_handler(type='color', value = false ) {
     if (range) {
         // only if it is a range and not a position
         if (range.length > 0) {
-            if(format[type] === value){
-                quill.formatText(range.index, (range.length), {
-                    [type]: false
-                });
-            }else {
-                quill.formatText(range.index, (range.length), {
-                    [type]: value
-                });
+            if (typeof format[type] === 'object' && typeof value ==='object'){
+                let valueContent = Object.entries(value)[0];
+                if (format[type][valueContent[0]]==valueContent[1]){
+                    quill.formatText(range.index, (range.length), {
+                        [type]: {[valueContent[0]] : false}
+                    })
+                }
+                else {
+                    quill.formatText(range.index, (range.length), {
+                        [type]: {[valueContent[0]] : valueContent[1]}
+                    })
+                }
+            }
+
+            else {
+                if(format[type] === value){
+                    quill.formatText(range.index, (range.length), {
+                        [type]: false
+                    });
+                }   
+                else {
+                    quill.formatText(range.index, (range.length), {
+                        [type]: value
+                    });
+            
             }
         }
+
+        }
         else {
-            if(format[type] === value){
-                quill.format(type, false);
-            }else {
-                quill.format(type, value);
+            if (typeof format[type] === 'object' && typeof value ==='object'){
+                let valueContent = Object.entries(value)[0];
+                if (format[type][valueContent[0]]==valueContent[1]){
+                    quill.format(
+                        type, {[valueContent[0]] : false}
+                    )
+                }
+                else {
+                    quill.format(
+                        type, {[valueContent[0]] : valueContent[1]}
+                    )
+                }
+            }
+            else {
+                if(format[type] === value){
+                    quill.format(type, false);
+                }else {
+                    quill.format(type, value);
+                }
             }
         }
     }
@@ -210,6 +247,7 @@ Quill.register(EmphasisBlot);
 /**
  * Class for <prosody rate=""></prosody>
  */
+/*
 class RateBlot extends Inline {
     static create(value) {
         let node = super.create();
@@ -225,25 +263,30 @@ RateBlot.blotName = 'rate';
 RateBlot.tagName = 'prosody';
 
 Quill.register(RateBlot);
-
+*/
 /**
  * Class for <prosody pitch=""></prosody>
+ * or Class for <prosody rate=""></prosody>
  */
-class PitchBlot extends Inline {
+class ProsodyBlot extends Inline {
     static create(value) {
+
         let node = super.create();
-        node.setAttribute('pitch', value);
+        Object.entries(value).forEach(function(item){
+            node.setAttribute(item[0],item[1])
+        });
+
         return node;
     }
-
+//à corriger
     static formats(node) {
-        return node.getAttribute('pitch');
+        return {'pitch':node.getAttribute('pitch'),'rate' :node.getAttribute('rate')};
     }
 }
-PitchBlot.blotName = 'pitch';
-PitchBlot.tagName = 'prosody';
+ProsodyBlot.blotName = 'prosody';
+ProsodyBlot.tagName = 'prosody';
 
-Quill.register(PitchBlot);
+Quill.register(ProsodyBlot);
 
 /**
  * Class for <say-as interpret-as="spell-out"></say-as>
