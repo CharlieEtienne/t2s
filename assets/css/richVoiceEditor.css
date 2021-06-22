@@ -125,4 +125,5 @@ say-as[interpret-as="spell-out"]:before {
     bottom: 0;
     border: none;
     border-radius: 0 0 6px 6px;
+    overflow: auto;
 }
