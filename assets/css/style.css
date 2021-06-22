@@ -116,6 +116,12 @@ audio:focus, audio:focus-visible {
         background: #fff;
         color: hsl(229, 18%, 31%);
     }
+    audio {
+        border: 1px solid hsl(210, 14%, 83%);
+    }
+    audio::-webkit-media-controls-panel {
+        background: hsl(249, 47%, 97%);
+    }
 }
 
 @media (prefers-color-scheme: dark) {
