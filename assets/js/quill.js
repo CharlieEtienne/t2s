@@ -1098,6 +1098,7 @@ var Quill = function () {
     this.root = this.addContainer('ql-editor');
     this.root.classList.add('ql-blank');
     this.root.setAttribute('data-gramm', false);
+    this.root.setAttribute('tabindex',2);
     this.scrollingContainer = this.options.scrollingContainer || this.root;
     this.emitter = new _emitter4.default();
     this.scroll = _parchment2.default.create(this.root, {
