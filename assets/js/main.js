@@ -52,6 +52,55 @@ audio.onpause = function() {
     play_icon.removeClass('fa-pause-circle').addClass('fa-play-circle');
 };
 
+filename.on('change input paste keyup', function(){
+    multifile();
+});
+
+$('#multiple').on('change', function(){
+    multifile();
+});
+
+function multifile() {
+    if ($('#multiple').prop('checked')){
+        let filename_value = filename.val();
+        if (filename.val() === ''){
+            filename_value = uniqid;
+        }
+        const style     = document.createElement('style');
+        style.innerHTML = `
+      .ql-editor{
+        counter-reset: filenumber;
+      }
+      .ql-editor p {
+        border: 1px solid hsl(250, 100%, 42%);
+        border-radius: 5px;
+        margin-bottom: 34px;
+        clear: both;
+        position: relative;
+        padding: 5px;
+        margin-top: 24px;
+      }
+      .ql-editor p:before {
+        color: hsl(250, 100%, 20%);
+        content: "` + filename_value + `." counter(filenumber) '.mp3';
+        width: auto;
+        height: 24px;
+        margin: -29px 5px 5px 0;
+        position: absolute;
+        display: inline-block;
+        clear: both;
+        border: 1px solid hsl(250, 71%, 50%);
+        background: hsl(250, 75%, 97%);
+        padding: 3px;
+        font-size: 11px;
+        border-radius: 3px 3px 0 0;
+        counter-increment: filenumber;
+      }
+    `;
+        document.head.appendChild(style);
+    }
+}
+
 $(document).ready(function(){
     if(getCookie('last_filename')){
         $('#filename').val(getCookie('last_filename'));
@@ -83,6 +132,8 @@ $(document).ready(function(){
             textarea.select();
         }
     });
+    window.uniqid = document.getElementById('filename').placeholder;
+    multifile();
 });
 
 document.addEventListener("keydown", function(event) {
