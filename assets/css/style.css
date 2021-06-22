@@ -222,8 +222,12 @@ audio:focus, audio:focus-visible {
     /* soluce 2 */
     audio::-webkit-media-controls-panel {
         background: #fff;
-        filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
-        -webkit-filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
+        /*On trouve les filtres à appliquer via le code sur codepen puis on modifie 'invert'*/
+        filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
+        -webkit-filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
+
+        /*filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
+        -webkit-filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);*/
     }
 
     /* EXO Pablo :
