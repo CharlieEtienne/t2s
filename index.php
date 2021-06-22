@@ -114,7 +114,7 @@
             <div class="form-group">
                 <label for="text">Texte</label>
                 <input name="text" type="hidden">
-                <div id="text" class="center form-control" tabindex="2"></div>
+                <div id="text" class="center form-control"></div>
             </div>
 
             <div class="form-group">
