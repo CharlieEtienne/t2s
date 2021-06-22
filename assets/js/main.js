@@ -94,6 +94,36 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
         $('#download').click();
     }
+    
+    if (event.code === "ArrowRight") {
+        event.preventDefault();
+        let index=quill.getSelection().index;
+        console.log(JSON.stringify(quill.getFormat(index,0))=='{}');
+
+        
+        if(quill.getLength()==index+1){
+            console.log("1");
+            quill.format('emphasis', false);
+            quill.format('spellout', false);
+            quill.format('rate', false);
+            quill.format('pitch', false);
+            quill.format('prosody', false);
+            }
+        else if ((JSON.stringify(quill.getFormat(index,0)) === JSON.stringify(quill.getFormat(index,1))) || (JSON.stringify(quill.getFormat(index,0))=='{}')){
+            console.log("2");
+            quill.setSelection(index+1);            
+        }
+
+        else{
+            console.log("3");
+            quill.format('emphasis', false);
+            quill.format('spellout', false);
+            quill.format('rate', false);
+            quill.format('pitch', false);
+            quill.format('prosody', false);
+        }
+    } 
+    
 });
 //setCookie('last_content', encodeURIComponent(textarea.innerHtml), 360);
 function setCookies() {
