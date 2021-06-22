@@ -104,6 +104,13 @@ audio:focus, audio:focus-visible {
     opacity: .45;
 }
 
+#text {
+    height: auto;
+}
+.ql-editor {
+    resize: vertical;
+}
+
 @media (prefers-color-scheme: light) {
     body {
         background-color: hsl(229, 45%, 98%);
