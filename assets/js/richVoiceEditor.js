@@ -278,7 +278,6 @@ class ProsodyBlot extends Inline {
 
         return node;
     }
-//à corriger
     static formats(node) {
         return {'pitch':node.getAttribute('pitch'),'rate' :node.getAttribute('rate')};
     }
