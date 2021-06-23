@@ -75,33 +75,8 @@ function multifile() {
         filename_value = uniqid;
     }
     style.innerHTML = `
-  .multiple_files .ql-editor{
-    counter-reset: filenumber;
-  }
-  .multiple_files .ql-editor p {
-    border: 1px solid hsl(250, 100%, 42%);
-    border-radius: 5px;
-    margin-bottom: 34px;
-    clear: both;
-    position: relative;
-    padding: 5px;
-    margin-top: 24px;
-  }
   .multiple_files .ql-editor p:before {
-    color: hsl(250, 100%, 20%);
     content: "` + filename_value + `." counter(filenumber) '.mp3';
-    width: auto;
-    height: 24px;
-    margin: -29px 5px 5px 0;
-    position: absolute;
-    display: inline-block;
-    clear: both;
-    border: 1px solid hsl(250, 71%, 50%);
-    background: hsl(250, 75%, 97%);
-    padding: 3px;
-    font-size: 11px;
-    border-radius: 3px 3px 0 0;
-    counter-increment: filenumber;
   }
 `;
     document.head.appendChild(style);
