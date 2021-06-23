@@ -323,7 +323,7 @@ txtArea.classList.add("language-html");
 htmlEditor.appendChild(txtArea);
 
 quill.on('text-change', (delta, oldDelta, source) => {
-    txtArea.innerText = quillEditor.children[0].innerHTML;
+    txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ');
     hljs.configure({
         languages:['html']
     });
