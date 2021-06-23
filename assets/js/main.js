@@ -149,33 +149,56 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
         $('#download').click();
     }
+    if (event.ctrlKey && event.code === "Numpad1") {
+        event.preventDefault();
+        erase_format();
+    }
+    if (event.ctrlKey && event.code === "Numpad2") {
+        event.preventDefault();
+        let cursorPosition = quill.getSelection().index;
+        quill.insertText(cursorPosition, '⌛');
+    }
+    if (event.ctrlKey && event.code === "Numpad3") {
+        event.preventDefault();
+        quill_range_button_handler('spellout', 'spell-out');
+    }
+    if (event.ctrlKey && event.code === "Numpad4") {
+        event.preventDefault();
+        quill_range_button_handler('emphasis', 'strong');
+    }
+
+
+    if (event.ctrlKey && event.code === "ArrowLeft") {
+        event.preventDefault();
+        quill_range_button_handler('prosody',{'rate':'slow'})
+    }
+    if (event.ctrlKey && event.code === "ArrowRight") {
+        event.preventDefault();
+        quill_range_button_handler('prosody',{'rate':'fast'})
+    }
+    if (event.ctrlKey && event.code === "ArrowUp") {
+        event.preventDefault();
+        quill_range_button_handler('prosody',{'pitch':'high'})
+    }
+    if (event.ctrlKey && event.code === "ArrowDown") {
+        event.preventDefault();
+        quill_range_button_handler('prosody',{'pitch':'low'})
+    }
+
     
     if (event.code === "ArrowRight") {
         event.preventDefault();
         let index=quill.getSelection().index;
-        console.log(JSON.stringify(quill.getFormat(index,0))=='{}');
-
-        
         if(quill.getLength()==index+1){
-            console.log("1");
-            quill.format('emphasis', false);
-            quill.format('spellout', false);
-            quill.format('rate', false);
-            quill.format('pitch', false);
-            quill.format('prosody', false);
+            erase_format();
             }
         else if ((JSON.stringify(quill.getFormat(index,0)) === JSON.stringify(quill.getFormat(index,1))) || (JSON.stringify(quill.getFormat(index,0))=='{}')){
-            console.log("2");
             quill.setSelection(index+1);            
         }
 
         else{
-            console.log("3");
-            quill.format('emphasis', false);
-            quill.format('spellout', false);
-            quill.format('rate', false);
-            quill.format('pitch', false);
-            quill.format('prosody', false);
+            erase_format();
+
         }
     } 
     
