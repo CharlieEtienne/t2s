@@ -10,6 +10,7 @@ function style_to_code() {
     code = code.replace('<p>', '');
     code = code.replace('</p>', '');
 
+    //Changing Hourglass to Break tags
     code = code.replaceAll('⌛⌛⌛⌛', '<break strength="x-strong"/>');
     code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
     code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
@@ -141,33 +142,44 @@ $(document).ready(function(){
 });
 
 document.addEventListener("keydown", function(event) {
+    //Play keyboard shortcut
     if (event.ctrlKey && event.code === "KeyE") {
         event.preventDefault();
         $('#play').click();
     }
+    
+    //Download keyboard shortcut
     if (event.ctrlKey && event.code === "KeyD") {
         event.preventDefault();
         $('#download').click();
     }
+
+    //Eraser keyboard shortcut
     if (event.ctrlKey && event.code === "Numpad1") {
         event.preventDefault();
         erase_format();
     }
+
+    //Break keyboard shortcut
     if (event.ctrlKey && event.code === "Numpad2") {
         event.preventDefault();
         let cursorPosition = quill.getSelection().index;
         quill.insertText(cursorPosition, '⌛');
     }
+
+    //Spell out keyboard shortcut
     if (event.ctrlKey && event.code === "Numpad3") {
         event.preventDefault();
         quill_range_button_handler('spellout', 'spell-out');
     }
+
+    //Emphasis keyboard shortcut
     if (event.ctrlKey && event.code === "Numpad4") {
         event.preventDefault();
         quill_range_button_handler('emphasis', 'strong');
     }
 
-
+    //Pitch & rate keyboard shortcut
     if (event.ctrlKey && event.code === "ArrowLeft") {
         event.preventDefault();
         quill_range_button_handler('prosody',{'rate':'slow'})
@@ -185,7 +197,7 @@ document.addEventListener("keydown", function(event) {
         quill_range_button_handler('prosody',{'pitch':'low'})
     }
 
-    
+    //Use right arrow key at the end of a format leaves it
     if (event.code === "ArrowRight") {
         event.preventDefault();
         let index=quill.getSelection().index;
@@ -238,7 +250,6 @@ form.on('submit', function(e){
             setCookie('last_audio_file', encodeURIComponent(response.filepath), 360);
         },
         error: function(){
-            // console.log(response);
             play_btn.find('.spinner').addClass('d-none');
             toastr['error']('Erreur lors de la requête Ajax');
         }
@@ -257,7 +268,6 @@ $(document).on('click', '#download', function (e) {
         data: form.serialize() + "&download=1",
         dataType: 'json',
         success: function(response){
-            // console.log(response);
             if (response.status && response.status === 'error') {
                 toastr[response.status](response.message);
             }
@@ -278,7 +288,6 @@ $(document).on('click', '#download', function (e) {
             listfiles();
         },
         error: function(){
-            // console.log(response);
             download_btn.find('.spinner').addClass('d-none');
             toastr['error']('Erreur lors de la requête Ajax');
         }
@@ -295,7 +304,6 @@ function listfiles() {
         success: function(response){
             $('#myfiles>.no-files').remove();
             myfilestable.html('');
-            // console.log(response);
             if (response.status && response.status == 'error') {
                 toastr[response.status](response.message);
             }
