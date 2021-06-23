@@ -106,9 +106,11 @@ audio:focus, audio:focus-visible {
 
 #text {
     height: auto;
+    min-height: 200px;
 }
 .ql-editor {
     resize: vertical;
+    min-height: 200px;
 }
 .multiple_files .ql-editor{
     counter-reset: filenumber;
