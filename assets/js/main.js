@@ -198,7 +198,7 @@ document.addEventListener("keydown", function(event) {
     }
 */
     //Use right arrow key at the end of a format leaves it
-    if (event.code === "ArrowRight") {
+    if (event.code === "ArrowRight" && event.ctrlKey==false && event.shiftKey==false) {
         event.preventDefault();
         let index=quill.getSelection().index;
         if(quill.getLength()==index+1){
