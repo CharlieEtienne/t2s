@@ -177,6 +177,12 @@ audio:focus, audio:focus-visible {
     .form-control:focus {
         background: hsl(229, 21%, 23%);
         color: hsl(229, 18%, 92%);
+        border-color: hsla(250, 100%, 74%, 0.1);
+        box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
+    }
+    audio:focus, audio:focus-visible {
+        border-color: hsla(250, 100%, 74%, 0.1);
+        box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
     }
     .custom-control-label::before{
         background: hsl(229, 21%, 26%);
