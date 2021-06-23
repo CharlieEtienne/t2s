@@ -127,3 +127,7 @@ say-as[interpret-as="spell-out"]:before {
     border-radius: 0 0 6px 6px;
     overflow: auto;
 }
+
+.ql-editor {
+    white-space: normal!important;
+}
