@@ -110,6 +110,34 @@ audio:focus, audio:focus-visible {
 .ql-editor {
     resize: vertical;
 }
+.multiple_files .ql-editor{
+    counter-reset: filenumber;
+}
+.multiple_files .ql-editor p {
+    border: 1px solid hsl(250, 100%, 42%);
+    border-radius: 5px;
+    margin-bottom: 34px;
+    clear: both;
+    position: relative;
+    padding: 5px;
+    margin-top: 24px;
+}
+.multiple_files .ql-editor p:before {
+    color: hsl(250, 100%, 20%);
+    /*content: "` + filename_value + `." counter(filenumber) '.mp3';*/
+    width: auto;
+    height: 24px;
+    margin: -29px 5px 5px 0;
+    position: absolute;
+    display: inline-block;
+    clear: both;
+    border: 1px solid hsl(250, 71%, 50%);
+    background: hsl(250, 75%, 97%);
+    padding: 3px;
+    font-size: 11px;
+    border-radius: 3px 3px 0 0;
+    counter-increment: filenumber;
+}
 
 @media (prefers-color-scheme: light) {
     body {
@@ -224,27 +252,18 @@ audio:focus, audio:focus-visible {
         background-color: hsla(272, 100%, 60%, 0.2);
     }
 
-    /* audio target color = hsl(229, 21%, 23%); */
-    /* soluce 1 */
-    /*audio::-webkit-media-controls-panel {
-        background: hsl(410, 21%, 76%);
-        filter: invert(100%);
-        -webkit-filter: invert(100%);
-    }*/
-
-    /* soluce 2 */
-    audio::-webkit-media-controls-panel {
-        background: #fff;
-        /*On trouve les filtres à appliquer via le code sur codepen puis on modifie 'invert'*/
-        filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
-        -webkit-filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
-
-        /*filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);
-        -webkit-filter: invert(81%) sepia(30%) saturate(582%) hue-rotate(191deg) brightness(92%) contrast(93%);*/
+    .multiple_files .ql-editor p {
+        border-color: hsl(250, 100%, 74%);
+    }
+    .multiple_files .ql-editor p:before {
+        color: hsl(250, 100%, 80%);
+        border-color: hsl(250, 100%, 74%);
+        background: hsla(250, 75%, 50%, 0.2);
     }
 
-    /* EXO Pablo :
-    peut-on adapter ce code https://codepen.io/jsm91/pen/ZEEawyZ
-    pour pouvoir partir d'une autre couleur que le noir ?
-    */
+    audio::-webkit-media-controls-panel {
+        background: #fff;
+        filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
+        -webkit-filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
+    }
 }
