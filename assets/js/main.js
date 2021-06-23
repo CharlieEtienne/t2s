@@ -153,7 +153,7 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
         $('#download').click();
     }
-
+/*
     //Eraser keyboard shortcut
     if (event.ctrlKey && event.code === "Numpad1") {
         event.preventDefault();
@@ -196,7 +196,7 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
         quill_range_button_handler('prosody',{'pitch':'low'})
     }
-
+*/
     //Use right arrow key at the end of a format leaves it
     if (event.code === "ArrowRight") {
         event.preventDefault();
