@@ -36,13 +36,6 @@ const quill = new Quill('#text', {
 
 window.quill = quill;
 
-let BackgroundClass = Quill.import('attributors/class/background');
-let ColorClass      = Quill.import('attributors/class/color');
-let SizeStyle       = Quill.import('attributors/style/size');
-Quill.register(BackgroundClass, true);
-Quill.register(ColorClass, true);
-Quill.register(SizeStyle, true);
-
 delete quill.getModule('keyboard').bindings["9"];
 
 quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
