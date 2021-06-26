@@ -38,6 +38,8 @@ Quill.register(BackgroundClass, true);
 Quill.register(ColorClass, true);
 Quill.register(SizeStyle, true);
 
+delete quill.getModule('keyboard').bindings["9"];
+
 quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
     delta.forEach(function (ops) {
         ops.insert = ops.insert.replaceAll(/\u00a0/g, ' ');
