@@ -162,6 +162,7 @@
     <script src="/assets/js/richVoiceEditor.js"></script>
     <script src="/assets/js/toastr_options.js"></script>
     <script src="/assets/js/cookies.js"></script>
+    <script src="/assets/js/helpers.js"></script>
     <script src="/assets/js/main.js"></script>
 </body>
 </html>

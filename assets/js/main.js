@@ -106,7 +106,7 @@ $(document).ready(function(){
     }
     listfiles();
     textarea.trigger('change');
-    filename.focus().select();
+    filename.focus();
     $(window).keyup(function (e) {
         let code = (e.keyCode ? e.keyCode : e.which);
         if (code === 9 && $('#text:focus').length) {
@@ -115,6 +115,10 @@ $(document).ready(function(){
     });
     window.uniqid = document.getElementById('filename').placeholder;
     multifile();
+});
+
+filename.on('focus', function (){
+    this.setSelectionRange(this.value.length, this.value.length);
 });
 
 document.addEventListener("keydown", function(event) {
@@ -128,6 +132,26 @@ document.addEventListener("keydown", function(event) {
     if (event.ctrlKey && event.code === "KeyD") {
         event.preventDefault();
         $('#download').click();
+    }
+
+    if ((event.code === "ArrowUp" || event.code === "ArrowDown" )
+        && event.ctrlKey === false
+        && event.shiftKey === false
+        && filename.is(':focus')
+    ) {
+        event.preventDefault();
+
+        let input = document.getElementById('filename');
+        let number = getNumberBetweenDots(input);
+        if(number){
+            if(event.code === "ArrowUp"){
+                input.value = replaceBetween(input.value, number.begin, number.end, number.number + 1);
+            }
+            if(event.code === "ArrowDown"){
+                input.value = replaceBetween(input.value, number.begin, number.end, number.number - 1);
+            }
+            input.setSelectionRange(number.end, number.end);
+        }
     }
 /*
     //Eraser keyboard shortcut
@@ -174,6 +198,8 @@ document.addEventListener("keydown", function(event) {
     }
 */
     //Use right arrow key at the end of a format leaves it
+    // TODO : N'executer que dans quill editor
+    // TODO : Réécrire avec API de quill.js
     if (event.code === "ArrowRight" && event.ctrlKey==false && event.shiftKey==false) {
         event.preventDefault();
         let index=quill.getSelection().index;
