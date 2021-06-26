@@ -26,7 +26,12 @@ const quill = new Quill('#text', {
         syntax: true,
         toolbar: ssmlToolbarOptions,
     },
-    placeholder: ''
+    placeholder: '',
+    formats: [
+        'emphasis',
+        'spellout',
+        'prosody',
+    ]
 });
 
 window.quill = quill;
