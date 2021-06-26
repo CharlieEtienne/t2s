@@ -7,7 +7,6 @@ const ssmlToolbarOptions = {
         ['ssml_spellout'],
         ['erase_format'],
         ['showHtml']
-        // [{ 'ssml_date': ['mdy', 'dmy', 'ymd', 'md', 'dm', 'ym', 'my', 'd', 'm', 'y'] }],
     ],
     handlers: {
         'ssml_break': function () { },
@@ -16,7 +15,6 @@ const ssmlToolbarOptions = {
         'ssml_pitch': function () { },
         'ssml_spellout': function () { },
         'erase_format' : function () { }
-        // 'ssml_date': function () { },
     }
 }
 

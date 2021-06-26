@@ -71,7 +71,7 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 
 // SSML say-as tag
 // ---------------
-// style toolbar button with icon and keep dropdown values
+// style toolbar button with icon
 document.querySelector('.ql-ssml_spellout').innerHTML = '<i class="fas fa-spell-check" title="Spell Out"></i>';
 function ssml_spellout_handler() {
     quill_range_button_handler('spellout', 'spell-out');
@@ -79,64 +79,26 @@ function ssml_spellout_handler() {
 // add tag handler to quill toolbar
 toolbar.addHandler('ssml_spellout', ssml_spellout_handler.bind(quill));
 
-// SSML say-as (date) tag
-// ----------------------
-// load texts for dropdown items
-// var datePickerItems = Array.prototype.slice.call(document.querySelectorAll('.ql-ssml_date .ql-picker-item'));
-// datePickerItems.forEach(function (item) {
-//     return item.textContent = item.dataset.value;
-// });
-// // style toolbar button with icon and keep dropdown values
-// document.querySelector('.ql-ssml_date .ql-picker-label').innerHTML = '<i class="calendar alternate outline icon" title="Date"></i>' + document.querySelector('.ql-ssml_date .ql-picker-label').innerHTML;
-// // fix withd and padding problem in quill toolbar for dropdowns
-// document.querySelector('.ql-ssml_date').style.width = '45px';
-// document.querySelector('.ql-ssml_date').style.padding = '4px 0 0 0';
-// function ssml_date_handler(value) {
-//     // get current selected text as range
-//     var range = quill.getSelection();
-//     // only if range is currently selected
-//     if (range) {
-//         // only if it is a range and not a position
-//         if (range.length > 0) {
-//
-//
-//             // add tag at the end of the selected range
-//             quill.insertText(range.index + range.length, '</say-as>');
-//             // add tag at the beginning of the selected range
-//             quill.insertText(range.index, '<say-as interpret-as="date" format="' + value + '">');
-//             // set cursor position to the end of new tag
-//             quill.setSelection(range.index + range.length + value.length + 47);
-//
-//         }
-//     }
-// }
-// add tag handler to quill toolbar
-// toolbar.addHandler('ssml_date', ssml_date_handler.bind(quill));
-
 document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser" title="Effacer les formats"></i>';
+/**
+ * Remove all styles
+ */
 function erase_format() {
-    // get current selected text as range
     let range   = quill.getSelection();
-    let format = quill.getFormat(range);
-    let type='color';
-    // only if range is currently selected
+
     if (range) {
-        // only if it is a range and not a position
         // removing all styles applied to the selection
         if (range.length > 0) {
             quill.formatText(range.index, (range.length), {
                     'emphasis': false,
                     'spellout': false,
-                    'rate':     false,
-                    'pitch':    false,
                     'prosody': false
                 })    
             }
+        // removing all styles from the current cursor position
         else {
             quill.format('emphasis', false);
             quill.format('spellout', false);
-            quill.format('rate', false);
-            quill.format('pitch', false);
             quill.format('prosody', false)
         }
     }
@@ -145,19 +107,14 @@ toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
 function quill_range_button_handler(type='color', value = false) {
-    // get current selected text as range
     let range   = quill.getSelection();
     let format  = quill.getFormat(range);
 
-    // console.log(format);
-
-    // only if range is currently selected
     if (range) {
-        // only if it is a range and not a position
         if (range.length > 0) {
             if (typeof format[type] === 'object' && typeof value ==='object'){
                 let valueContent = Object.entries(value)[0];
-                if (format[type][valueContent[0]]==valueContent[1]){
+                if (format[type][valueContent[0]] === valueContent[1]){
                     quill.formatText(range.index, (range.length), {
                         [type]: {[valueContent[0]] : false}
                     })
@@ -187,7 +144,7 @@ function quill_range_button_handler(type='color', value = false) {
         else {
             if (typeof format[type] === 'object' && typeof value ==='object'){
                 let valueContent = Object.entries(value)[0];
-                if (format[type][valueContent[0]]==valueContent[1]){
+                if (format[type][valueContent[0]] === valueContent[1]){
                     quill.format(
                         type, {[valueContent[0]] : false}
                     )
@@ -218,7 +175,7 @@ function set_dropdown(method, title, icon) {
     });
     // style toolbar button with icon and keep dropdown values
     document.querySelector('.ql-' + method + ' .ql-picker-label').innerHTML = '<i class="' + icon + '" title="' + title + '"></i>' + document.querySelector('.ql-' + method + ' .ql-picker-label').innerHTML;
-    // fix withd and padding problem in quill toolbar for dropdowns
+    // fix width and padding problem in quill toolbar for dropdowns
     document.querySelector('.ql-' + method).style.width   = '45px';
     document.querySelector('.ql-' + method).style.padding = '4px 0 0 0';
 }
@@ -246,7 +203,7 @@ Quill.register(EmphasisBlot);
 
 /**
  * Class for <prosody pitch=""></prosody>
- * or Class for <prosody rate=""></prosody>
+ * or <prosody rate=""></prosody>
  */
 class ProsodyBlot extends Inline {
     static create(value) {
