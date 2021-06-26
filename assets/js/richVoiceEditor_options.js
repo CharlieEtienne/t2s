@@ -36,8 +36,10 @@ const quill = new Quill('#text', {
 
 window.quill = quill;
 
+// Remove tab key binding
 delete quill.getModule('keyboard').bindings["9"];
 
+// Remove &nbsp;
 quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
     delta.forEach(function (ops) {
         ops.insert = ops.insert.replaceAll(/\u00a0/g, ' ');
