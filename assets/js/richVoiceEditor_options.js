@@ -37,3 +37,10 @@ let SizeStyle       = Quill.import('attributors/style/size');
 Quill.register(BackgroundClass, true);
 Quill.register(ColorClass, true);
 Quill.register(SizeStyle, true);
+
+quill.clipboard.addMatcher(Node.TEXT_NODE, function(node, delta) {
+    delta.forEach(function (ops) {
+        ops.insert = ops.insert.replaceAll(/\u00a0/g, ' ');
+    });
+    return delta;
+});
