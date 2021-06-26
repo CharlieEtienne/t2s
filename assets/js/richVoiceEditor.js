@@ -245,26 +245,6 @@ EmphasisBlot.tagName = 'emphasis';
 Quill.register(EmphasisBlot);
 
 /**
- * Class for <prosody rate=""></prosody>
- */
-/*
-class RateBlot extends Inline {
-    static create(value) {
-        let node = super.create();
-        node.setAttribute('rate', value);
-        return node;
-    }
-
-    static formats(node) {
-        return node.getAttribute('rate');
-    }
-}
-RateBlot.blotName = 'rate';
-RateBlot.tagName = 'prosody';
-
-Quill.register(RateBlot);
-*/
-/**
  * Class for <prosody pitch=""></prosody>
  * or Class for <prosody rate=""></prosody>
  */
