@@ -49,8 +49,6 @@ var bindings = {
         ctrlKey: true,
         handler: function(range, context) {
             quill_range_button_handler('spellout', 'spell-out');
-            quill.insertText(quill.getSelection().index, '⌛');
-
         }
       },
     break1: {
