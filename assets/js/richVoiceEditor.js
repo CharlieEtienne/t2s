@@ -120,8 +120,10 @@ function quill_range_button_handler(type='color', value = false) {
                     })
                 }
                 else {
+                    let newFormat = format[type];
+                    newFormat[valueContent[0]]= valueContent[1];
                     quill.formatText(range.index, (range.length), {
-                        [type]: {[valueContent[0]] : valueContent[1]}
+                        [type]: newFormat
                     })
                 }
             }
