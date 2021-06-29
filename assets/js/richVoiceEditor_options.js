@@ -32,7 +32,10 @@ let bindings = {
         shiftKey: true,
         ctrlKey:  true,
         handler:  function (range, context) {
-            quill_range_button_handler('prosody', {'rate': 'fast'})
+            quill_range_button_handler('prosody', {
+                'rate': 'fast',
+                'pitch': 'high',
+            })
         }
     },
     slow:       {
@@ -40,7 +43,10 @@ let bindings = {
         shiftKey: true,
         ctrlKey:  true,
         handler:  function (range, context) {
-            quill_range_button_handler('prosody', {'rate': 'slow'})
+            quill_range_button_handler('prosody', {
+                'rate': 'slow',
+                'pitch': 'low',
+            })
         }
     },
     spellout:   {
