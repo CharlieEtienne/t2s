@@ -80,8 +80,7 @@ function multifile() {
   }
 `;
     // TODO : faire fonctionner ça
-    document.head.removeChild(style);
-
+    document.head.removeChild(document.head.lastChild);
     document.head.appendChild(style);
 }
 
