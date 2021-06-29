@@ -79,9 +79,12 @@ function multifile() {
     content: "` + filename_value + `." counter(filenumber) '.mp3';
   }
 `;
-    // TODO : faire fonctionner ça
-    document.head.removeChild(document.head.lastChild);
+    let multipleFilesStyleTags = document.getElementsByClassName('multiple-files-style-tag');
+    while(multipleFilesStyleTags.length > 0){
+        multipleFilesStyleTags[0].parentNode.removeChild(multipleFilesStyleTags[0]);
+    }
     document.head.appendChild(style);
+    style.classList.add('multiple-files-style-tag');
 }
 
 $(document).ready(function(){
