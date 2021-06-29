@@ -18,85 +18,83 @@ const ssmlToolbarOptions = {
     }
 }
 
-var bindings = {
-    emphasis: {
-      key: 'B',
-      shiftKey: false,
-      ctrlKey: true,
-      handler: function(range, context) {
-        quill_range_button_handler('emphasis', 'strong');
-      }
-    },
-    fast: {
-        key: 'F',
-        shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
-            quill_range_button_handler('prosody',{'rate':'fast'})
-        }
-      },
-    slow: {
-        key: 'S',
-        shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
-            quill_range_button_handler('prosody',{'rate':'slow'})
-        }
-      },
-    spellout: {
-        key: 'P',
+let bindings = {
+    emphasis:   {
+        key:      'B',
         shiftKey: false,
-        ctrlKey: true,
-        handler: function(range, context) {
+        ctrlKey:  true,
+        handler:  function (range, context) {
+            quill_range_button_handler('emphasis', 'strong');
+        }
+    },
+    fast:       {
+        key:      'F',
+        shiftKey: true,
+        ctrlKey:  true,
+        handler:  function (range, context) {
+            quill_range_button_handler('prosody', {'rate': 'fast'})
+        }
+    },
+    slow:       {
+        key:      'S',
+        shiftKey: true,
+        ctrlKey:  true,
+        handler:  function (range, context) {
+            quill_range_button_handler('prosody', {'rate': 'slow'})
+        }
+    },
+    spellout:   {
+        key:      'P',
+        shiftKey: false,
+        ctrlKey:  true,
+        handler:  function (range, context) {
             quill_range_button_handler('spellout', 'spell-out');
         }
-      },
-    break1: {
-        key: '1',
+    },
+    break1:     {
+        key:      '1',
         shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
+        ctrlKey:  true,
+        handler:  function (range, context) {
             console.log('test');
             quill.insertText(quill.getSelection().index, '⌛');
         }
-      },
-    break2: {
-        key: '2',
+    },
+    break2:     {
+        key:      '2',
         shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
+        ctrlKey:  true,
+        handler:  function (range, context) {
             quill.insertText(quill.getSelection().index, '⌛⌛');
         }
-      },
-    break3: {
-        key: '3',
+    },
+    break3:     {
+        key:      '3',
         shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
+        ctrlKey:  true,
+        handler:  function (range, context) {
             quill.insertText(quill.getSelection().index, '⌛⌛⌛');
         }
-      },
-    break4: {
-        key: '4',
+    },
+    break4:     {
+        key:      '4',
         shiftKey: true,
-        ctrlKey: true,
-        handler: function(range, context) {
+        ctrlKey:  true,
+        handler:  function (range, context) {
             quill.insertText(quill.getSelection().index, '⌛⌛⌛⌛');
         }
-      },
-    rightarrow:{
-        key: 39,  // Right arrow key code in JavaScript
+    },
+    rightarrow: {
+        key:      39,  // Right arrow key code in JavaScript
         shiftKey: false,
-        ctrlKey: false,
-        handler: function(range, context) {
-            let index=quill.getSelection().index;
-            if(quill.getLength()==index+1){
+        ctrlKey:  false,
+        handler:  function (range, context) {
+            let index = quill.getSelection().index;
+            if (quill.getLength() == index + 1) {
                 erase_format();
-                }
-            else if ((JSON.stringify(quill.getFormat(index,0)) === JSON.stringify(quill.getFormat(index,1))) || (JSON.stringify(quill.getFormat(index,0))=='{}')){
-                quill.setSelection(index+1);            
-            }
-            else{
+            } else if ((JSON.stringify(quill.getFormat(index, 0)) === JSON.stringify(quill.getFormat(index, 1))) || (JSON.stringify(quill.getFormat(index, 0)) == '{}')) {
+                quill.setSelection(index + 1);
+            } else {
                 erase_format();
             }
         }
@@ -124,7 +122,7 @@ var bindings = {
             }
         }
     }*/
-  };
+};
 
 const quill = new Quill('#text', {
     theme: 'snow',
