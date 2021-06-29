@@ -247,24 +247,6 @@ audio:focus, audio:focus-visible {
     .custom-control-label::before {
         border-color: hsl(229, 21%, 32%);
     }
-    say-as[interpret-as="spell-out"] {
-        background-color: hsla(156, 100%, 50%, 0.2);
-    }
-    emphasis {
-        background-color: hsla(189, 100%, 50%, 0.2);
-    }
-    prosody[rate="x-slow"],
-    prosody[rate="slow"],
-    prosody[rate="fast"],
-    prosody[rate="x-fast"] {
-        background-color: hsla(33, 100%, 50%, 0.2);
-    }
-    prosody[pitch="x-low"],
-    prosody[pitch="low"],
-    prosody[pitch="high"],
-    prosody[pitch="x-high"] {
-        background-color: hsla(272, 100%, 60%, 0.2);
-    }
 
     .multiple_files .ql-editor p {
         border-color: hsl(250, 100%, 74%);

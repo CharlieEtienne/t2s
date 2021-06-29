@@ -1,11 +1,38 @@
-prosody[rate="slow"]:before,
-prosody[rate="x-slow"]:before,
-prosody[rate="fast"]:before,
-prosody[rate="x-fast"]:before,
-prosody[pitch="x-low"]:before,
-prosody[pitch="low"]:before,
-prosody[pitch="high"]:before,
-prosody[pitch="x-high"]:before,
+:root{
+    --underline_hsl_lightness: 50%;
+    --bg_hsl_lightness: 93%;
+
+    --rate_bg_color:hsl(33, 100%, var(--bg_hsl_lightness));
+    --rate_underline_color:hsl(33, 100%, var(--underline_hsl_lightness));
+
+    --pitch_bg_color:hsl(272, 100%, var(--bg_hsl_lightness));
+    --pitch_underline_color:hsl(272, 100%, var(--underline_hsl_lightness));
+
+    --emphasis_bg_color:hsl(189, 100%, var(--bg_hsl_lightness));
+    --emphasis_underline_color:hsl(189, 100%, var(--underline_hsl_lightness));
+
+    --spellout_bg_color:hsl(156, 100%, var(--bg_hsl_lightness));
+    --spellout_underline_color:hsl(156, 100%, var(--underline_hsl_lightness));
+
+    --rate_pitch_gradient: linear-gradient(0deg, var(--rate_bg_color) 50%, var(--pitch_bg_color) 50%);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --rate_bg_color:hsla(33, 100%, var(--bg_hsl_lightness), 0.2);
+        --pitch_bg_color:hsla(272, 100%, 60%, 0.2);
+        --emphasis_bg_color:hsla(189, 100%, var(--bg_hsl_lightness), 0.2);
+        --spellout_bg_color:hsla(156, 100%, var(--bg_hsl_lightness), 0.2);
+    }
+}
+
+prosody, emphasis, say-as {
+    padding: 0 3px;
+    border-radius: 3px;
+}
+
+prosody[rate]:before,
+prosody[pitch]:after,
 emphasis:before,
 say-as[interpret-as="spell-out"]:before {
     line-height: 16px;
@@ -15,78 +42,201 @@ say-as[interpret-as="spell-out"]:before {
     margin-right: 3px;
 }
 
-
-prosody[rate="x-slow"],
-prosody[rate="slow"],
-prosody[rate="fast"],
-prosody[rate="x-fast"] {
-    background-color: hsl(33, 100%, 93%);
-    text-decoration: underline dotted hsl(36, 100%, 50%);
+prosody[rate] {
+    background-color: var(--rate_bg_color);
+    text-decoration: underline dotted var(--rate_underline_color);
     text-decoration-thickness: 3px;
-    padding: 0 3px;
-    border-radius: 3px;
+    background-repeat: no-repeat;
+    background-size: auto 74%;
+    background-position: 3px center;
 }
 
-prosody[rate="slow"]:before {
-    content: url(/assets/icons/turtle.svg);
-    height: 16px;
-    width: 16px;
+prosody[rate="x-slow"] {
+    background-image: url(/assets/icons/rate-x-slow.svg);
+    padding-left: 40px;
 }
-prosody[rate="x-slow"]:before {
-    content: url(/assets/icons/double-turtle.svg);
-    height: 16px;
-    width: 30px;
+prosody[rate="slow"] {
+    background-image: url(/assets/icons/rate-slow.svg);
+    padding-left: 26px;
 }
 
-prosody[rate="fast"]:before {
-    content: url(/assets/icons/rabbit.svg);
-    height: 16px;
-    width: 16px;
+prosody[rate="fast"] {
+    background-image: url(/assets/icons/rate-fast.svg);
+    padding-left: 26px;
 }
-prosody[rate="x-fast"]:before {
-    content: url(/assets/icons/double-rabbit.svg);
-    height: 16px;
-    width: 30px;
+prosody[rate="x-fast"] {
+    background-image: url(/assets/icons/rate-x-fast.svg);
+    padding-left: 40px;
 }
 
-prosody[pitch="x-low"],
-prosody[pitch="low"],
-prosody[pitch="high"],
+prosody[pitch] {
+    background-color: var(--pitch_bg_color);
+    text-decoration: underline wavy var(--pitch_underline_color);
+    background-repeat: no-repeat;
+    background-size: auto 74%;
+    background-position: 3px center;
+}
+
+prosody[pitch="x-low"] {
+    background-image: url(/assets/icons/pitch-x-low.svg);
+    padding-left: 19px;
+}
+prosody[pitch="low"] {
+    background-image: url(/assets/icons/pitch-low.svg);
+    padding-left: 21px;
+}
+
+prosody[pitch="high"] {
+    background-image: url(/assets/icons/pitch-high.svg);
+    padding-left: 21px;
+}
 prosody[pitch="x-high"] {
-    background-color: hsl(272, 100%, 93%);
-    text-decoration: underline wavy hsl(272, 100%, 60%);
-    padding: 0 3px;
-    border-radius: 3px;
+    background-image: url(/assets/icons/pitch-x-high.svg);
+    padding-left: 19px;
 }
 
-prosody[pitch="x-low"]:before {
-    content: url(/assets/icons/pitch-x-low.svg);
-    height: 19px;
-    width: 11px;
-}
-prosody[pitch="low"]:before {
-    content: url(/assets/icons/pitch-low.svg);
-    height: 16px;
-    width: 11px;
+
+prosody[rate][pitch] {
+    background-repeat: no-repeat;
+    background-size: auto 74%, auto 74%, cover;
 }
 
-prosody[pitch="high"]:before {
-    content: url(/assets/icons/pitch-high.svg);
-    height: 16px;
-    width: 11px;
+prosody[rate="x-slow"][pitch="x-low"] {
+    background-image:
+            url(/assets/icons/rate-x-slow.svg),
+            url(/assets/icons/pitch-x-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 40px center, center;
+    padding-left: 55px;
 }
-prosody[pitch="x-high"]:before {
-    content: url(/assets/icons/pitch-x-high.svg);
-    height: 19px;
-    width: 11px;
+prosody[rate="x-slow"][pitch="low"] {
+    background-image:
+            url(/assets/icons/rate-x-slow.svg),
+            url(/assets/icons/pitch-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 40px center, center;
+    padding-left: 57px;
+}
+prosody[rate="x-slow"][pitch="high"] {
+    background-image:
+            url(/assets/icons/rate-x-slow.svg),
+            url(/assets/icons/pitch-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 40px center, center;
+    padding-left: 57px;
+}
+prosody[rate="x-slow"][pitch="x-high"] {
+    background-image:
+            url(/assets/icons/rate-x-slow.svg),
+            url(/assets/icons/pitch-x-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 40px center, center;
+    padding-left: 55px;
+}
+
+prosody[rate="slow"][pitch="x-low"] {
+    background-image:
+            url(/assets/icons/rate-slow.svg),
+            url(/assets/icons/pitch-x-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 40px;
+}
+prosody[rate="slow"][pitch="low"] {
+    background-image:
+            url(/assets/icons/rate-slow.svg),
+            url(/assets/icons/pitch-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 42px;
+}
+prosody[rate="slow"][pitch="high"] {
+    background-image:
+            url(/assets/icons/rate-slow.svg),
+            url(/assets/icons/pitch-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 42px;
+}
+prosody[rate="slow"][pitch="x-high"] {
+    background-image:
+            url(/assets/icons/rate-slow.svg),
+            url(/assets/icons/pitch-x-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 40px;
+}
+
+prosody[rate="fast"][pitch="x-low"] {
+    background-image:
+            url(/assets/icons/rate-fast.svg),
+            url(/assets/icons/pitch-x-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 40px;
+}
+prosody[rate="fast"][pitch="low"] {
+    background-image:
+            url(/assets/icons/rate-fast.svg),
+            url(/assets/icons/pitch-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 42px;
+}
+prosody[rate="fast"][pitch="high"] {
+    background-image:
+            url(/assets/icons/rate-fast.svg),
+            url(/assets/icons/pitch-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 42px;
+}
+prosody[rate="fast"][pitch="x-high"] {
+    background-image:
+            url(/assets/icons/rate-fast.svg),
+            url(/assets/icons/pitch-x-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 25px center, center;
+    padding-left: 40px;
+}
+
+prosody[rate="x-fast"][pitch="x-low"] {
+    background-image:
+            url(/assets/icons/rate-x-fast.svg),
+            url(/assets/icons/pitch-x-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 42px center, center;
+    padding-left: 57px;
+}
+prosody[rate="x-fast"][pitch="low"] {
+    background-image:
+            url(/assets/icons/rate-x-fast.svg),
+            url(/assets/icons/pitch-low.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 42px center, center;
+    padding-left: 59px;
+}
+prosody[rate="x-fast"][pitch="high"] {
+    background-image:
+            url(/assets/icons/rate-x-fast.svg),
+            url(/assets/icons/pitch-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 42px center, center;
+    padding-left: 59px;
+}
+prosody[rate="x-fast"][pitch="x-high"] {
+    background-image:
+            url(/assets/icons/rate-x-fast.svg),
+            url(/assets/icons/pitch-x-high.svg),
+            var(--rate_pitch_gradient);
+    background-position: 3px center, 42px center, center;
+    padding-left: 57px;
 }
 
 emphasis {
-    background-color: hsl(189, 100%, 93%);
-    text-decoration: underline hsl(189, 100%, 50%);
+    background-color: var(--emphasis_bg_color);
+    text-decoration: underline var(--emphasis_underline_color);
     text-decoration-thickness: 3px;
-    padding: 0 3px;
-    border-radius: 3px;
     font-weight: bold;
 }
 
@@ -97,11 +247,9 @@ emphasis:before {
 }
 
 say-as[interpret-as="spell-out"] {
-    background-color: hsl(156, 100%, 93%);
-    text-decoration: underline dashed hsl(156, 100%, 50%);
+    background-color: var(--spellout_bg_color);
+    text-decoration: underline dashed var(--spellout_underline_color);
     text-decoration-thickness: 4px;
-    padding: 0 3px;
-    border-radius: 3px;
     letter-spacing: 3px;
 }
 
