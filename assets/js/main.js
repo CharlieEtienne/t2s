@@ -79,6 +79,9 @@ function multifile() {
     content: "` + filename_value + `." counter(filenumber) '.mp3';
   }
 `;
+    // TODO : faire fonctionner ça
+    document.head.removeChild(style);
+
     document.head.appendChild(style);
 }
 
