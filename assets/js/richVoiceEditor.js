@@ -261,12 +261,16 @@ txtArea.classList.add("language-html");
 
 htmlEditor.appendChild(txtArea);
 
+function hljsInit() {
+    hljs.configure({
+        languages: ['html']
+    });
+    hljs.highlightElement(txtArea);
+}
+
 quill.on('text-change', (delta, oldDelta, source) => {
     txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ');
-    hljs.configure({
-        languages:['html']
-    });
-    hljs.highlightElement( txtArea );
+    hljsInit();
 })
 
 
