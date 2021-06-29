@@ -158,69 +158,6 @@ document.addEventListener("keydown", function(event) {
             input.setSelectionRange(number.end, number.end);
         }
     }
-/*
-    //Eraser keyboard shortcut
-    if (event.ctrlKey && event.code === "Numpad1") {
-        event.preventDefault();
-        erase_format();
-    }
-
-    //Break keyboard shortcut
-    if (event.ctrlKey && event.code === "Numpad2") {
-        event.preventDefault();
-        let cursorPosition = quill.getSelection().index;
-        quill.insertText(cursorPosition, '⌛');
-    }
-
-    //Spell out keyboard shortcut
-    if (event.ctrlKey && event.code === "Numpad3") {
-        event.preventDefault();
-        quill_range_button_handler('spellout', 'spell-out');
-    }
-
-    //Emphasis keyboard shortcut
-    if (event.ctrlKey && event.code === "Numpad4") {
-        event.preventDefault();
-        quill_range_button_handler('emphasis', 'strong');
-    }
-
-    //Pitch & rate keyboard shortcut
-    if (event.ctrlKey && event.code === "ArrowLeft") {
-        event.preventDefault();
-        quill_range_button_handler('prosody',{'rate':'slow'})
-    }
-    if (event.ctrlKey && event.code === "ArrowRight") {
-        event.preventDefault();
-        quill_range_button_handler('prosody',{'rate':'fast'})
-    }
-    if (event.ctrlKey && event.code === "ArrowUp") {
-        event.preventDefault();
-        quill_range_button_handler('prosody',{'pitch':'high'})
-    }
-    if (event.ctrlKey && event.code === "ArrowDown") {
-        event.preventDefault();
-        quill_range_button_handler('prosody',{'pitch':'low'})
-    }
-*/
-    //Use right arrow key at the end of a format leaves it
-    // TODO : N'executer que dans quill editor
-    // TODO : Réécrire avec API de quill.js
-    if (event.code === "ArrowRight" && event.ctrlKey==false && event.shiftKey==false) {
-        event.preventDefault();
-        let index=quill.getSelection().index;
-        if(quill.getLength()==index+1){
-            erase_format();
-            }
-        else if ((JSON.stringify(quill.getFormat(index,0)) === JSON.stringify(quill.getFormat(index,1))) || (JSON.stringify(quill.getFormat(index,0))=='{}')){
-            quill.setSelection(index+1);            
-        }
-
-        else{
-            erase_format();
-
-        }
-    } 
-    
 });
 //setCookie('last_content', encodeURIComponent(textarea.innerHtml), 360);
 function setCookies() {
