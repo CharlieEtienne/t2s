@@ -19,7 +19,7 @@ const ssmlToolbarOptions = {
 }
 
 let bindings = {
-    emphasis:   {
+    bold:   {
         key:      'B',
         shiftKey: false,
         ctrlKey:  true,
