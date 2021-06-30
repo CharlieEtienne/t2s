@@ -38,7 +38,7 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // SSML emphasis tag
 // -----------------
 // style toolbar button with icon
-document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
+document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="fas fa-volume-up" title="Emphasis"></i>';
 function ssml_emphasis_handler() {
     quill_range_button_handler('emphasis', 'strong');
 }
@@ -72,7 +72,7 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 // SSML say-as tag
 // ---------------
 // style toolbar button with icon
-document.querySelector('.ql-ssml_spellout').innerHTML = '<i class="fas fa-spell-check" title="Spell Out (ctrl+P)"></i>';
+document.querySelector('.ql-ssml_spellout').innerHTML = '<i class="fas fa-spell-check" title="Spell Out"></i>';
 function ssml_spellout_handler() {
     quill_range_button_handler('spellout', 'spell-out');
 }

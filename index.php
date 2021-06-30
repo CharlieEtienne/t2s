@@ -100,6 +100,15 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-row mt-md-2">
+                    <div class="custom-control custom-switch col-md-12" style="padding-left: calc(2.5rem + 5px);">
+                        <input type="checkbox" class="custom-control-input" name="new_tab" id="new_tab" checked="checked">
+                        <label class="custom-control-label" for="new_tab">
+                            Ouvrir dans un nouvel onglet ?
+                            <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, le bouton Téléchargez ouvrira le fichier dans un nouvel onglet."></i>
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
