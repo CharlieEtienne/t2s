@@ -6,7 +6,7 @@ $(function () {
 function style_to_code() {
 
     let code = quill.root.innerHTML;
-
+    code = code.replaceAll('<p></p>', '');
     code = code.replaceAll('<p>', '');
     code = code.replaceAll('</p>', '');
     code = code.replaceAll('&nbsp;', ' ');

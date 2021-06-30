@@ -105,6 +105,15 @@ let bindings = {
             }
         }
     },
+    newline:{
+        key:      13,  // Enter key code in JavaScript
+        shiftKey: false,
+        ctrlKey:  false,
+        handler:  function (range, context) {
+            quill.insertText(quill.getSelection().index, '\n');
+            erase_format();
+        }
+    }
     /*
     leftarrow:{
         key: 37,  // Left arrow key code in JavaScript
