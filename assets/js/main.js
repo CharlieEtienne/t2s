@@ -7,8 +7,6 @@ function style_to_code() {
 
     let code = quill.root.innerHTML;
 
-    code = code.replaceAll('<p>', '');
-    code = code.replaceAll('</p>', '');
     code = code.replaceAll('&nbsp;', ' ');
 
     //Changing Hourglass to Break tags
