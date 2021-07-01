@@ -110,8 +110,13 @@ let bindings = {
         shiftKey: false,
         ctrlKey:  false,
         handler:  function (range, context) {
-            quill.insertText(quill.getSelection().index, '\n');
-            erase_format();
+            if (quill.getContents().ops[0].insert[quill.getSelection().index-1]!="\n"){
+                quill.insertText(quill.getSelection().index, '\n');
+                erase_format();
+                }
+                else{
+                    
+                }
         }
     }
     /*
