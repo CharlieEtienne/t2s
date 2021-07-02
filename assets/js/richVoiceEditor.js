@@ -2,6 +2,25 @@
 let toolbar = quill.getModule('toolbar');
 
 
+// Replace format with appropriate SSML tags
+function style_to_code() {
+
+    let code = quill.root.innerHTML;
+    
+    code = code.replaceAll('<p><br></p>', ' ');
+    code = code.replaceAll('&nbsp;', ' ');
+
+
+    //Changing Hourglass to Break tags
+    code = code.replaceAll('⌛⌛⌛⌛', '<break strength="x-strong"/>');
+    code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
+    code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
+    code = code.replaceAll('⌛', '<break strength="x-weak"/>');
+
+    return(code);
+}
+
+
 // SSML break tag
 // --------------
 // load texts for dropdown items
