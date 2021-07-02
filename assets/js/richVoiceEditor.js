@@ -288,7 +288,7 @@ function hljsInit() {
 }
 
 quill.on('text-change', (delta, oldDelta, source) => {
-    txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ');
+    txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ').replaceAll('<p><br></p>', '');
     hljsInit();
 })
 
