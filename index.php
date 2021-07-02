@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="/assets/css/lity.min.css">
     <link rel="stylesheet" href="/assets/css/quill.snow.css">
     <link rel="stylesheet" href="assets/css/richVoiceEditor.css">
     <link rel="stylesheet" href="assets/css/material-palenight.css">
@@ -99,6 +100,25 @@
                             <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, si un nom de fichier est saisi, il sera conservé tel quel et remplacera un éventuel fichier portant le même nom. En désactivant cette option, les fichiers auront la forme audio(x).mp3"></i>
                         </label>
                     </div>
+
+                    <a href="#shortcuts-popup"
+                       class="btn-link mt-2 text-decoration-none"
+                       style="padding: 0 10px;"
+                       data-lity><i class="fas fa-keyboard mr-1"></i> Raccourcis claviers</a>
+
+                    <div id="shortcuts-popup" class="lity-hide">
+                        <h4 class="text-center">Raccourcis claviers</h4>
+                        <p><code>Ctrl</code>+<code>E</code> : Écouter</p>
+                        <p><code>Ctrl</code>+<code>D</code> : Télécharger</p>
+                        <p><code>Ctrl</code>+<code>B</code> : Emphasis</p>
+                        <p><code>Ctrl</code>+<code>P</code> : Spell-out</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>F</code> : Rate fast + Pitch high</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>S</code> : Rate slow + Pitch low</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>1</code> : ⌛</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>2</code> : ⌛⌛</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>3</code> : ⌛⌛⌛</p>
+                        <p><code>Ctrl</code>+<code>Maj</code>+<code>4</code> : ⌛⌛⌛⌛</p>
+                    </div>
                 </div>
             </div>
 
@@ -148,6 +168,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" crossorigin="anonymous"></script>
     <script src="/assets/js/highlight.min.js"></script>
+    <script src="/assets/js/lity.min.js"></script>
     <script src="/assets/js/quill.js"></script>
     <script src="/assets/js/richVoiceEditor_options.js"></script>
     <script src="/assets/js/richVoiceEditor.js"></script>
