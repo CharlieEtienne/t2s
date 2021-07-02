@@ -2,6 +2,25 @@
 let toolbar = quill.getModule('toolbar');
 
 
+// Replace format with appropriate SSML tags
+function style_to_code() {
+
+    let code = quill.root.innerHTML;
+    
+    code = code.replaceAll('<p><br></p>', '');
+    code = code.replaceAll('&nbsp;', ' ');
+
+
+    //Changing Hourglass to Break tags
+    code = code.replaceAll('⌛⌛⌛⌛', '<break strength="x-strong"/>');
+    code = code.replaceAll('⌛⌛⌛', '<break strength="strong"/>');
+    code = code.replaceAll('⌛⌛', '<break strength="weak"/>');
+    code = code.replaceAll('⌛', '<break strength="x-weak"/>');
+
+    return(code);
+}
+
+
 // SSML break tag
 // --------------
 // load texts for dropdown items
@@ -269,7 +288,7 @@ function hljsInit() {
 }
 
 quill.on('text-change', (delta, oldDelta, source) => {
-    txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ');
+    txtArea.innerText = quillEditor.children[0].innerHTML.replaceAll('&nbsp;', ' ').replaceAll('<p><br></p>', '');
     hljsInit();
 })
 
