@@ -1,10 +1,19 @@
+:root{
+    --main-bg: hsl(229, 45%, 98%);
+    --text-color: hsl(229, 18%, 16%);
+    --link-color: hsl(250, 62%, 56%);
+    --link-color-hover: hsl(250, 62%, 66%);
+    --code-tag-bg: hsl(229, 45%, 93%);
+}
+
 body {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
     align-items: center;
     padding-top: 10px;
-    background-color: #f8f7fc;
+    background-color: var(--main-bg);
+    color: var(--text-color);
     font-family: 'Nunito', sans-serif;
 }
 #t2s {
@@ -63,10 +72,10 @@ button.disabled {
     color: #3e28a9!important;
 }
 a {
-    color: #6049d4;
+    color: var(--link-color);
 }
 a:hover {
-    color: #8473de;
+    color: var(--link-color-hover);
     text-decoration: underline;
 }
 .form-control:focus,
@@ -142,12 +151,37 @@ audio:focus, audio:focus-visible {
     border-radius: 3px 3px 0 0;
     counter-increment: filenumber;
 }
+code {
+    background: var(--code-tag-bg);
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--link-color);
+}
+#shortcuts-popup {
+    background: var(--main-bg);
+    max-width: 100%;
+    width: 600px;
+    min-height: 300px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.lity {
+    background: rgba(0, 0, 0, 0.75);
+}
+.lity-close {
+    font-size: 26px;
+    font-weight: 100;
+    font-family: 'Nunito',Arial,Baskerville,monospace;
+    color: var(--text-color);
+}
+.lity-close:hover, .lity-close:focus, .lity-close:active, .lity-close:visited {
+    font-size: 26px;
+    font-weight: 100;
+    font-family: 'Nunito',Arial,Baskerville,monospace;
+    color: var(--link-color-hover);
+}
 
 @media (prefers-color-scheme: light) {
-    body {
-        background-color: hsl(229, 45%, 98%);
-        color: hsl(229, 18%, 16%);
-    }
     .main-title{
         color: hsl(229, 18%, 31%);
     }
@@ -164,9 +198,12 @@ audio:focus, audio:focus-visible {
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: hsl(229, 21%, 16%);
-        color: hsl(229, 18%, 72%);
+    :root{
+        --main-bg: hsl(229, 21%, 16%);
+        --text-color: hsl(229, 18%, 72%);
+        --link-color: hsl(250, 62%, 76%);
+        --link-color-hover: hsl(250, 62%, 86%);
+        --code-tag-bg: hsl(229, 21%, 21%);
     }
     .main-title{
         color: hsl(229, 18%, 65%);
@@ -227,12 +264,6 @@ audio:focus, audio:focus-visible {
     }
     .text-info {
         color: hsl(250, 62%, 61%) !important;
-    }
-    a {
-        color: hsl(250, 62%, 76%);
-    }
-    a:hover {
-        color: hsl(250, 62%, 86%);
     }
     .btn-link {
         color: hsl(250, 62%, 61%);
