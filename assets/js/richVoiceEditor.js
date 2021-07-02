@@ -145,6 +145,11 @@ function quill_range_button_handler(type='color', value = false) {
                         [type]: newFormat
                     })
                 }
+                if (quill.getFormat(quill.getSelection())['prosody'].rate != ("x-slow" || "slow" || "fast" || "x-fast") && quill.getFormat(quill.getSelection())['prosody'].pitch != ("x-low" || "low" || "high" || "x-high")) {
+                    quill.formatText(range.index, (range.length), {
+                        'prosody' : false
+                    })
+                }
             }
 
             else {
