@@ -87,9 +87,6 @@ $(document).ready(function(){
     if(getCookie('last_overwrite') === 'is_false'){
         $('#overwrite').prop('checked', false);
     }
-    if(getCookie('last_new_tab') === 'is_false'){
-        $('#new_tab').prop('checked', false);
-    }
     if(getCookie('last_audio_file')){
         $('#audio_player').attr("src", decodeURIComponent(getCookie('last_audio_file')) );
     }
@@ -150,7 +147,6 @@ function setCookies() {
     setCookie('last_voice', $('#voice-name').val(), 360);
     setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
     setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
-    setCookie('last_new_tab', 'is_' + $('#new_tab').prop('checked'), 360);
 }
 
 /* Listen button */
