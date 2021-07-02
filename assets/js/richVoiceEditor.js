@@ -180,6 +180,9 @@ function quill_range_button_handler(type='color', value = false) {
                         type, {[valueContent[0]] : valueContent[1]}
                     )
                 }
+                if (quill.getFormat(quill.getSelection())['prosody'].rate != ("x-slow" || "slow" || "fast" || "x-fast") && quill.getFormat(quill.getSelection())['prosody'].pitch != ("x-low" || "low" || "high" || "x-high")) {
+                    quill.format('prosody',false)
+                }
             }
             else {
                 if(format[type] === value){
