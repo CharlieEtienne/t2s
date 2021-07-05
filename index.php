@@ -37,116 +37,116 @@
 </head>
 
 <body class="pt-md-5 pt-3">
-    <div class="container">
+    <div class="container main-wrapper">
 
         <form id="t2s" method="POST" action="process.php">
 
-            <h1 class="h3 mb-5 mt-lg-5 font-weight-bold text-center main-title">
-                <img src="icon-192.png" class="mb-1 mr-3" style="width: 2rem;" alt="icon">
-                Google TextToSpeech 2 mp3
-            </h1>
+            <header>
+                <h1 class="h3 mb-5 mt-lg-5 font-weight-bold text-center main-title">
+                    <img src="icon-192.png" class="mb-1 mr-3" style="width: 2rem;" alt="icon">
+                    <span class="main-title-text">Google TextToSpeech 2 mp3</span>
+                </h1>
 
-            <div class="form-row">
+                <div class="form-row header-options">
 
-                <div class="form-group col-md-5">
-                    <label for="filename">Nom du fichier</label>
-                    <div class="input-group">
-                        <input id="filename" class="form-control" type="text" value="" name="filename" placeholder="<?php echo uniqid(); ?>" tabindex="1">
-                        <div class="input-group-append">
-                            <div class="input-group-text">.mp3</div>
+                    <div class="form-group col-md-5">
+                        <label for="filename">Nom du fichier</label>
+                        <div class="input-group">
+                            <input id="filename" class="form-control" type="text" value="" name="filename" placeholder="<?php echo uniqid(); ?>" tabindex="1">
+                            <div class="input-group-append">
+                                <div class="input-group-text">.mp3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 col-11">
+                        <label for="voice-name">Type de voix</label>
+                        <select class="form-control custom-select" name="voice-name" id="voice-name">
+                            <option value="fr-FR-Wavenet-A">fr-FR-Wavenet-A (Femme)</option>
+                            <option value="fr-FR-Wavenet-B">fr-FR-Wavenet-B (Homme)</option>
+                            <option value="fr-FR-Wavenet-C">fr-FR-Wavenet-C (Femme)</option>
+                            <option value="fr-FR-Wavenet-D">fr-FR-Wavenet-D (Homme)</option>
+                            <option value="fr-FR-Wavenet-E">fr-FR-Wavenet-E (Femme)</option>
+                            <option value="en-US-Wavenet-A">en-US-Wavenet-A (Homme)</option>
+                            <option value="en-US-Wavenet-B">en-US-Wavenet-B (Homme)</option>
+                            <option value="en-US-Wavenet-C">en-US-Wavenet-C (Femme)</option>
+                            <option value="en-US-Wavenet-D">en-US-Wavenet-D (Homme)</option>
+                            <option value="en-US-Wavenet-E">en-US-Wavenet-E (Femme)</option>
+                            <option value="en-US-Wavenet-F">en-US-Wavenet-F (Femme)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-1 align-self-end">
+                        <a class="btn btn-default pl-0 pr-0 w-100" data-toggle="collapse" href="#options" role="button" aria-expanded="false" aria-controls="options">
+                            <i class="fa fa-cog text-info align-middle" style="font-size:20px;" data-toggle="tooltip" data-placement="top" title="Options"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="collapse mb-3" id="options">
+                    <div class="form-row">
+                        <div class="custom-control custom-switch col-md-5" style="padding-left: calc(2.5rem + 5px);">
+                            <input type="checkbox" class="custom-control-input" name="multiple" id="multiple" checked="checked">
+                            <label class="custom-control-label" for="multiple">
+                                Un fichier par ligne&nbsp;?
+                                <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, un fichier audio sera créé à chaque fois qu'un saut de ligne sera détecté. Les fichiers seront numérotés par ordre croissant et téléchargés dans une archive au format .zip"></i>
+                            </label>
+                        </div>
+
+                        <div class="custom-control custom-switch col-md-7" style="padding-left: calc(2.5rem + 5px);">
+                            <input type="checkbox" class="custom-control-input" name="overwrite" id="overwrite" checked="checked">
+                            <label class="custom-control-label" for="overwrite">
+                                Écraser les fichiers du même nom&nbsp;?
+                                <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, si un nom de fichier est saisi, il sera conservé tel quel et remplacera un éventuel fichier portant le même nom. En désactivant cette option, les fichiers auront la forme audio(x).mp3"></i>
+                            </label>
+                        </div>
+
+                        <a href="#shortcuts-popup"
+                           class="btn-link mt-2 text-decoration-none"
+                           style="padding: 0 10px;"
+                           data-lity><i class="fas fa-keyboard mr-1"></i> Raccourcis claviers</a>
+
+                        <div id="shortcuts-popup" class="lity-hide">
+                            <h4 class="text-center">Raccourcis claviers</h4>
+                            <p><code>Ctrl</code>+<code>E</code> : Écouter</p>
+                            <p><code>Ctrl</code>+<code>D</code> : Télécharger</p>
+                            <p><code>Ctrl</code>+<code>B</code> : Emphasis</p>
+                            <p><code>Ctrl</code>+<code>P</code> : Spell-out</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>F</code> : Rate fast + Pitch high</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>S</code> : Rate slow + Pitch low</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>1</code> : ⌛</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>2</code> : ⌛⌛</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>3</code> : ⌛⌛⌛</p>
+                            <p><code>Ctrl</code>+<code>Maj</code>+<code>4</code> : ⌛⌛⌛⌛</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group col-md-6 col-11">
-                    <label for="voice-name">Type de voix</label>
-                    <select class="form-control custom-select" name="voice-name" id="voice-name">
-                        <option value="fr-FR-Wavenet-A">fr-FR-Wavenet-A (Femme)</option>
-                        <option value="fr-FR-Wavenet-B">fr-FR-Wavenet-B (Homme)</option>
-                        <option value="fr-FR-Wavenet-C">fr-FR-Wavenet-C (Femme)</option>
-                        <option value="fr-FR-Wavenet-D">fr-FR-Wavenet-D (Homme)</option>
-                        <option value="fr-FR-Wavenet-E">fr-FR-Wavenet-E (Femme)</option>
-                        <option value="en-US-Wavenet-A">en-US-Wavenet-A (Homme)</option>
-                        <option value="en-US-Wavenet-B">en-US-Wavenet-B (Homme)</option>
-                        <option value="en-US-Wavenet-C">en-US-Wavenet-C (Femme)</option>
-                        <option value="en-US-Wavenet-D">en-US-Wavenet-D (Homme)</option>
-                        <option value="en-US-Wavenet-E">en-US-Wavenet-E (Femme)</option>
-                        <option value="en-US-Wavenet-F">en-US-Wavenet-F (Femme)</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-1 align-self-end">
-                	<a class="btn btn-default pl-0 pr-0 w-100" data-toggle="collapse" href="#options" role="button" aria-expanded="false" aria-controls="options">
-                	    <i class="fa fa-cog text-info align-middle" style="font-size:20px;" data-toggle="tooltip" data-placement="top" title="Options"></i>
-                	</a>
-                </div>
-
-            </div>
-
-            <div class="collapse mb-3" id="options">
-                <div class="form-row">
-                    <div class="custom-control custom-switch col-md-5" style="padding-left: calc(2.5rem + 5px);">
-                        <input type="checkbox" class="custom-control-input" name="multiple" id="multiple" checked="checked">
-                        <label class="custom-control-label" for="multiple">
-                            Un fichier par ligne&nbsp;?
-                            <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, un fichier audio sera créé à chaque fois qu'un saut de ligne sera détecté. Les fichiers seront numérotés par ordre croissant et téléchargés dans une archive au format .zip"></i>
-                        </label>
-                    </div>
-
-                    <div class="custom-control custom-switch col-md-7" style="padding-left: calc(2.5rem + 5px);">
-                        <input type="checkbox" class="custom-control-input" name="overwrite" id="overwrite" checked="checked">
-                        <label class="custom-control-label" for="overwrite">
-                            Écraser les fichiers du même nom&nbsp;?
-                            <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, si un nom de fichier est saisi, il sera conservé tel quel et remplacera un éventuel fichier portant le même nom. En désactivant cette option, les fichiers auront la forme audio(x).mp3"></i>
-                        </label>
-                    </div>
-
-                    <a href="#shortcuts-popup"
-                       class="btn-link mt-2 text-decoration-none"
-                       style="padding: 0 10px;"
-                       data-lity><i class="fas fa-keyboard mr-1"></i> Raccourcis claviers</a>
-
-                    <div id="shortcuts-popup" class="lity-hide">
-                        <h4 class="text-center">Raccourcis claviers</h4>
-                        <p><code>Ctrl</code>+<code>E</code> : Écouter</p>
-                        <p><code>Ctrl</code>+<code>D</code> : Télécharger</p>
-                        <p><code>Ctrl</code>+<code>B</code> : Emphasis</p>
-                        <p><code>Ctrl</code>+<code>P</code> : Spell-out</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>F</code> : Rate fast + Pitch high</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>S</code> : Rate slow + Pitch low</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>1</code> : ⌛</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>2</code> : ⌛⌛</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>3</code> : ⌛⌛⌛</p>
-                        <p><code>Ctrl</code>+<code>Maj</code>+<code>4</code> : ⌛⌛⌛⌛</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
+            </header>
+            <div class="form-group text-container">
                 <label for="text">Texte</label>
                 <input name="text" type="hidden">
                 <div id="text" class="center form-control"></div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group player-container">
                 <audio controls class="w-100" id="audio_player" tabindex="5">
                     Votre navigateur ne supporte pas la balise audio.
                 </audio>
             </div>
 
-            <div class="form-group text-center">
-                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + E" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
+            <div class="form-group buttons-container text-center">
+                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + E" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> <span class="button-text">Écouter</span>
                     <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
                     <span id="equalizer"></span>
                 </button>
-                <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title="Ctrl + D" tabindex="4"><i class="far fa-arrow-alt-circle-down"></i> Télécharger
+                <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title="Ctrl + D" tabindex="4"><i class="far fa-arrow-alt-circle-down"></i> <span class="button-text">Télécharger</span>
                     <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
                 </a>
                 <a class="btn btn-link" data-toggle="collapse" href="#myfiles" role="button" aria-expanded="false" aria-controls="myfiles">
                     <i class="fas fa-history text-info align-middle" style="font-size:26px;" data-toggle="tooltip" data-placement="top" title="Historique"></i>
                 </a>
             </div>
-
             <div class="collapse" id="myfiles">
                 <hr class="mt-5">
                 <h3 class="h5 w-100"><span class="text-muted">Historique de mes fichiers</span> <a class="float-right h6 p-0 text-right" id="delete-all" href="#">Effacer tout</a></h3>
@@ -158,7 +158,7 @@
         </form>
 
 
-        <p class="mt-3 mb-3 text-muted text-center">Made with <i class="far fa-heart text-danger"></i> by <a href="https://github.com/CharlieEtienne" target="_blank">Charlie Etienne</a></p>
+        <p class="mt-3 mb-3 text-muted text-center copyright">Made with <i class="far fa-heart text-danger"></i> by <a href="https://github.com/CharlieEtienne" target="_blank">Charlie Etienne</a></p>
 
     </div>
 

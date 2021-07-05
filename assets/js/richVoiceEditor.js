@@ -125,6 +125,15 @@ function erase_format() {
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
+// Function to turn on and off fullscreen mode 
+document.querySelector('.ql-fullscreen').innerHTML = '<i class="fas fa-expand" title="Plein écran"></i>';
+
+function fullscreen () {
+    document.body.classList.toggle('fullscreen');
+}
+toolbar.addHandler('fullscreen', fullscreen.bind(quill));
+
+
 function quill_range_button_handler(type='color', value = false) {
     let range   = quill.getSelection();
     let format  = quill.getFormat(range);
