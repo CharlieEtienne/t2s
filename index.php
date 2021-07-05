@@ -121,31 +121,29 @@
                     </div>
                 </div>
             </div>
-            <div id="Form">
-                <div class="form-group">
-                    <label for="text">Texte</label>
-                    <input name="text" type="hidden">
-                    <div id="text" class="center form-control"></div>
-                </div>
+            <div class="form-group">
+                <label for="text">Texte</label>
+                <input name="text" type="hidden">
+                <div id="text" class="center form-control"></div>
+            </div>
 
-                <div class="form-group">
-                    <audio controls class="w-100" id="audio_player" tabindex="5">
-                        Votre navigateur ne supporte pas la balise audio.
-                    </audio>
-                </div>
-            
-                <div class="form-group text-center">
-                    <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + E" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
-                        <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
-                        <span id="equalizer"></span>
-                    </button>
-                    <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title="Ctrl + D" tabindex="4"><i class="far fa-arrow-alt-circle-down"></i> Télécharger
-                        <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
-                    </a>
-                    <a class="btn btn-link" data-toggle="collapse" href="#myfiles" role="button" aria-expanded="false" aria-controls="myfiles">
-                        <i class="fas fa-history text-info align-middle" style="font-size:26px;" data-toggle="tooltip" data-placement="top" title="Historique"></i>
-                    </a>
-                </div>
+            <div class="form-group">
+                <audio controls class="w-100" id="audio_player" tabindex="5">
+                    Votre navigateur ne supporte pas la balise audio.
+                </audio>
+            </div>
+
+            <div class="form-group text-center">
+                <button id="play" type="submit" class="btn btn-info rounded-0 btn-lg mr-4 disabled" data-toggle="tooltip" data-placement="top" title="Ctrl + E" tabindex="3" disabled><i id="play-pause" class="far fa-play-circle"></i> Écouter
+                    <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
+                    <span id="equalizer"></span>
+                </button>
+                <a id="download" class="btn btn-info rounded-0 btn-lg disabled" href="#" target="_blank" data-toggle="tooltip" data-placement="top" title="Ctrl + D" tabindex="4"><i class="far fa-arrow-alt-circle-down"></i> Télécharger
+                    <i class="spinner fas fa-circle-notch fa-spin d-none" style="opacity: 0.75"></i>
+                </a>
+                <a class="btn btn-link" data-toggle="collapse" href="#myfiles" role="button" aria-expanded="false" aria-controls="myfiles">
+                    <i class="fas fa-history text-info align-middle" style="font-size:26px;" data-toggle="tooltip" data-placement="top" title="Historique"></i>
+                </a>
             </div>
             <div class="collapse" id="myfiles">
                 <hr class="mt-5">
