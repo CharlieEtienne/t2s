@@ -124,6 +124,17 @@ function erase_format() {
 }
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
+// Function to turn on and off fullscreen mode 
+function fullscreen () {
+    if (document.getElementById("Form").classList.contains("fullscreen")){
+        document.getElementById("Form").classList.remove("fullscreen");
+    }
+    else {
+    document.getElementById("Form").classList.add("fullscreen");
+    }
+}
+toolbar.addHandler('fullscreen', fullscreen.bind(quill));
+
 
 function quill_range_button_handler(type='color', value = false) {
     let range   = quill.getSelection();
