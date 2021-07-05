@@ -126,7 +126,7 @@ let bindings = {
         shiftKey: false,
         ctrlKey:  false,        
         handler: function (range, context) {
-            document.getElementById("Form").classList.remove("fullscreen");
+            document.body.classList.remove('fullscreen');
         }
     }
     /*
