@@ -152,6 +152,93 @@ audio:focus, audio:focus-visible {
     border-radius: 3px 3px 0 0;
     counter-increment: filenumber;
 }
+.fullscreen {
+    padding-top: 0 !important;
+}
+.fullscreen .main-title {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 48px;
+    height: 54px;
+}
+.fullscreen .main-title img {
+    margin-bottom:0 !important;
+}
+.fullscreen #text {
+    height: calc(100vh - 235px);
+}
+@media (max-width: 767px) {
+    .fullscreen #text {
+        height: calc(100vh - 290px);
+    }
+}
+.fullscreen .buttons-container {
+    display: flex;
+    position: absolute;
+    right: 35px;
+    bottom: 120px;
+}
+.fullscreen .buttons-container .button-text {
+    display: none;
+}
+.fullscreen .buttons-container .btn {
+    border-radius: 100% !important;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px !important;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.25);
+}
+.fullscreen .buttons-container .btn i {
+    font-size: 26px;
+    color: #fff !important;
+}
+.fullscreen .buttons-container .btn[href="#myfiles"] {
+    background-color: #3e28a9;
+    border-color: #3e28a9;
+}
+.fullscreen .buttons-container .btn[href="#myfiles"]:hover,
+.fullscreen .buttons-container .btn[href="#myfiles"]:active {
+    background-color: #2e1e80;
+    border-color: #2e1e80;
+    text-decoration: none !important;
+}
+.fullscreen .header-options {
+    width: calc(100% - 38px);
+}
+.fullscreen label:not(.custom-control-label) {
+    display: none;
+}
+.fullscreen header{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.fullscreen #options {
+
+}
+.fullscreen .main-wrapper {
+    max-width: 100% !important;
+}
+.fullscreen #t2s {
+    max-width: 100% !important;
+    padding-bottom: 5px;
+}
+.fullscreen .main-title-text{
+    display: none;
+}
+.fullscreen .player-container {
+    margin-bottom: 0;
+}
+.fullscreen .copyright {
+    margin-top: 0 !important;
+}
 code {
     background: var(--code-tag-bg);
     padding: 1px 6px;
