@@ -124,7 +124,10 @@ function erase_format() {
 }
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
+
 // Function to turn on and off fullscreen mode 
+document.querySelector('.ql-fullscreen').innerHTML = '<i class="fas fa-expand" title="Plein écran"></i>';
+
 function fullscreen () {
     if (document.getElementById("Form").classList.contains("fullscreen")){
         document.getElementById("Form").classList.remove("fullscreen");
