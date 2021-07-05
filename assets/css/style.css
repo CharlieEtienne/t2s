@@ -17,15 +17,6 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
-.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow: auto;
-}
-
 #t2s {
     width: 100%;
     max-width: 600px;
