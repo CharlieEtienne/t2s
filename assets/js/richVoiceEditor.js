@@ -129,12 +129,7 @@ toolbar.addHandler('erase_format', erase_format.bind(quill));
 document.querySelector('.ql-fullscreen').innerHTML = '<i class="fas fa-expand" title="Plein écran"></i>';
 
 function fullscreen () {
-    if (document.getElementById("Form").classList.contains("fullscreen")){
-        document.getElementById("Form").classList.remove("fullscreen");
-    }
-    else {
-    document.getElementById("Form").classList.add("fullscreen");
-    }
+    document.body.classList.toggle('fullscreen');
 }
 toolbar.addHandler('fullscreen', fullscreen.bind(quill));
 
