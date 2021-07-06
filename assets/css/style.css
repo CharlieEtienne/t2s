@@ -192,6 +192,7 @@ audio:focus, audio:focus-visible {
     justify-content: center;
     margin-right: 10px !important;
     box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.25);
+    padding: 0;
 }
 .fullscreen .buttons-container .btn i {
     font-size: 26px !important;
@@ -201,13 +202,13 @@ audio:focus, audio:focus-visible {
     color: #fff !important;
 }
 .fullscreen .buttons-container .btn[href="#myfiles"] {
-    background-color: #3e28a9;
-    border-color: #3e28a9;
+    background-color: hsl(140, 62%, 41%);
+    border-color: hsl(140, 62%, 41%);
 }
 .fullscreen .buttons-container .btn[href="#myfiles"]:hover,
 .fullscreen .buttons-container .btn[href="#myfiles"]:active {
-    background-color: #2e1e80;
-    border-color: #2e1e80;
+    background-color: hsl(140, 62%, 31%);
+    border-color: hsl(140, 62%, 31%);
     text-decoration: none !important;
 }
 .fullscreen .header-options {
