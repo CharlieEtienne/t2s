@@ -57,7 +57,7 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // SSML emphasis tag
 // -----------------
 // style toolbar button with icon
-document.querySelector('.ql-ssml_emphasis').innerHTML = '<i class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
+document.querySelector('.ql-ssml_emphasis').innerHTML = '<i id="emphasis" class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
 function ssml_emphasis_handler() {
     quill_range_button_handler('emphasis', 'strong');
 }
@@ -91,7 +91,7 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 // SSML say-as tag
 // ---------------
 // style toolbar button with icon
-document.querySelector('.ql-ssml_spellout').innerHTML = '<i class="fas fa-spell-check" title="Spell Out (ctrl+P)"></i>';
+document.querySelector('.ql-ssml_spellout').innerHTML = '<i id="spellout" class="fas fa-spell-check" title="Spell Out (ctrl+P)"></i>';
 function ssml_spellout_handler() {
     quill_range_button_handler('spellout', 'spell-out');
 }
@@ -126,10 +126,11 @@ toolbar.addHandler('erase_format', erase_format.bind(quill));
 
 
 // Function to turn on and off fullscreen mode 
-document.querySelector('.ql-fullscreen').innerHTML = '<i class="fas fa-expand" title="Plein écran"></i>';
+document.querySelector('.ql-fullscreen').innerHTML = '<i id="fsbutton" class="fas fa-expand" title="Plein écran"></i>';
 
 function fullscreen () {
     document.body.classList.toggle('fullscreen');
+    document.getElementById("fsbutton").classList.toggle("active");
 }
 toolbar.addHandler('fullscreen', fullscreen.bind(quill));
 
@@ -289,7 +290,7 @@ let txtArea        = document.createElement('div');
 let htmlEditor     = quill.addContainer('ql-custom');
 let quillEditor    = document.querySelector('#text');
 
-customButton.innerHTML = '<i class="fas fa-code" title="Basculer entre les vues texte et code"></i>';
+customButton.innerHTML = '<i id="code" class="fas fa-code" title="Basculer entre les vues texte et code"></i>';
 txtArea.setAttribute('contenteditable', 'true');
 txtArea.style.cssText = "display:none";
 txtArea.classList.add("ssml-code");
@@ -317,5 +318,45 @@ customButton.addEventListener('click', () => {
     }
     txtArea.style.display = txtArea.style.display === 'none' ? '' : 'none';
     customButton.classList.toggle("active");
+    document.getElementById("code").classList.toggle("active");
 });
 
+//Coloring buttons when format is active
+function updateButtons(){
+    let format = quill.getFormat(quill.getSelection());
+
+
+    if (format.emphasis == "strong"){
+        document.getElementById("emphasis").classList.add("active");
+    }
+    else{
+        document.getElementById("emphasis").classList.remove("active");
+    }
+
+    if (format.spellout == "spell-out"){
+        document.getElementById("spellout").classList.add("active");
+    }
+    else {
+        document.getElementById("spellout").classList.remove("active");
+    }
+/*
+    if (format.prosody != undefined){
+        if (quill.getFormat(quill.getSelection()).prosody.pitch!=null) {
+            document.getElementById("pitch").classList.add("active");
+        }
+        else {
+            document.getElementById("pitch").classList.remove("active");
+        }
+
+        if (quill.getFormat(quill.getSelection()).prosody.rate!=null) {
+            document.getElementById("rate").classList.add("active");
+        }
+        else {
+            document.getElementById("rate").classList.remove("active");
+        }
+    }
+    else {
+        document.getElementById("pitch").classList.remove("active");
+        document.getElementById("rate").classList.remove("active");
+    }*/
+}

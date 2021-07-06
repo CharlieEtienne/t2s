@@ -127,6 +127,8 @@ let bindings = {
         ctrlKey:  false,        
         handler: function (range, context) {
             document.body.classList.remove('fullscreen');
+            document.getElementById("fsbutton").classList.remove("active");
+
         }
     }
     /*
