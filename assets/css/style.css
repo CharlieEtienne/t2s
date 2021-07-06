@@ -268,7 +268,7 @@ code {
     font-size: 26px;
     font-weight: 100;
     font-family: 'Nunito',Arial,Baskerville,monospace;
-    color: var(--text-color);
+    color: #fff;
 }
 .lity-close:hover, .lity-close:focus, .lity-close:active, .lity-close:visited {
     font-size: 26px;
