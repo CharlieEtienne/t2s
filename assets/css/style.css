@@ -194,7 +194,10 @@ audio:focus, audio:focus-visible {
     box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.25);
 }
 .fullscreen .buttons-container .btn i {
-    font-size: 26px;
+    font-size: 26px !important;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
     color: #fff !important;
 }
 .fullscreen .buttons-container .btn[href="#myfiles"] {
