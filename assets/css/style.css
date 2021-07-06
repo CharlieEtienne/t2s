@@ -211,6 +211,9 @@ audio:focus, audio:focus-visible {
     border-color: hsl(140, 62%, 31%);
     text-decoration: none !important;
 }
+.fullscreen .buttons-container .btn[href="#myfiles"]:focus {
+    text-decoration: none !important;
+}
 .fullscreen .header-options {
     width: calc(100% - 38px);
 }
