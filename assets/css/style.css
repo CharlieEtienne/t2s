@@ -163,6 +163,7 @@ audio:focus, audio:focus-visible {
 }
 .fullscreen .main-title img {
     margin-bottom:0 !important;
+    width: 38px !important;
 }
 .fullscreen #text {
     height: calc(100vh - 235px);
