@@ -17,6 +17,10 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+.active{
+    color :#8473de
+}
+
 #t2s {
     width: 100%;
     max-width: 600px;

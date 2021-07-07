@@ -336,3 +336,10 @@ function deleteFile(file) {
         }
     });
 }
+
+quill.root.onkeyup = function() {
+    updateButtons();
+}
+quill.root.onclick = function() {
+    updateButtons();
+}
