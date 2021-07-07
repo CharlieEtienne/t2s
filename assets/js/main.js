@@ -101,6 +101,12 @@ $(document).ready(function(){
     });
     window.uniqid = document.getElementById('filename').placeholder;
     multifile();
+
+    $('#options').on('show.bs.collapse', function () {
+        $('.fullscreen #text').css('height', 'calc(100vh - 310px)');
+    }).on('hide.bs.collapse', function () {
+        $('.fullscreen #text').css('height', 'calc(100vh - 235px)');
+    });
 });
 
 filename.on('focus', function (){
