@@ -167,6 +167,7 @@ audio:focus, audio:focus-visible {
 }
 .fullscreen #text {
     height: calc(100vh - 235px);
+    transition: height linear 0.25s;
 }
 @media (max-width: 767px) {
     .fullscreen #text {

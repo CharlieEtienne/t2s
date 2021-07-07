@@ -127,6 +127,7 @@ let bindings = {
         ctrlKey:  false,        
         handler: function (range, context) {
             document.body.classList.remove('fullscreen');
+            document.getElementById('text').removeAttribute('style');
         }
     }
     /*
