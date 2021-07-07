@@ -339,24 +339,24 @@ function updateButtons(){
     else {
         document.getElementById("spellout").classList.remove("active");
     }
-/*
+    
     if (format.prosody != undefined){
         if (quill.getFormat(quill.getSelection()).prosody.pitch!=null) {
-            document.getElementById("pitch").classList.add("active");
+            document.getElementsByClassName("fa-wave-square")[0].classList.add("active");
         }
         else {
-            document.getElementById("pitch").classList.remove("active");
+            document.getElementsByClassName("fa-wave-square")[0].classList.remove("active");
         }
 
         if (quill.getFormat(quill.getSelection()).prosody.rate!=null) {
-            document.getElementById("rate").classList.add("active");
+            document.getElementsByClassName("fa-tachometer-alt")[0].classList.add("active");
         }
         else {
-            document.getElementById("rate").classList.remove("active");
+            document.getElementsByClassName("fa-tachometer-alt")[0].classList.remove("active");
         }
     }
     else {
-        document.getElementById("pitch").classList.remove("active");
-        document.getElementById("rate").classList.remove("active");
-    }*/
+        document.getElementsByClassName("fa-wave-square")[0].classList.remove("active");
+        document.getElementsByClassName("fa-tachometer-alt")[0].classList.remove("active");
+    }
 }

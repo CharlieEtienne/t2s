@@ -330,7 +330,10 @@ function deleteFile(file) {
         }
     });
 }
-/*
-textarea.on('', function(){
+
+document.onkeyup = function() {
     updateButtons();
-})*/
+}
+document.onclick = function() {
+    updateButtons();
+}
