@@ -331,9 +331,9 @@ function deleteFile(file) {
     });
 }
 
-document.onkeyup = function() {
+quill.root.onkeyup = function() {
     updateButtons();
 }
-document.onclick = function() {
+quill.root.onclick = function() {
     updateButtons();
 }
