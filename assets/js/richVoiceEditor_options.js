@@ -133,13 +133,14 @@ let bindings = {
 
             document.getElementById('text').removeAttribute('style');
         }
-    }
+    },
     /*
     leftarrow:{
         key: 37,  // Left arrow key code in JavaScript
         shiftKey: false,
         ctrlKey: false,
         handler: function(range, context) {
+            console.log('test');
             let index=quill.getSelection().index;
             console.log(quill.getFormat(index,0));
             console.log(quill.getFormat(index-1,0));
@@ -147,22 +148,24 @@ let bindings = {
                 erase_format();
                 console.log('1');
                 }
-            else if ((JSON.stringify(quill.getFormat(index,0)) !== JSON.stringify(quill.getFormat(index-1,0))) && (JSON.stringify(quill.getFormat(index, 0)) != '{}')){
-                quill.setSelection(index-1);
-                erase_format();
-                console.log('2');          
-            }
-            else if ((JSON.stringify(quill.getFormat(index,0)) !== JSON.stringify(quill.getFormat(index-1,0))) && (JSON.stringify(quill.getFormat(index-1, 1)) != '{}')){
-                quill.setSelection(index+1);
-                quill.setSelection(index);
-                console.log('5');
-            }
-            
+                
             else if (JSON.stringify(quill.getFormat(index,0)) !== JSON.stringify(quill.getFormat(index-1,0))){
                 console.log('3');
                 quill.setSelection(index-1);
                 erase_format();  
             }
+            else if ((JSON.stringify(quill.getFormat(index,0)) !== JSON.stringify(quill.getFormat(index-1,1))) && (JSON.stringify(quill.getFormat(index, 0)) != '{}')){
+                quill.setSelection(index-1);
+                quill.setSelection(index);
+                erase_format();
+                console.log('2');          
+            }
+            else if ((JSON.stringify(quill.getFormat(index,0)) !== JSON.stringify(quill.getFormat(index-1,1))) && (JSON.stringify(quill.getFormat(index-1, 1)) != '{}')){
+                quill.setSelection(index+1);
+                quill.setSelection(index);
+                console.log('5');
+            }
+            
             else {
                 quill.setSelection(index-1);
                 console.log('4');
