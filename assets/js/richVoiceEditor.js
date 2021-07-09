@@ -22,27 +22,10 @@ function style_to_code() {
 
 // Copy selection from code text area to quill 
 function copySelection(){
-    let start=-1;
-    let current = -1;
-    let length = -1;
-    let begin = false;
-    //Get index of start
-    while(begin == false){
-        current+=1;
-        if (isInTag==false){
-        start+=1;
-        }
-        if(/* testing if index of current is selected */true){
-            begin=true;
-        }
-    }
+    let startIndex = window.getSelection().getRangeAt(0).startOffset;
+    let length = window.getSelection().getRangeAt(0).endOffset - window.getSelection().getRangeAt(0).startOffset;
 
-    //get the lenght
-    while(end==false){
-        
-    }
-
-    quill.setSelection(begin, length);
+    quill.setSelection(startIndex, length);
 }
 
 // SSML break tag
@@ -53,6 +36,9 @@ function ssml_break_handler(value) {
     // only if a position is currently selected
     if (value) {
         // get the current position idndex
+        if(document.getElementById("code").classList.contains("active")){
+            copySelection();
+        }
         let cursorPosition = quill.getSelection().index;
         // insert the single tag
         switch (value){
@@ -83,11 +69,11 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // style toolbar button with icon
 document.querySelector('.ql-ssml_emphasis').innerHTML = '<i id="emphasis" class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
 function ssml_emphasis_handler() {
-    /*
+    
     if(document.getElementById("code").classList.contains("active")){
-            copySelection();
-        }
-    */
+        copySelection();
+    }
+    
     quill_range_button_handler('emphasis', 'strong');
 }
 // add tag handler to quill toolbar
@@ -99,6 +85,9 @@ toolbar.addHandler('ssml_emphasis', ssml_emphasis_handler.bind(quill));
 // --------------
 set_dropdown('ssml_rate', 'Rate', 'fas fa-tachometer-alt')
 function ssml_rate_handler(value) {
+    if(document.getElementById("code").classList.contains("active")){
+        copySelection();
+    }
     quill_range_button_handler('prosody',{'rate':value})
 }
 // add tag handler to quill toolbar
@@ -110,6 +99,9 @@ toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
 // --------------
 set_dropdown('ssml_pitch', 'Pitch', 'fas fa-wave-square')
 function ssml_pitch_handler(value) {
+    if(document.getElementById("code").classList.contains("active")){
+        copySelection();
+    }
     quill_range_button_handler('prosody',{'pitch':value});
 }
 // add tag handler to quill toolbar
@@ -122,6 +114,9 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 // style toolbar button with icon
 document.querySelector('.ql-ssml_spellout').innerHTML = '<i id="spellout" class="fas fa-spell-check" title="Spell Out (ctrl+P)"></i>';
 function ssml_spellout_handler() {
+    if(document.getElementById("code").classList.contains("active")){
+        copySelection();
+    }
     quill_range_button_handler('spellout', 'spell-out');
 }
 // add tag handler to quill toolbar
@@ -132,7 +127,11 @@ document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser"
  * Remove all styles
  */
 function erase_format() {
+    if(document.getElementById("code").classList.contains("active")){
+        copySelection();
+    }
     let range   = quill.getSelection();
+    
 
     if (range) {
         // removing all styles applied to the selection
