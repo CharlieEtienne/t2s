@@ -20,6 +20,30 @@ function style_to_code() {
     return(code);
 }
 
+// Copy selection from code text area to quill 
+function copySelection(){
+    let start=-1;
+    let current = -1;
+    let length = -1;
+    let begin = false;
+    //Get index of start
+    while(begin == false){
+        current+=1;
+        if (isInTag==false){
+        start+=1;
+        }
+        if(/* testing if index of current is selected */true){
+            begin=true;
+        }
+    }
+
+    //get the lenght
+    while(end==false){
+        
+    }
+
+    quill.setSelection(begin, length);
+}
 
 // SSML break tag
 // --------------
@@ -59,6 +83,11 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // style toolbar button with icon
 document.querySelector('.ql-ssml_emphasis').innerHTML = '<i id="emphasis" class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
 function ssml_emphasis_handler() {
+    /*
+    if(document.getElementById("code").classList.contains("active")){
+            copySelection();
+        }
+    */
     quill_range_button_handler('emphasis', 'strong');
 }
 // add tag handler to quill toolbar
