@@ -198,6 +198,7 @@ $(document).on('click', '#download', function (e) {
         data: form.serialize() + "&download=1",
         dataType: 'json',
         success: function(response){
+            console.log(response);
             if (response.status && response.status === 'error') {
                 toastr[response.status](response.message);
             }
