@@ -1,7 +1,12 @@
 // fetch the toolbar to add handlers
 let toolbar = quill.getModule('toolbar');
 
-
+quill.getModule("toolbar").container.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    if(document.getElementById("code").classList.contains("active")){
+        copySelection();
+    }
+  });
 // Replace format with appropriate SSML tags
 function style_to_code() {
 
@@ -21,9 +26,52 @@ function style_to_code() {
 }
 
 // Copy selection from code text area to quill 
+function getCaretCharacterOffsetWithin(element) {
+    var caretOffset = 0;
+    var doc = element.ownerDocument || element.document;
+    var win = doc.defaultView || doc.parentWindow;
+    var sel;
+    if (typeof win.getSelection != "undefined") {
+        sel = win.getSelection();
+        if (sel.rangeCount > 0) {
+            var range = win.getSelection().getRangeAt(0);
+            var preCaretRange = range.cloneRange();
+            preCaretRange.selectNodeContents(element);
+            preCaretRange.setEnd(range.endContainer, range.endOffset);
+            caretOffset = preCaretRange.toString().length;
+        }
+    } else if ( (sel = doc.selection) && sel.type != "Control") {
+        var textRange = sel.createRange();
+        var preCaretTextRange = doc.body.createTextRange();
+        preCaretTextRange.moveToElementText(element);
+        preCaretTextRange.setEndPoint("EndToEnd", textRange);
+        caretOffset = preCaretTextRange.text.length;
+    }
+    return caretOffset;
+}
+function count(startindex, txtarea){
+    let count = 0;
+    let inTag=false;
+    for(let i=0; i<startindex; i++){
+        if ((txtarea.textContent)[i] =='>'){
+            count+=1;
+            inTag=false;
+        }
+        else if ((txtarea.textContent)[i] =='<'){
+            count+=1;
+            inTag=true;
+        }
+        else if (inTag==true){
+            count+=1;
+        }
+        
+    }
+    return(count);
+}
 function copySelection(){
-    let startIndex = window.getSelection().getRangeAt(0).startOffset;
-    let length = window.getSelection().getRangeAt(0).endOffset - window.getSelection().getRangeAt(0).startOffset;
+    let length = window.getSelection().toString().length;
+    let startIndex = getCaretCharacterOffsetWithin(txtArea)-length;
+    startIndex = startIndex - count(startIndex,txtArea);
 
     quill.setSelection(startIndex, length);
 }
@@ -69,11 +117,6 @@ toolbar.addHandler('ssml_break', ssml_break_handler.bind(quill));
 // style toolbar button with icon
 document.querySelector('.ql-ssml_emphasis').innerHTML = '<i id="emphasis" class="fas fa-volume-up" title="Emphasis (ctrl+B)"></i>';
 function ssml_emphasis_handler() {
-    
-    if(document.getElementById("code").classList.contains("active")){
-        copySelection();
-    }
-    
     quill_range_button_handler('emphasis', 'strong');
 }
 // add tag handler to quill toolbar
@@ -85,9 +128,6 @@ toolbar.addHandler('ssml_emphasis', ssml_emphasis_handler.bind(quill));
 // --------------
 set_dropdown('ssml_rate', 'Rate', 'fas fa-tachometer-alt')
 function ssml_rate_handler(value) {
-    if(document.getElementById("code").classList.contains("active")){
-        copySelection();
-    }
     quill_range_button_handler('prosody',{'rate':value})
 }
 // add tag handler to quill toolbar
@@ -99,9 +139,6 @@ toolbar.addHandler('ssml_rate', ssml_rate_handler.bind(quill));
 // --------------
 set_dropdown('ssml_pitch', 'Pitch', 'fas fa-wave-square')
 function ssml_pitch_handler(value) {
-    if(document.getElementById("code").classList.contains("active")){
-        copySelection();
-    }
     quill_range_button_handler('prosody',{'pitch':value});
 }
 // add tag handler to quill toolbar
@@ -114,9 +151,6 @@ toolbar.addHandler('ssml_pitch', ssml_pitch_handler.bind(quill));
 // style toolbar button with icon
 document.querySelector('.ql-ssml_spellout').innerHTML = '<i id="spellout" class="fas fa-spell-check" title="Spell Out (ctrl+P)"></i>';
 function ssml_spellout_handler() {
-    if(document.getElementById("code").classList.contains("active")){
-        copySelection();
-    }
     quill_range_button_handler('spellout', 'spell-out');
 }
 // add tag handler to quill toolbar
@@ -127,9 +161,6 @@ document.querySelector('.ql-erase_format').innerHTML = '<i class="fas fa-eraser"
  * Remove all styles
  */
 function erase_format() {
-    if(document.getElementById("code").classList.contains("active")){
-        copySelection();
-    }
     let range   = quill.getSelection();
     
 
@@ -321,6 +352,7 @@ let quillEditor    = document.querySelector('#text');
 
 customButton.innerHTML = '<i id="code" class="fas fa-code" title="Basculer entre les vues texte et code"></i>';
 txtArea.setAttribute('contenteditable', 'true');
+txtArea.id = "codeEditor";
 txtArea.style.cssText = "display:none";
 txtArea.classList.add("ssml-code");
 txtArea.classList.add("language-html");
