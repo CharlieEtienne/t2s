@@ -75,10 +75,11 @@ function synthesize_text( $text ) {
 
     /* Check if multiple : we detect line breaks and split string into array */
     if( isset($_POST[ 'multiple' ], $_POST[ 'download' ]) && $_POST[ 'multiple' ] == 'on' && $_POST[ 'download' ] == 1 ) {
-        $text = str_replace('"', '', $text);
+//        $text = str_replace('"', '', $text);
         $text = rtrim($text, '&#13;&#10;');
         $text = rtrim($text, '"');
         $text = ltrim($text, '"');
+        $text = str_replace('<p>', "", $text);
         $text = stripslashes (str_replace('</p>', "\r\n", $text));
         $text = rtrim($text, "\r\n");
         $array = preg_split('/\r\n|[\r\n]/', $text);
