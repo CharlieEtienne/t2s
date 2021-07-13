@@ -73,7 +73,7 @@ function copySelection(){
     let startIndex = getCaretCharacterOffsetWithin(txtArea)-length;
     startIndex = startIndex - count(startIndex,txtArea);
     
-    quill.setSelection(startIndex);
+    quill.setSelection(startIndex, length);
     
 }
 
