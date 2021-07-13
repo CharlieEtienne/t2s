@@ -3,7 +3,7 @@ let toolbar = quill.getModule('toolbar');
 
 quill.getModule("toolbar").container.addEventListener("mousedown", (e) => {
     e.preventDefault();
-    if(document.getElementById("code").classList.contains("active")){
+    if(document.getElementById("code").classList.contains("active") && quill.getSelection()==null){
         copySelection();
     }
   });
@@ -72,8 +72,9 @@ function copySelection(){
     let length = window.getSelection().toString().length;
     let startIndex = getCaretCharacterOffsetWithin(txtArea)-length;
     startIndex = startIndex - count(startIndex,txtArea);
-
-    quill.setSelection(startIndex, length);
+    
+    quill.setSelection(startIndex);
+    
 }
 
 // SSML break tag
@@ -83,10 +84,6 @@ set_dropdown('ssml_break', 'Break', 'fas fa-pause');
 function ssml_break_handler(value) {
     // only if a position is currently selected
     if (value) {
-        // get the current position idndex
-        if(document.getElementById("code").classList.contains("active")){
-            copySelection();
-        }
         let cursorPosition = quill.getSelection().index;
         // insert the single tag
         switch (value){
