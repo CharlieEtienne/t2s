@@ -23,7 +23,7 @@ function synthesize_text( $text ) {
 
     $voice_gender      = $_POST[ 'voice-gender' ] ?? '1';
     $voice_name        = $_POST[ 'voice-name' ] ?? 'fr-FR-Wavenet-D';
-    $language          = $voice_name[ 0 ] == 'e' ? 'en-EN' : 'fr-FR';
+    $language          = substr($voice_name, 0, 5);
     $root              = __DIR__ . '/audio/';
     $directory         = $_COOKIE[ 't2s' ] ?? uniqid();
     $user_dir          = $root . $directory;
