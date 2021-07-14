@@ -2,6 +2,7 @@
     if(!isset($_COOKIE['t2s'])){
         setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true);
     }
+    require_once 'get_voices.php';
 ?>
 
 <!DOCTYPE html>
@@ -62,17 +63,9 @@
                     <div class="form-group col-md-6 col-11">
                         <label for="voice-name">Type de voix</label>
                         <select class="form-control custom-select" name="voice-name" id="voice-name">
-                            <option value="fr-FR-Wavenet-A">fr-FR-Wavenet-A (Femme)</option>
-                            <option value="fr-FR-Wavenet-B">fr-FR-Wavenet-B (Homme)</option>
-                            <option value="fr-FR-Wavenet-C">fr-FR-Wavenet-C (Femme)</option>
-                            <option value="fr-FR-Wavenet-D">fr-FR-Wavenet-D (Homme)</option>
-                            <option value="fr-FR-Wavenet-E">fr-FR-Wavenet-E (Femme)</option>
-                            <option value="en-US-Wavenet-A">en-US-Wavenet-A (Homme)</option>
-                            <option value="en-US-Wavenet-B">en-US-Wavenet-B (Homme)</option>
-                            <option value="en-US-Wavenet-C">en-US-Wavenet-C (Femme)</option>
-                            <option value="en-US-Wavenet-D">en-US-Wavenet-D (Homme)</option>
-                            <option value="en-US-Wavenet-E">en-US-Wavenet-E (Femme)</option>
-                            <option value="en-US-Wavenet-F">en-US-Wavenet-F (Femme)</option>
+                            <?php foreach( get_voices(['fr-FR', 'en-US']) as $key => $value ) : ?>
+                                <option value="<?= $key ?>"><?= $value ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
