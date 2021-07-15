@@ -152,7 +152,6 @@ const quill = new Quill('#text', {
         'prosody',
     ]
 });
-console.log(quill.keyboard.bindings);
 window.quill = quill;
 
 // Remove tab key binding
