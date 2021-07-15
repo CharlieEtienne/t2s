@@ -349,7 +349,7 @@ let keysPressed = {};
 document.getElementById("codeEditor").addEventListener('keydown', (event) => {
     keysPressed[event.key] = true;
  
-    if (keysPressed['Control'] && keysPressed['Shift'] && event.key == 'z') {
+    if (keysPressed['Control'] && keysPressed['Shift'] && event.key === 'z') {
         quill.history.undo();
     }
     else if (keysPressed['Control'] && event.key == 'z') {
