@@ -77,10 +77,8 @@ function copySelection(){
     let startIndex = getCaretCharacterOffsetWithin(txtArea)-length;
     startIndex = startIndex - count(startIndex,txtArea);
 
-
     self.quill.pasteHTML(html);
-    quill.setSelection(startIndex, length);
-    
+    quill.setSelection(startIndex, length);   
 }
 
 // SSML break tag
