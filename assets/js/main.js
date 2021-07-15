@@ -353,7 +353,7 @@ document.getElementById("codeEditor").addEventListener('keydown', (event) => {
         quill.history.undo();
     }
     else if (keysPressed['Control'] && event.key == 'z') {
-        quill.history.undo();
+        quill.history.redo();
     }
  });
 
