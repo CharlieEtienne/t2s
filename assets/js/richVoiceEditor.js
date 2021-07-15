@@ -69,12 +69,16 @@ function count(startindex, txtarea){
     return(count);
 }
 function copySelection(){
+    // Updating Quill editor
+    let html = txtArea.innerText;
+
+    //Copying selection from txtArea to Quill
     let length = window.getSelection().toString().length;
     let startIndex = getCaretCharacterOffsetWithin(txtArea)-length;
     startIndex = startIndex - count(startIndex,txtArea);
-    
-    quill.setSelection(startIndex, length);
-    
+
+    self.quill.pasteHTML(html);
+    quill.setSelection(startIndex, length);   
 }
 
 // SSML break tag
