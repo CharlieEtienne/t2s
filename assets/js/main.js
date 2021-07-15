@@ -344,3 +344,19 @@ quill.root.onkeyup = function() {
 quill.root.onclick = function() {
     updateButtons();
 }
+
+let keysPressed = {};
+document.getElementById("codeEditor").addEventListener('keydown', (event) => {
+    keysPressed[event.key] = true;
+ 
+    if (keysPressed['Control'] && keysPressed['Shift'] && event.key == 'z') {
+        quill.history.undo();
+    }
+    else if (keysPressed['Control'] && event.key == 'z') {
+        quill.history.undo();
+    }
+ });
+
+document.addEventListener('keyup', (event) => {
+    delete keysPressed[event.key];
+});
