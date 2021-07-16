@@ -164,8 +164,9 @@ else {
 }
 
 //Is request?
-if($_SERVER['REQUEST_METHOD'] == 'post'){
-    //Validate the form key
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Validate the form key   
+    /*
     if(!isset($_POST['form_key']) || !$formKey->validate()){
         echo json_encode([
             'status'  => 'error',
@@ -176,5 +177,5 @@ if($_SERVER['REQUEST_METHOD'] == 'post'){
         echo json_encode([
             'status'   => 'success',
             'message'  => 'Fichier généré avec succès',]);
-    }
+    }*/
 }
