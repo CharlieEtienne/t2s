@@ -3,6 +3,15 @@
         setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true);
     }
     require_once 'get_voices.php';
+    
+    //Start the session
+    session_start();
+    //Require the class
+    require('formkey.class.php');
+    //Start the class
+    $formKey = new formKey();
+    
+    $error = 'No error';
 ?>
 
 <!DOCTYPE html>
@@ -148,6 +157,7 @@
                     </tbody>
                 </table>
             </div>
+            <?php $formKey->outputKey(); ?>
         </form>
 
 
