@@ -150,6 +150,19 @@ function synthesize_text( $text ) {
     return compact('relative_user_dir', 'relative_filepath', 'text');
 }
 
+//Is request?
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Validate the form key   
+    
+    if(!isset($_POST['form_key']) || !$formKey->validate()){
+        echo json_encode([
+            'status'  => 'error',
+            'message' => 'Erreur de validation du formulaire'
+        ]);
+        die();
+    }
+}
+
 if( isset($_POST[ 'text' ]) ) {
     $result = synthesize_text($_POST[ 'text' ]);
     echo json_encode([
@@ -168,14 +181,3 @@ else {
                      ]);
 }
 
-//Is request?
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //Validate the form key   
-    
-    if(!isset($_POST['form_key']) || !$formKey->validate()){
-        echo json_encode([
-            'status'  => 'error',
-            'message' => 'Erreur de validation du formulaire'
-        ]);
-    }
-}
