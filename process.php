@@ -7,6 +7,11 @@ ob_start();
 
 require __DIR__ . '/vendor/autoload.php';
 
+session_start();
+require('formkey.class.php');
+$formKey = new formKey();
+$error = 'No error';
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -166,16 +171,11 @@ else {
 //Is request?
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //Validate the form key   
-    /*
+    
     if(!isset($_POST['form_key']) || !$formKey->validate()){
         echo json_encode([
             'status'  => 'error',
             'message' => 'Erreur de validation du formulaire'
         ]);
     }
-    else{
-        echo json_encode([
-            'status'   => 'success',
-            'message'  => 'Fichier généré avec succès',]);
-    }*/
 }
