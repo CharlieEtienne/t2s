@@ -39,6 +39,11 @@ function synthesize_text( $text ) {
     $is_multiple       = false;
     $overwrite         = $_POST[ 'overwrite' ] ?? 'on';
 
+
+    //Filtering POST request in order to secure it
+    $_POST['text']=filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
     $voice = ( new VoiceSelectionParams() )
