@@ -41,7 +41,8 @@ function synthesize_text( $text ) {
 
 
     //Filtering POST request in order to secure it
-    $_POST['text']=filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $_POST['text']     = filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $_POST['filename'] = filter_var($_POST['filename'], FILTER_SANITIZE_STRING);
 
 
     // note: the voice can also be specified by name
