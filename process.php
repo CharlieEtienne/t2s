@@ -27,12 +27,12 @@ function synthesize_text( $text ) {
     $client = new TextToSpeechClient();
 
     $voice_gender      = $_POST[ 'voice-gender' ] ?? '1';
-    $voice_name        = $_POST[ 'voice-name' ] ?? 'fr-FR-Wavenet-D';
+    $voice_name        = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
     $language          = substr($voice_name, 0, 5);
     $root              = __DIR__ . '/audio/';
     $directory         = $_COOKIE[ 't2s' ] ?? uniqid();
     $user_dir          = $root . $directory;
-    $filename          = !empty($_POST[ 'filename' ]) ? $_POST[ 'filename' ] : uniqid();
+    $filename          = !empty(filter_var($_POST['filename'], FILTER_SANITIZE_STRING)) ? filter_var($_POST['filename'], FILTER_SANITIZE_STRING) : uniqid();
     $filepath          = $user_dir . '/' . $filename . '.mp3';
     $relative_user_dir = '/audio/' . $directory;
     $relative_filepath = $relative_user_dir . '/' . $filename . '.mp3';
@@ -172,6 +172,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 if( isset($_POST[ 'text' ]) ) {
     $result = synthesize_text($_POST[ 'text' ]);
     echo json_encode([
+                         'POST' => $_POST,
                          'status'   => 'success',
                          'message'  => 'Fichier généré avec succès',
                          'user_dir' => $result[ 'relative_user_dir' ],
