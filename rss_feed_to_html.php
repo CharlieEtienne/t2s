@@ -73,7 +73,7 @@ function get_rss_feed_as_html(
         if( $show_description ) {
             $description = $feed[ $x ][ 'desc' ];
             // clean up
-            $description = strip_tags(preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "$1$3", $description), ["<h3>", '<code>', '<strong>', '<i>', '<em>', '<b>','<ul>', '<li>']);
+            $description = strip_tags(preg_replace('/(<(script|style)\b[^>]*>).*?(<\/\2>)/s', "$1$3", $description), ["<h3>", '<code>', '<strong>', '<i>', '<em>', '<b>','<ul>', '<li>', '<a>']);
             // add classes for release type
             foreach( ['breaking', 'changed', 'deprecated', 'feature', 'fixed', 'security', 'announcement', 'issue'] as $type ) {
                 $description = str_replace('<h3>' . ucfirst($type) . '</h3>', '<h4 class="release-' . $type . '">' . "" . '</h4>', $description);
