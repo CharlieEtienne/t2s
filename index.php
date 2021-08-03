@@ -165,7 +165,7 @@
                         <div class="swiper-wrapper">
                             <!-- Slides -->
                             <?php
-                            foreach( get_rss_feed_as_html('https://cloud.google.com/feeds/tts-release-notes.xml', 3, true, 50, 'array') as $slide ) {
+                            foreach( get_rss_feed_as_html('https://cloud.google.com/feeds/tts-release-notes.xml', 3, true, 50) as $slide ) {
                                 ?>
                                 <div class="swiper-slide">
                                     <div class="slide-content">
