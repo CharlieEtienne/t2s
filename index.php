@@ -3,6 +3,7 @@
         setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true);
     }
     require_once 'get_voices.php';
+    require_once 'rss_feed_to_html.php';
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +30,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/assets/css/lity.min.css">
     <link rel="stylesheet" href="/assets/css/quill.snow.css">
     <link rel="stylesheet" href="assets/css/richVoiceEditor.css">
@@ -150,6 +152,44 @@
             </div>
         </form>
 
+        <div id="release-notes" class="release-notes mb-4">
+            <div class="row release-notes-header">
+                <div class="col-6"><h2 class="release-notes-title">Release notes</h2></div>
+                <div class="col-6 align-self-center text-right"><a class=" release-notes-link" href="https://cloud.google.com/text-to-speech/docs/release-notes" target="_blank">Voir sur cloud.google.com <i class="fas fa-external-link-alt"></i></a></div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="padding-left: 9px; padding-right: 9px">
+                    <!-- Slider main container -->
+                    <div class="swiper-container">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <?php
+                            foreach( get_rss_feed_as_html('https://cloud.google.com/feeds/tts-release-notes.xml', 3, true, 50, 'array') as $slide ) {
+                                ?>
+                                <div class="swiper-slide">
+                                    <div class="slide-content">
+                                        <?php echo $slide ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination"></div>
+
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
 
         <p class="mt-3 mb-3 text-muted text-center copyright">Made with <i class="far fa-heart text-danger"></i> by <a href="https://github.com/CharlieEtienne" target="_blank">Charlie Etienne</a></p>
 
@@ -160,6 +200,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/js/highlight.min.js"></script>
     <script src="/assets/js/lity.min.js"></script>
     <script src="/assets/js/quill.js"></script>

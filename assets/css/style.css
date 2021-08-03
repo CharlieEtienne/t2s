@@ -2,6 +2,7 @@
     --main-bg: hsl(229, 45%, 98%);
     --text-color: hsl(229, 18%, 16%);
     --link-color: hsl(250, 62%, 56%);
+    --swiper-theme-color: hsl(250, 62%, 56%);
     --link-color-hover: hsl(250, 62%, 66%);
     --code-tag-bg: hsl(229, 45%, 93%);
 }
@@ -258,6 +259,9 @@ code {
     border-radius: 5px;
     color: var(--link-color);
 }
+.text-normal {
+    font-size: 16px;
+}
 #shortcuts-popup {
     background: var(--main-bg);
     max-width: 100%;
@@ -282,9 +286,145 @@ code {
     color: var(--link-color-hover);
 }
 
+/* RSS feed */
+.fullscreen .release-notes {
+    display: none;
+}
+.swiper-container {
+    min-height: 242px;
+}
+.swiper-slide {
+    padding: 6px;
+}
+.swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    left: 16px;
+}
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+    right: 16px;
+}
+.slide-content {
+    min-height: 230px;
+    padding: 25px 80px 40px;
+    border-radius: .25rem;
+    box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.25);
+}
+.feed-lists {
+    padding: 0;
+}
+.feed-item {
+    list-style-type: none;
+    margin-top: 40px;
+}
+.feed-description {
+    margin-left: 110px;
+}
+.release-breaking, .release-changed, .release-deprecated, .release-feature, .release-fixed, .release-security, .release-announcement, .release-issue {
+    position: relative;
+    margin-top: 15px;
+}
+.release-breaking::before,
+.release-changed::before,
+.release-deprecated::before,
+.release-feature::before,
+.release-fixed::before,
+.release-security::before,
+.release-announcement::before,
+.release-issue::before {
+    border-radius: 14px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    height: 28px;
+    left: -110px;
+    line-height: 28px;
+    margin-right: 10px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: -3px;
+    width: 100px;
+}
+
+@media screen and (max-width: 767px){
+    .feed-description {
+        margin-left: 0;
+    }
+    .release-breaking::before,
+    .release-changed::before,
+    .release-deprecated::before,
+    .release-feature::before,
+    .release-fixed::before,
+    .release-security::before,
+    .release-announcement::before,
+    .release-issue::before {
+        top: -35px;
+        left: 0;
+    }
+    .release-feature {
+        margin-top: 50px;
+    }
+    .slide-content {
+        padding: 25px 60px 40px;
+    }
+}
+
+/* Colours for each type of changelog entry. */
+
+.release-breaking::before {
+    content: "breaking";
+    background-color: #db4437;
+    color: #fff;
+}
+
+.release-changed::before {
+    content: "changed";
+    background-color: #f4b400;
+    color: #fff;
+}
+
+.release-deprecated::before {
+    content: "deprecated";
+    background-color: #db4437;
+    color: #fff;
+}
+
+.release-feature::before {
+    content: "feature";
+    background-color: #0f9d58;
+    color: #fff;
+}
+
+.release-fixed::before {
+    content: "fixed";
+    background-color: #4285f4;
+    color: #fff;
+}
+
+.release-issue::before {
+    content: "issue";
+    background-color: #db4437;
+    color: #fff;
+}
+
+.release-security::before {
+    content: "security";
+    background-color: #ff6e40;
+    color: #fff;
+}
+
+.release-announcement::before {
+    content: "announcement";
+    background-color: #ffbc00;
+    color: #fff;
+    font-size: 11px;
+}
+
 @media (prefers-color-scheme: light) {
     .main-title{
         color: hsl(229, 18%, 31%);
+    }
+    .slide-content {
+        background: #fff;
     }
     .form-control{
         background: #fff;
@@ -308,6 +448,9 @@ code {
     }
     .main-title{
         color: hsl(229, 18%, 65%);
+    }
+    .slide-content {
+        background: hsl(229, 21%, 19%);
     }
     .form-control{
         background: hsl(229, 21%, 19%);
