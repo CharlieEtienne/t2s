@@ -172,7 +172,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 if( isset($_POST[ 'text' ]) ) {
     $result = synthesize_text($_POST[ 'text' ]);
     echo json_encode([
-                         'POST' => $_POST,
                          'status'   => 'success',
                          'message'  => 'Fichier généré avec succès',
                          'user_dir' => $result[ 'relative_user_dir' ],
