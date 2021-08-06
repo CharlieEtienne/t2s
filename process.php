@@ -17,7 +17,6 @@ $dotenv->load();
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
 use Google\Cloud\TextToSpeech\V1\AudioEncoding;
-use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
 use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
@@ -26,7 +25,6 @@ function synthesize_text( $text ) {
     // create client object
     $client = new TextToSpeechClient();
 
-    $voice_gender      = $_POST[ 'voice-gender' ] ?? '1';
     $voice_name        = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
     $language          = substr($voice_name, 0, 5);
     $root              = __DIR__ . '/audio/';
@@ -49,8 +47,7 @@ function synthesize_text( $text ) {
     // names of voices can be retrieved with $client->listVoices()
     $voice = ( new VoiceSelectionParams() )
         ->setLanguageCode($language)
-        ->setName($voice_name)
-        ->setSsmlGender($voice_gender);
+        ->setName($voice_name);
 
     /**
      * We choose "LINEAR16" for encoding since it sounds
