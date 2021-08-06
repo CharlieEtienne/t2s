@@ -28,7 +28,7 @@ function synthesize_text( $text ) {
     $voice_name         = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
     $language           = substr($voice_name, 0, 5);
     $root               = __DIR__ . '/audio/';
-    $directory          = htmlspecialchars($_COOKIE[ 't2s' ]) ?? uniqid();
+    $directory          = !empty($_COOKIE[ 't2s' ]) ? htmlspecialchars($_COOKIE[ 't2s' ]) : uniqid();
     $user_dir           = $root . $directory;
     $sanitized_filename = filter_var($_POST[ 'filename' ], FILTER_SANITIZE_STRING);
     $filename           = !empty($sanitized_filename) ? $sanitized_filename : uniqid();
@@ -36,7 +36,7 @@ function synthesize_text( $text ) {
     $relative_user_dir  = '/audio/' . $directory;
     $relative_filepath  = $relative_user_dir . '/' . $filename . '.mp3';
     $is_multiple        = false;
-    $overwrite          = htmlspecialchars($_POST[ 'overwrite' ]) ?? 'on';
+    $overwrite          = !empty($_POST[ 'overwrite' ]) ? htmlspecialchars($_POST[ 'overwrite' ]) : 'on';
 
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
@@ -162,15 +162,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if( isset($_POST[ 'text' ]) ) {
-    $sanitized_text = filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $sanitized_text = strip_tags($_POST['text'], ['<p>', '<emphasis>', '<prosody>', '<say-as>', '<break>', '<br>']);
     $result = synthesize_text($sanitized_text);
     echo json_encode([
-                         'status'   => 'success',
-                         'message'  => 'Fichier généré avec succès',
-                         'user_dir' => $result[ 'relative_user_dir' ],
-                         'filepath' => $result[ 'relative_filepath' ],
+                         'status'        => 'success',
+                         'message'       => 'Fichier généré avec succès',
+                         'user_dir'      => $result[ 'relative_user_dir' ],
+                         'filepath'      => $result[ 'relative_filepath' ],
                          'original_text' => $sanitized_text,
-                         'output_text' => $result[ 'text' ],
+                         'output_text'   => $result[ 'text' ],
                      ]);
 }
 else {

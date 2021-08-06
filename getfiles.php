@@ -14,7 +14,7 @@ if (!isset($_COOKIE['t2s'])) {
 }
 
 $root               = __DIR__ . '/audio/';
-$directory          = $_COOKIE['t2s'];
+$directory          = htmlspecialchars($_COOKIE['t2s']);
 $user_dir           = $root . $directory;
 $relative_user_dir  = '/audio/' . $directory . '/';
 
