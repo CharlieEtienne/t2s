@@ -8,9 +8,9 @@ ob_start();
 require __DIR__ . '/vendor/autoload.php';
 
 session_start();
-require('formkey.class.php');
+require( 'formkey.class.php' );
 $formKey = new formKey();
-$error = 'No error';
+$error   = 'No error';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -79,12 +79,12 @@ function synthesize_text( $text ) {
     /* Check if multiple : we detect line breaks and split string into array */
     if( isset($_POST[ 'multiple' ], $_POST[ 'download' ]) && $_POST[ 'multiple' ] == 'on' && $_POST[ 'download' ] == 1 ) {
 //        $text = str_replace('"', '', $text);
-        $text = rtrim($text, '&#13;&#10;');
-        $text = rtrim($text, '"');
-        $text = ltrim($text, '"');
-        $text = str_replace('<p>', "", $text);
-        $text = stripslashes (str_replace('</p>', "\r\n", $text));
-        $text = rtrim($text, "\r\n");
+        $text  = rtrim($text, '&#13;&#10;');
+        $text  = rtrim($text, '"');
+        $text  = ltrim($text, '"');
+        $text  = str_replace('<p>', "", $text);
+        $text  = stripslashes(str_replace('</p>', "\r\n", $text));
+        $text  = rtrim($text, "\r\n");
         $array = preg_split('/\r\n|[\r\n]/', $text);
         if( is_array($array) && count($array) > 1 ) {
             $is_multiple = true;
@@ -100,7 +100,6 @@ function synthesize_text( $text ) {
         $relative_filepath   = $relative_user_dir . '/' . $zipfilename;
         $tempdir             = uniqid();
         $tempdirabsolutepath = $user_dir . '/' . $tempdir;
-        $tempdirrelativepath = $tempdir;
 
         // Make a temp folder
         mkdir($tempdirabsolutepath, 0777, true);
@@ -108,8 +107,7 @@ function synthesize_text( $text ) {
         // Create a zip archive
         $zip->open($zipfilepath, ZipArchive::CREATE);
 
-        foreach( $array as $key => $value ) {
-            $number       = (string)$i;
+        foreach( $array as $value ) {
             $name         = $original_name . '.' . $i . ".mp3";
             $filepath     = $tempdirabsolutepath . '/' . $name;
             $input_text   = ( new SynthesisInput() )->setSsml('<speak>' . $value . '</speak>');
@@ -131,10 +129,10 @@ function synthesize_text( $text ) {
         rmdir($tempdirabsolutepath);
     }
     else { // We don't want to make multiple audio file, so let's just create one.
-        $text = rtrim($text, '&#13;&#10;');
-        $text = rtrim($text, '"');
-        $text = ltrim($text, '"');
-        $text = stripslashes ( str_replace('&#13;&#10;', "", $text));
+        $text         = rtrim($text, '&#13;&#10;');
+        $text         = rtrim($text, '"');
+        $text         = ltrim($text, '"');
+        $text         = stripslashes(str_replace('&#13;&#10;', "", $text));
         $input_text   = ( new SynthesisInput() )->setSsml('<speak>' . $text . '</speak>');
         $response     = $client->synthesizeSpeech($input_text, $voice, $audioConfig);
         $audioContent = $response->getAudioContent();
@@ -149,21 +147,21 @@ function synthesize_text( $text ) {
 }
 
 //Is request?
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
     //Validate the form key   
-    
-    if(!isset($_POST['form_key']) || !$formKey->validate()){
+
+    if( !isset($_POST[ 'form_key' ]) || !$formKey->validate() ) {
         echo json_encode([
-            'status'  => 'error',
-            'message' => 'Erreur de validation du formulaire'
-        ]);
+                             'status'  => 'error',
+                             'message' => 'Erreur de validation du formulaire'
+                         ]);
         die();
     }
 }
 
 if( isset($_POST[ 'text' ]) ) {
-    $sanitized_text = strip_tags($_POST['text'], ['<p>', '<emphasis>', '<prosody>', '<say-as>', '<break>', '<br>']);
-    $result = synthesize_text($sanitized_text);
+    $sanitized_text = strip_tags($_POST[ 'text' ], [ '<p>', '<emphasis>', '<prosody>', '<say-as>', '<break>', '<br>' ]);
+    $result         = synthesize_text($sanitized_text);
     echo json_encode([
                          'status'        => 'success',
                          'message'       => 'Fichier généré avec succès',
