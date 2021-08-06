@@ -25,23 +25,18 @@ function synthesize_text( $text ) {
     // create client object
     $client = new TextToSpeechClient();
 
-    $voice_name        = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
-    $language          = substr($voice_name, 0, 5);
-    $root              = __DIR__ . '/audio/';
-    $directory         = $_COOKIE[ 't2s' ] ?? uniqid();
-    $user_dir          = $root . $directory;
-    $filename          = !empty(filter_var($_POST['filename'], FILTER_SANITIZE_STRING)) ? filter_var($_POST['filename'], FILTER_SANITIZE_STRING) : uniqid();
-    $filepath          = $user_dir . '/' . $filename . '.mp3';
-    $relative_user_dir = '/audio/' . $directory;
-    $relative_filepath = $relative_user_dir . '/' . $filename . '.mp3';
-    $is_multiple       = false;
-    $overwrite         = $_POST[ 'overwrite' ] ?? 'on';
-
-
-    //Filtering POST request in order to secure it
-    $_POST['text']     = filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
-    $_POST['filename'] = filter_var($_POST['filename'], FILTER_SANITIZE_STRING);
-
+    $voice_name         = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
+    $language           = substr($voice_name, 0, 5);
+    $root               = __DIR__ . '/audio/';
+    $directory          = htmlspecialchars($_COOKIE[ 't2s' ]) ?? uniqid();
+    $user_dir           = $root . $directory;
+    $sanitized_filename = filter_var($_POST[ 'filename' ], FILTER_SANITIZE_STRING);
+    $filename           = !empty($sanitized_filename) ? $sanitized_filename : uniqid();
+    $filepath           = $user_dir . '/' . $filename . '.mp3';
+    $relative_user_dir  = '/audio/' . $directory;
+    $relative_filepath  = $relative_user_dir . '/' . $filename . '.mp3';
+    $is_multiple        = false;
+    $overwrite          = htmlspecialchars($_POST[ 'overwrite' ]) ?? 'on';
 
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
@@ -167,13 +162,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if( isset($_POST[ 'text' ]) ) {
-    $result = synthesize_text($_POST[ 'text' ]);
+    $sanitized_text = filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $result = synthesize_text($sanitized_text);
     echo json_encode([
                          'status'   => 'success',
                          'message'  => 'Fichier généré avec succès',
                          'user_dir' => $result[ 'relative_user_dir' ],
                          'filepath' => $result[ 'relative_filepath' ],
-                         'original_text' => $_POST[ 'text' ],
+                         'original_text' => $sanitized_text,
                          'output_text' => $result[ 'text' ],
                      ]);
 }
