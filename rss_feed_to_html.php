@@ -54,10 +54,6 @@ function get_rss_feed_as_html(
             'desc'    => $node->getElementsByTagName('content')->item(0)->nodeValue,
             'link'    => $node->getElementsByTagName('link')->item(0)->getAttribute('href'),
         );
-        $content = $node->getElementsByTagName('encoded'); // <content:encoded>
-        if( $content->length > 0 ) {
-            $item[ 'content' ] = $content->item(0)->nodeValue;
-        }
         array_push($feed, $item);
     }
     // real good count
