@@ -360,3 +360,25 @@ document.getElementById("codeEditor").addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
     delete keysPressed[event.key];
 });
+
+const swiper = new Swiper('.swiper-container', {
+    // Optional parameters
+    loop: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: true,
+    },
+    spaceBetween: 30,
+    autoHeight: true,
+
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    }
+});
