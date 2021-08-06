@@ -7,12 +7,16 @@ ob_start();
 
 require __DIR__ . '/vendor/autoload.php';
 
+session_start();
+require('formkey.class.php');
+$formKey = new formKey();
+$error = 'No error';
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
 use Google\Cloud\TextToSpeech\V1\AudioEncoding;
-use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
 use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
@@ -21,25 +25,24 @@ function synthesize_text( $text ) {
     // create client object
     $client = new TextToSpeechClient();
 
-    $voice_gender      = $_POST[ 'voice-gender' ] ?? '1';
-    $voice_name        = $_POST[ 'voice-name' ] ?? 'fr-FR-Wavenet-D';
-    $language          = substr($voice_name, 0, 5);
-    $root              = __DIR__ . '/audio/';
-    $directory         = $_COOKIE[ 't2s' ] ?? uniqid();
-    $user_dir          = $root . $directory;
-    $filename          = !empty($_POST[ 'filename' ]) ? $_POST[ 'filename' ] : uniqid();
-    $filepath          = $user_dir . '/' . $filename . '.mp3';
-    $relative_user_dir = '/audio/' . $directory;
-    $relative_filepath = $relative_user_dir . '/' . $filename . '.mp3';
-    $is_multiple       = false;
-    $overwrite         = $_POST[ 'overwrite' ] ?? 'on';
+    $voice_name         = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
+    $language           = substr($voice_name, 0, 5);
+    $root               = __DIR__ . '/audio/';
+    $directory          = htmlspecialchars($_COOKIE[ 't2s' ]) ?? uniqid();
+    $user_dir           = $root . $directory;
+    $sanitized_filename = filter_var($_POST[ 'filename' ], FILTER_SANITIZE_STRING);
+    $filename           = !empty($sanitized_filename) ? $sanitized_filename : uniqid();
+    $filepath           = $user_dir . '/' . $filename . '.mp3';
+    $relative_user_dir  = '/audio/' . $directory;
+    $relative_filepath  = $relative_user_dir . '/' . $filename . '.mp3';
+    $is_multiple        = false;
+    $overwrite          = htmlspecialchars($_POST[ 'overwrite' ]) ?? 'on';
 
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
     $voice = ( new VoiceSelectionParams() )
         ->setLanguageCode($language)
-        ->setName($voice_name)
-        ->setSsmlGender($voice_gender);
+        ->setName($voice_name);
 
     /**
      * We choose "LINEAR16" for encoding since it sounds
@@ -145,14 +148,28 @@ function synthesize_text( $text ) {
     return compact('relative_user_dir', 'relative_filepath', 'text');
 }
 
+//Is request?
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Validate the form key   
+    
+    if(!isset($_POST['form_key']) || !$formKey->validate()){
+        echo json_encode([
+            'status'  => 'error',
+            'message' => 'Erreur de validation du formulaire'
+        ]);
+        die();
+    }
+}
+
 if( isset($_POST[ 'text' ]) ) {
-    $result = synthesize_text($_POST[ 'text' ]);
+    $sanitized_text = filter_var($_POST['text'], FILTER_SANITIZE_SPECIAL_CHARS);
+    $result = synthesize_text($sanitized_text);
     echo json_encode([
                          'status'   => 'success',
                          'message'  => 'Fichier généré avec succès',
                          'user_dir' => $result[ 'relative_user_dir' ],
                          'filepath' => $result[ 'relative_filepath' ],
-                         'original_text' => $_POST[ 'text' ],
+                         'original_text' => $sanitized_text,
                          'output_text' => $result[ 'text' ],
                      ]);
 }
@@ -162,3 +179,4 @@ else {
                          'message' => 'Le texte est absent'
                      ]);
 }
+
