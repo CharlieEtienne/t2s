@@ -2,3 +2,6 @@
 /vendor
 /audio/*
 /cache
+.env
+.htaccess
+*credentials.json
