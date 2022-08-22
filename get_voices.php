@@ -39,7 +39,9 @@ function get_voices( array $languages = [ 'fr-FR', 'en-US' ] ) {
                     }
                 }
             }
-            asort($voices[$language]);
+	        if( isset($voices[ $language ]) && is_array($voices[ $language ]) ) {
+		        asort($voices[ $language ]);
+	        }
         }
 
         return array_merge(...array_values($voices));
