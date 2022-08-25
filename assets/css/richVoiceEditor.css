@@ -277,6 +277,6 @@ say-as[interpret-as="spell-out"]:before {
     overflow: auto;
 }
 
-.ql-editor {
-    white-space: normal!important;
-}
+/*.ql-editor {*/
+/*    white-space: normal!important;*/
+/*}*/
