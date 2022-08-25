@@ -17,15 +17,14 @@
     --rate_pitch_gradient: linear-gradient(0deg, var(--rate_bg_color) 50%, var(--pitch_bg_color) 50%);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg_hsl_lightness: 50%;
-        --rate_bg_color:hsla(33, 100%, var(--bg_hsl_lightness), 0.2);
-        --pitch_bg_color:hsla(272, 100%, 60%, 0.2);
-        --emphasis_bg_color:hsla(189, 100%, var(--bg_hsl_lightness), 0.2);
-        --spellout_bg_color:hsla(156, 100%, var(--bg_hsl_lightness), 0.2);
-    }
+:root body.dark {
+    --bg_hsl_lightness: 50%;
+    --rate_bg_color:hsla(33, 100%, var(--bg_hsl_lightness), 0.2);
+    --pitch_bg_color:hsla(272, 100%, 60%, 0.2);
+    --emphasis_bg_color:hsla(189, 100%, var(--bg_hsl_lightness), 0.2);
+    --spellout_bg_color:hsla(156, 100%, var(--bg_hsl_lightness), 0.2);
 }
+
 
 prosody, emphasis, say-as {
     padding: 0 3px;

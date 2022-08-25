@@ -1,3 +1,11 @@
+:root body.dark {
+    --main-bg: hsl(229, 21%, 16%);
+    --text-color: hsl(229, 18%, 72%);
+    --link-color: hsl(250, 62%, 76%);
+    --link-color-hover: hsl(250, 62%, 86%);
+    --code-tag-bg: hsl(229, 21%, 21%);
+}
+
 :root{
     --main-bg: hsl(229, 45%, 98%);
     --text-color: hsl(229, 18%, 16%);
@@ -39,6 +47,39 @@ body {
 }
 button.disabled {
     cursor:default;
+}
+input[type="radio"] {
+    display: none;
+}
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 1.3rem;
+    margin-left: 10px;
+}
+input[type="radio"] + label::before,
+input[type="radio"] + label::after {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    content:'';
+    border-radius: 100%;
+}
+input[type="radio"] + label::before {
+    bottom: 4px;
+    left: 0;
+    border: 1px solid #3e28a9;
+    background-color: #3e28a9;
+    width: 16px;
+    height: 16px;
+}
+input[type="radio"] + label::after {
+    bottom: 7px;
+    left: 3px;
+    width: 10px;
+    height: 10px;
+}
+input[type="radio"]:checked + label::after {
+    background-color: #fff;
 }
 .custom-control-input:checked~.custom-control-label::before{
     background-color:#3e28a9;
@@ -422,122 +463,113 @@ code {
     font-size: 11px;
 }
 
-@media (prefers-color-scheme: light) {
-    .main-title{
-        color: hsl(229, 18%, 31%);
-    }
-    .slide-content {
-        background: #fff;
-    }
-    .form-control{
-        background: #fff;
-        color: hsl(229, 18%, 31%);
-    }
-    audio {
-        border: 1px solid hsl(210, 14%, 83%);
-    }
-    audio::-webkit-media-controls-panel {
-        background: hsl(249, 47%, 97%);
-    }
+
+body:not(.dark) .main-title{
+    color: hsl(229, 18%, 31%);
+}
+body:not(.dark) .slide-content {
+    background: #fff;
+}
+body:not(.dark) .form-control{
+    background: #fff;
+    color: hsl(229, 18%, 31%);
+}
+body:not(.dark) audio {
+    border: 1px solid hsl(210, 14%, 83%);
+}
+body:not(.dark) audio::-webkit-media-controls-panel {
+    background: hsl(249, 47%, 97%);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root{
-        --main-bg: hsl(229, 21%, 16%);
-        --text-color: hsl(229, 18%, 72%);
-        --link-color: hsl(250, 62%, 76%);
-        --link-color-hover: hsl(250, 62%, 86%);
-        --code-tag-bg: hsl(229, 21%, 21%);
-    }
-    .main-title{
-        color: hsl(229, 18%, 65%);
-    }
-    .slide-content {
-        background: hsl(229, 21%, 19%);
-    }
-    .form-control{
-        background: hsl(229, 21%, 19%);
-        color: hsl(229, 18%, 65%);
-        border-color: hsl(229, 21%, 32%);
-    }
-    .form-control:focus {
-        background: hsl(229, 21%, 23%);
-        color: hsl(229, 18%, 92%);
-        border-color: hsla(250, 100%, 74%, 0.1);
-        box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
-    }
-    .ql-editor:focus {
-        border-color: hsla(250, 100%, 74%, 0.1);
-        box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
-    }
-    audio:focus, audio:focus-visible {
-        border-color: hsla(250, 100%, 74%, 0.1);
-        box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
-    }
-    .custom-control-label::before{
-        background: hsl(229, 21%, 26%);
-        border-color: hsl(229, 21%, 32%);
-    }
-    .input-group-text {
-        color: hsl(229, 18%, 50%);
-        background-color: hsl(229, 21%, 23%);
-        border-color: hsl(229, 21%, 32%);
-    }
-    .text-muted {
-        color: hsl(229, 18%, 46%)!important;
-    }
-    .ql-toolbar.ql-snow {
-        background: hsl(229, 21%, 23%);
-    }
-    .ql-toolbar.ql-snow + .ql-container.ql-snow {
-        color: hsl(229, 18%, 79%);
-    }
-    .ql-toolbar.ql-snow,
-    .ql-container.ql-snow {
-        border-color: hsl(229, 21%, 32%);
-    }
-    .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button,
-    .ql-snow .ql-picker {
-        color: hsl(229, 18%, 65%);
-    }
-    .ql-snow .ql-stroke {
-        stroke: hsl(229, 18%, 65%);
-    }
-    .ql-snow .ql-picker.ql-expanded .ql-picker-label {
-        color: hsl(229, 18%, 50%);
-    }
-    .ql-snow .ql-picker-options {
-        background: hsl(229, 18%, 29%);
-    }
-    .text-info {
-        color: hsl(250, 62%, 61%) !important;
-    }
-    .btn-link {
-        color: hsl(250, 62%, 61%);
-    }
-    .btn-link:hover {
-        color: hsl(250, 62%, 71%);
-    }
-    .custom-control-input:not(:disabled):active~.custom-control-label::before {
-        background-color: hsl(229, 21%, 32%);
-        border-color: hsl(229, 21%, 32%);
-    }
-    .custom-control-label::before {
-        border-color: hsl(229, 21%, 32%);
-    }
 
-    .multiple_files .ql-editor p {
-        border-color: hsl(250, 100%, 74%);
-    }
-    .multiple_files .ql-editor p:before {
-        color: hsl(250, 100%, 80%);
-        border-color: hsl(250, 100%, 74%);
-        background: hsla(250, 75%, 50%, 0.2);
-    }
+body.dark .main-title{
+    color: hsl(229, 18%, 65%);
+}
+body.dark .slide-content {
+    background: hsl(229, 21%, 19%);
+}
+body.dark .form-control{
+    background: hsl(229, 21%, 19%);
+    color: hsl(229, 18%, 65%);
+    border-color: hsl(229, 21%, 32%);
+}
+body.dark .form-control:focus {
+    background: hsl(229, 21%, 23%);
+    color: hsl(229, 18%, 92%);
+    border-color: hsla(250, 100%, 74%, 0.1);
+    box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
+}
+body.dark .ql-editor:focus {
+    border-color: hsla(250, 100%, 74%, 0.1);
+    box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
+}
+body.dark audio:focus, body.dark audio:focus-visible {
+    border-color: hsla(250, 100%, 74%, 0.1);
+    box-shadow: 0 0 0 0.2rem hsla(250, 100%, 74%, 0.25);
+}
+body.dark .custom-control-label::before{
+    background: hsl(229, 21%, 26%);
+    border-color: hsl(229, 21%, 32%);
+}
+body.dark .input-group-text {
+    color: hsl(229, 18%, 50%);
+    background-color: hsl(229, 21%, 23%);
+    border-color: hsl(229, 21%, 32%);
+}
+body.dark .text-muted {
+    color: hsl(229, 18%, 46%)!important;
+}
+body.dark .ql-toolbar.ql-snow {
+    background: hsl(229, 21%, 23%);
+}
+body.dark .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    color: hsl(229, 18%, 79%);
+}
+body.dark .ql-toolbar.ql-snow,
+body.dark .ql-container.ql-snow {
+    border-color: hsl(229, 21%, 32%);
+}
+body.dark .ql-snow.ql-toolbar button, body.dark .ql-snow .ql-toolbar button,
+body.dark .ql-snow .ql-picker {
+    color: hsl(229, 18%, 65%);
+}
+body.dark .ql-snow .ql-stroke {
+    stroke: hsl(229, 18%, 65%);
+}
+body.dark .ql-snow .ql-picker.ql-expanded .ql-picker-label {
+    color: hsl(229, 18%, 50%);
+}
+body.dark .ql-snow .ql-picker-options {
+    background: hsl(229, 18%, 29%);
+}
+body.dark .text-info {
+    color: hsl(250, 62%, 61%) !important;
+}
+body.dark .btn-link {
+    color: hsl(250, 62%, 61%);
+}
+body.dark .btn-link:hover {
+    color: hsl(250, 62%, 71%);
+}
+body.dark .custom-control-input:not(:disabled):active~.custom-control-label::before {
+    background-color: hsl(229, 21%, 32%);
+    border-color: hsl(229, 21%, 32%);
+}
+body.dark .custom-control-label::before {
+    border-color: hsl(229, 21%, 32%);
+}
 
-    audio::-webkit-media-controls-panel {
-        background: #fff;
-        filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
-        -webkit-filter: invert(83%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
-    }
+body.dark.multiple_files .ql-editor p {
+    border-color: hsl(250, 100%, 74%);
+}
+body.dark.multiple_files .ql-editor p:before {
+    color: hsl(250, 100%, 80%);
+    border-color: hsl(250, 100%, 74%);
+    background: hsla(250, 75%, 50%, 0.2);
+}
+
+body.dark audio::-webkit-media-controls-panel {
+    background: #000;
+    filter: invert(17%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(12%) contrast(91%);
+    -webkit-filter: invert(17%) sepia(9%) saturate(1960%) hue-rotate(191deg) brightness(99%) contrast(91%);
 }

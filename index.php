@@ -36,6 +36,7 @@
     <link rel="manifest" href="manifest.json">
 
     <!--  STYLESHEETS  -->
+	<style id="scheme"></style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
@@ -105,6 +106,16 @@
                                 <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top" title="En activant cette option, si un nom de fichier est saisi, il sera conservé tel quel et remplacera un éventuel fichier portant le même nom. En désactivant cette option, les fichiers auront la forme audio(x).mp3"></i>
                             </label>
                         </div>
+
+	                    <div class="col-md-12 mt-3">
+		                    <span>Theme:</span>
+		                    <input type="radio" class="" name="theme" value="auto" id="theme--auto" checked="checked">
+		                    <label class="" for="theme--auto">Auto</label>
+		                    <input type="radio" class="" name="theme" value="light" id="theme--light">
+		                    <label class="" for="theme--light">Light</label>
+		                    <input type="radio" class="" name="theme" value="dark" id="theme--dark">
+		                    <label class="" for="theme--dark">Dark</label>
+	                    </div>
 
                         <a href="#shortcuts-popup"
                            class="btn-link mt-2 text-decoration-none"

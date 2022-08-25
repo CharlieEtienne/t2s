@@ -107,6 +107,18 @@ $(document).ready(function(){
     }).on('hide.bs.collapse', function () {
         $('.fullscreen #text').css('height', 'calc(100vh - 235px)');
     });
+
+    let currentTheme = localStorage.getItem("scheme");
+    if(currentTheme){
+        if ( document.getElementById( 'theme--' + currentTheme )){
+            document.getElementById( 'theme--' + currentTheme).checked = true;
+        }
+    }
+    setTheme();
+
+    $('input[name="theme"]').on( "change", () => {
+        setTheme();
+    });
 });
 
 filename.on('focus', function (){
@@ -387,3 +399,21 @@ const swiper = new Swiper('.swiper-container', {
         prevEl: '.swiper-button-prev',
     }
 });
+
+// DARK/LIGHT THEME
+function setTheme(){
+    let theme = document.querySelector('input[name="theme"]:checked').value;
+
+    if ( (window.matchMedia( "(prefers-color-scheme: dark)" ).matches && theme === 'auto') || theme === 'dark' ) {
+
+        document.getElementById( "scheme" ).innerHTML = ":root{color-scheme:dark}";
+        document.body.classList.add( "dark" );
+        localStorage.setItem( "scheme", theme );
+    }
+    else {
+        document.getElementById( "scheme" ).innerHTML = ":root{color-scheme:light}";
+        document.body.classList.remove( "dark" );
+        localStorage.setItem( "scheme", theme );
+    }
+
+}
