@@ -290,6 +290,9 @@ code {
 .fullscreen .release-notes {
     display: none;
 }
+#release-notes {
+    overflow: hidden;
+}
 .swiper-container {
     min-height: 242px;
 }
