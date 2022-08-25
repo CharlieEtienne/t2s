@@ -258,10 +258,15 @@ function listfiles() {
 
                     myfilestable.append(html);
                 });
-                if(response.files.length == 0){
+                if(response.files.length === 0){
                     $('#myfiles>.no-files').remove();
                     $('#myfiles>table').before('<div class="no-files text-center p-4 text-muted">Aucun fichier récent</div>');
                 }
+                initActions();
+            }
+            if(response && !response.files){
+                $('#myfiles>.no-files').remove();
+                $('#myfiles>table').before('<div class="no-files text-center p-4 text-muted">Aucun fichier récent</div>');
                 initActions();
             }
         },
