@@ -404,7 +404,7 @@ code {
         top: -35px;
         left: 0;
     }
-    .release-feature {
+    .release-breaking, .release-changed, .release-deprecated, .release-feature, .release-fixed, .release-security, .release-announcement, .release-issue {
         margin-top: 50px;
     }
     .slide-content {
