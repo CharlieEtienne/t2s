@@ -34,6 +34,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="manifest" href="manifest.json">
+	<script src="sw.js"></script>
 
     <!--  STYLESHEETS  -->
 	<style id="scheme"></style>
