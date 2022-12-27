@@ -14,7 +14,7 @@ use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
  *
  * @return array|false
  */
-function get_voices( array $languages = [ 'fr-FR', 'en-US' ] ) {
+function get_voices( array $languages = [ 'fr-FR', 'en-US', 'de-DE' ] ) {
     // create client object
     $client = new TextToSpeechClient();
 
