@@ -1,6 +1,6 @@
 <?php
     if(!isset($_COOKIE['t2s'])){
-        setcookie('t2s', uniqid(), time() + 365*24*3600, null, null, false, true);
+        setcookie('t2s', uniqid(), time() + 365*24*3600, "", "", false, true);
     }
     require_once 'get_voices.php';
 

@@ -25,12 +25,12 @@ function synthesize_text( $text ) {
     // create client object
     $client = new TextToSpeechClient();
 
-    $voice_name         = filter_var($_POST[ 'voice-name' ], FILTER_SANITIZE_SPECIAL_CHARS) ?? 'fr-FR-Wavenet-D';
+    $voice_name         = htmlspecialchars($_POST[ 'voice-name' ]) ?? 'fr-FR-Wavenet-D';
     $language           = substr($voice_name, 0, 5);
     $root               = __DIR__ . '/audio/';
     $directory          = !empty($_COOKIE[ 't2s' ]) ? htmlspecialchars($_COOKIE[ 't2s' ]) : uniqid();
     $user_dir           = $root . $directory;
-    $sanitized_filename = filter_var($_POST[ 'filename' ], FILTER_SANITIZE_STRING);
+    $sanitized_filename = htmlspecialchars($_POST[ 'filename' ]);
     $filename           = !empty($sanitized_filename) ? $sanitized_filename : uniqid();
     $filepath           = $user_dir . '/' . $filename . '.mp3';
     $relative_user_dir  = '/audio/' . $directory;
