@@ -11,7 +11,6 @@ if ("serviceWorker" in navigator) {
 
 const CACHE_NAME = 't2s-cache';
 const urlsToCache = [
-	'/',
 	'sw.js',
 	'manifest.json',
 	'ani_equalizer_white.gif',
