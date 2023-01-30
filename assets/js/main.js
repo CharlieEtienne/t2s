@@ -75,6 +75,12 @@ $(document).ready(function(){
     if(getCookie('last_filename')){
         $('#filename').val(getCookie('last_filename'));
     }
+    if(getCookie('speed')){
+        $('#speed').val(getCookie('speed'));
+    }
+    if(getCookie('pitch')){
+        $('#pitch').val(getCookie('pitch'));
+    }
     if(getCookie('last_content')){
         quill.root.innerHTML = decodeURIComponent(getCookie('last_content'));
     }
@@ -163,6 +169,8 @@ function setCookies() {
     setCookie('last_filename', filename.val(), 360);
     setCookie('last_content', encodeURIComponent(document.querySelector('.ql-editor').innerHTML), 360);
     setCookie('last_voice', $('#voice-name').val(), 360);
+    setCookie('speed', $('#speed').val(), 360);
+    setCookie('pitch', $('#pitch').val(), 360);
     setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
     setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
 }

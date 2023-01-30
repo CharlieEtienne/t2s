@@ -37,6 +37,8 @@ function synthesize_text( $text ) {
     $relative_filepath  = $relative_user_dir . '/' . $filename . '.mp3';
     $is_multiple        = false;
     $overwrite          = !empty($_POST[ 'overwrite' ]) ? htmlspecialchars($_POST[ 'overwrite' ]) : 'on';
+	$speed              = (float) $_POST[ 'speed' ] ?? '1';
+	$pitch              = (float) $_POST[ 'pitch' ] ?? '0';
 
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
@@ -50,7 +52,9 @@ function synthesize_text( $text ) {
      * It is the setting used in Cloud Text To Speech demo
      */
     $audioConfig = ( new AudioConfig() )
-        ->setAudioEncoding(AudioEncoding::LINEAR16);
+        ->setAudioEncoding(AudioEncoding::LINEAR16)
+        ->setSpeakingRate($speed)
+        ->setPitch($pitch);
 
     // Create necessary folders
     if( !is_dir($root) ) {

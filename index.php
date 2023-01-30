@@ -108,6 +108,16 @@
                             </label>
                         </div>
 
+	                    <div class="col-6 mt-6">
+		                    <label class="" for="speed">Speed</label>
+		                    <input class="form-control" id="speed" name="speed" type="number" step="0.05" min="0.25" max="4.00" value="1.00" />
+	                    </div>
+
+	                    <div class="col-6 mt-6">
+		                    <label class="" for="pitch">Pitch</label>
+		                    <input class="form-control" id="pitch" name="pitch" type="number" step="0.5" min="-20.0" max="20.0" value="0.0"/>
+	                    </div>
+
 	                    <div class="col-md-12 mt-3">
 		                    <span>Theme:</span>
 		                    <input type="radio" class="" name="theme" value="auto" id="theme--auto" checked="checked">
