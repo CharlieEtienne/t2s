@@ -76,8 +76,12 @@
                     <div class="form-group col-md-6 col-11">
                         <label for="voice-name">Type de voix</label>
                         <select class="form-control custom-select" name="voice-name" id="voice-name">
-                            <?php foreach( get_voices(['fr-FR', 'en-US', 'de-DE']) as $key => $value ) : ?>
-                                <option value="<?= $key ?>"><?= $value ?></option>
+                            <?php foreach( get_voices(['fr-FR', 'en-US', 'de-DE']) as $language_name => $voices ) : ?>
+                            <optgroup label="<?= $language_name ?>">
+	                            <?php foreach( $voices as $voice_code => $voice_name ) : ?>
+                                    <option value="<?= $voice_code ?>"><?= $voice_name ?></option>
+	                            <?php endforeach; ?>
+                            </optgroup>
                             <?php endforeach; ?>
                         </select>
                     </div>
