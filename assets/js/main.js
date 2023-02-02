@@ -144,6 +144,13 @@ document.addEventListener("keydown", function(event) {
         $('#download').click();
     }
 
+    //Download keyboard shortcut
+    if (event.ctrlKey && event.key === "q") {
+        quill.setText('\n');
+        quill.focus();
+        copySelection()
+    }
+
     if ((event.code === "ArrowUp" || event.code === "ArrowDown" )
         && event.ctrlKey === false
         && event.shiftKey === false

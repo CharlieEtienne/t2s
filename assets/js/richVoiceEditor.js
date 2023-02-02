@@ -184,6 +184,15 @@ function erase_format() {
 }
 toolbar.addHandler('erase_format', erase_format.bind(quill));
 
+// Function to clear editor content
+document.querySelector('.ql-clear_content').innerHTML = '<i id="clear_content_button" class="fas fa-trash-alt" title="Effacer le contenu (Ctrl + Q)"></i>';
+
+function clear_content () {
+    quill.setText('\n');
+    quill.focus();
+    copySelection()
+}
+toolbar.addHandler('clear_content', clear_content.bind(quill));
 
 // Function to turn on and off fullscreen mode 
 document.querySelector('.ql-fullscreen').innerHTML = '<i id="fsbutton" class="fas fa-expand" title="Plein écran"></i>';

@@ -6,6 +6,7 @@ const ssmlToolbarOptions = {
         [{'ssml_pitch':['x-low', 'low', 'medium', 'high', 'x-high']}],
         ['ssml_spellout'],
         ['erase_format'],
+        ['clear_content'],
         ['showHtml'],
         ['fullscreen']
     ],
@@ -16,6 +17,7 @@ const ssmlToolbarOptions = {
         'ssml_pitch': function () { },
         'ssml_spellout': function () { },
         'erase_format' : function () { },
+        'clear_content' : function () { },
         'fullscreen' : function () { }
     }
 }

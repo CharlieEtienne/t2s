@@ -141,6 +141,7 @@
                             <h4 class="text-center">Raccourcis claviers</h4>
                             <p><code>Ctrl</code>+<code>E</code> : Écouter</p>
                             <p><code>Ctrl</code>+<code>D</code> : Télécharger</p>
+	                        <p><code>Ctrl</code>+<code>Q</code> : Effacer le contenu</p>
                             <p><code>Ctrl</code>+<code>B</code> : Emphasis</p>
                             <p><code>Ctrl</code>+<code>P</code> : Spell-out</p>
                             <p><code>Ctrl</code>+<code>Maj</code>+<code>F</code> : Rate fast + Pitch high</p>
