@@ -11,7 +11,8 @@ const LANGUAGES_DISPLAY = [
 	'fr-FR' => 'Français (France)',
 	'en-US' => 'English (United States)',
 	'de-DE' => 'Deutsch (Deutschland)',
-	'pt-PT' => 'Português (Portugal)'
+	'pt-PT' => 'Português (Portugal)',
+	'pt-BR' => 'Português (Brasil)'
 ];
 
 function get_language_text( string $language ) : string {
