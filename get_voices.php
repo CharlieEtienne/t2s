@@ -10,7 +10,8 @@ use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 const LANGUAGES_DISPLAY = [
 	'fr-FR' => 'Français (France)',
 	'en-US' => 'English (United States)',
-	'de-DE' => 'Deutsch (Deutschland)'
+	'de-DE' => 'Deutsch (Deutschland)',
+	'pt-PT' => 'Português (Portugal)'
 ];
 
 function get_language_text( string $language ) : string {
@@ -36,7 +37,7 @@ function get_language_code( string $language_code ) : string {
  *
  * @return array|false
  */
-function get_voices( array $languages = [ 'fr-FR', 'en-US', 'de-DE' ] ) {
+function get_voices( array $languages = [ 'fr-FR', 'en-US', 'de-DE', 'pt-PT' ] ) {
     // create client object
     $client = new TextToSpeechClient();
 
