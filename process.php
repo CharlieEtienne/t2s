@@ -39,6 +39,7 @@ function synthesize_text( $text ) {
     $overwrite          = !empty($_POST[ 'overwrite' ]) ? htmlspecialchars($_POST[ 'overwrite' ]) : 'on';
 	$speed              = (float) $_POST[ 'speed' ] ?? '1';
 	$pitch              = (float) $_POST[ 'pitch' ] ?? '0';
+	$replace            = (string) $_POST[ 'replace' ] ?? '';
 
     // note: the voice can also be specified by name
     // names of voices can be retrieved with $client->listVoices()
@@ -67,6 +68,25 @@ function synthesize_text( $text ) {
     $actual_name   = pathinfo($filepath, PATHINFO_FILENAME);
     $original_name = $actual_name;
     $extension     = pathinfo($filepath, PATHINFO_EXTENSION);
+
+	if(!empty($replace)){
+		$rows = explode("\n", $replace);
+
+		// $replacements = array();
+
+		foreach ($rows as $row) {
+			$row = str_replace(' => ', "=>", $row);
+			// Divisez chaque ligne en utilisant "=>" comme délimiteur
+			$parts = explode("=>", $row);
+
+			// Vérifiez si la ligne a le format attendu (clé => valeur)
+			if (count($parts) == 2) {
+				// Créez un tableau associatif avec la clé et la valeur
+				// $replacements[$parts[0]] = $parts[1];
+				$text = str_replace($parts[0], $parts[1], $text);
+			}
+		}
+	}
 
     /* If we choose to not overwrite, we create files with number after name. Ex: audio(1).mp3 */
     if( $overwrite != 'on' ) {

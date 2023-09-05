@@ -81,6 +81,9 @@ $(document).ready(function(){
     if(getCookie('pitch')){
         $('#pitch').val(getCookie('pitch'));
     }
+    if(getCookie('replace')){
+        $('#replace').val(getCookie('replace'));
+    }
     if(getCookie('last_content')){
         quill.root.innerHTML = decodeURIComponent(getCookie('last_content'));
     }
@@ -178,6 +181,7 @@ function setCookies() {
     setCookie('last_voice', $('#voice-name').val(), 360);
     setCookie('speed', $('#speed').val(), 360);
     setCookie('pitch', $('#pitch').val(), 360);
+    setCookie('replace', $('#replace').val(), 360);
     setCookie('last_multiple', 'is_' + $('#multiple').prop('checked'), 360);
     setCookie('last_overwrite', 'is_' + $('#overwrite').prop('checked'), 360);
 }

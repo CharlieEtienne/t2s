@@ -132,6 +132,13 @@
 		                    <label class="" for="theme--dark">Dark</label>
 	                    </div>
 
+	                    <div class="col-12 mt-6">
+		                    <label class="" for="replace">Replace</label>
+		                    <i class="far fa-question-circle text-muted" data-toggle="tooltip" data-placement="top"
+		                        title="Remplacer automatiquement un mot par un autre. Exemple: whistleblowing => wisselblowing. Un par ligne."></i>
+		                    <textarea class="form-control" id="replace" name="replace" placeholder="Texte à remplacer => Texte lu"></textarea>
+	                    </div>
+
                         <a href="#shortcuts-popup"
                            class="btn-link mt-2 text-decoration-none"
                            style="padding: 0 10px;"
