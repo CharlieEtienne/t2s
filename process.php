@@ -71,19 +71,32 @@ function synthesize_text( $text ) {
 
 	if(!empty($replace)){
 		$rows = explode("\n", $replace);
+		// echo json_encode(var_export($rows, true));
 
-		// $replacements = array();
 
 		foreach ($rows as $row) {
-			$row = str_replace(' => ', "=>", $row);
+			$row = str_replace(' => ', '=>', $row);
 			// Divisez chaque ligne en utilisant "=>" comme délimiteur
 			$parts = explode("=>", $row);
 
 			// Vérifiez si la ligne a le format attendu (clé => valeur)
-			if (count($parts) == 2) {
+			if (count($parts) == 2 && !empty($parts[0]) && !empty($parts[1])) {
 				// Créez un tableau associatif avec la clé et la valeur
 				// $replacements[$parts[0]] = $parts[1];
-				$text = str_replace($parts[0], $parts[1], $text);
+				$parts[0] = preg_replace('/\r\n|[\r\n]/', '', $parts[0]);
+				$parts[1] = preg_replace('/\r\n|[\r\n]/', '', $parts[1]);
+				$text = str_replace(
+					$parts[0],
+					$parts[1],
+					$text
+				);
+				// echo json_encode(['$parts[0]' => var_export($parts[0], true)]);
+				// echo json_encode(['$parts[1]' => var_export($parts[1], true)]);
+				// echo json_encode(['$text' => var_export($text, true)]);
+				// die();
+				// var_dump($parts[0], $parts[1], $text);
+				// echo json_encode(print_r([$parts[0], $parts[1], $text]));
+				// die();
 			}
 		}
 	}
@@ -113,6 +126,8 @@ function synthesize_text( $text ) {
         if( is_array($array) && count($array) > 1 ) {
             $is_multiple = true;
         }
+		// echo json_encode(print_r($array, true));
+		// die();
     }
 
     /* If we choose to make multiple files, we iterate and return a zip file */

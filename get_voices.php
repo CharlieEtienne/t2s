@@ -38,7 +38,7 @@ function get_language_code( string $language_code ) : string {
  *
  * @return array|false
  */
-function get_voices( array $languages = [ 'fr-FR', 'en-US', 'de-DE', 'pt-PT' ] ) {
+function get_voices( array $languages = [ 'fr-FR', 'en-US', 'en-GB', 'de-DE', 'pt-PT' ] ) {
     // create client object
     $client = new TextToSpeechClient();
 
@@ -54,7 +54,7 @@ function get_voices( array $languages = [ 'fr-FR', 'en-US', 'de-DE', 'pt-PT' ] )
         foreach( $languages as $language ) {
             foreach( $available_voices as $voice ) {
                 foreach( $voice->getLanguageCodes() as $languageCode ) {
-                    if( $languageCode === $language && (strpos($voice->getName(), 'Wavenet') || strpos($voice->getName(), 'Neural2')) ) {
+                    if( $languageCode === $language && (strpos($voice->getName(), 'Wavenet') || strpos($voice->getName(), 'Neural2') || strpos($voice->getName(), 'Studio')) ) {
                         $language_text = get_language_text($language);
 						$voices[$language_text][ $voice->getName() ] =
                             sprintf("%s (%s)",
