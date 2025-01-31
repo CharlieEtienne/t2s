@@ -54,7 +54,7 @@ function get_voices( array $languages = [ 'fr-FR', 'en-US', 'en-GB', 'de-DE', 'p
         foreach( $languages as $language ) {
             foreach( $available_voices as $voice ) {
                 foreach( $voice->getLanguageCodes() as $languageCode ) {
-                    if( $languageCode === $language && (strpos($voice->getName(), 'Wavenet') || strpos($voice->getName(), 'Neural2') || strpos($voice->getName(), 'Studio')) ) {
+                    if( $languageCode === $language ) {
                         $language_text = get_language_text($language);
 						$voices[$language_text][ $voice->getName() ] =
                             sprintf("%s (%s)",
